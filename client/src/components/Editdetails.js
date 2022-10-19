@@ -1,9 +1,11 @@
 import React,{useState} from 'react'
 import {useNavigate} from 'react-router-dom'
+const UserDetails =require("./About");
 
 
-const SignUp =() =>{
+const Editdetails =() =>{
     let navigate =useNavigate();
+    const[userData, setUserData] = useState({});
     const[user,setUser ] = useState({                          // Do this same in Patient Register
         name:"", email:"", phone:"", gender:"",dob:"",pincode:"", work:"", password:"", cpassword: "",
     });
@@ -20,13 +22,14 @@ const SignUp =() =>{
         e.preventDefault();
         const{name,email,phone,gender,dob,pincode,work,password,cpassword} =user;
         console.log("Hello")
-        const res =await fetch('/register', {
+        const res =await fetch('/Editdetails', {
         method:"POST",
         headers:{
             "Content-Type" : "application/json"
          },
         body:JSON.stringify({
             name,email,phone,gender,dob,pincode,work,password,cpassword
+
          })
         });
        
@@ -37,10 +40,10 @@ const SignUp =() =>{
             console.log("Invalid Registration");
        }
        else{
-        window.alert("Registartion Successful");
+        window.alert("Successfully Updated.");
         console.log("Successful Registration");
        // alert("Hello");
-        navigate("/Login");
+        navigate("/About");
         }
        
     }
@@ -51,7 +54,7 @@ const SignUp =() =>{
   return(
     <>
     <section className="signup">
-                    <h2 className="form-title" align="center">Sign up</h2>
+                    <h2 className="form-title" align="center">Edit Details</h2>
                     <form method="POST">
                         <div className="form-group" align="center">
                             <input type ="text" name="name" id="name" autoComplete="off"
@@ -103,23 +106,23 @@ const SignUp =() =>{
                             <input type ="password" name="password" id="password" autoComplete="off"
                                value={user.password}
                                onChange={handleInputs}
-                             placeholder="Your password" 
+                             placeholder="Enter Your current password" 
                             />
                             <br/><br/>
                             <input type ="password"  name="cpassword" id="cpassword" autoComplete="off"
                                value={user.cpassword}
                                onChange={handleInputs}
-                             placeholder="Confirm Your password" 
+                             placeholder="Enter Your New password" 
                              
                             />
                         </div>
                         <br/><br/>
                         <div  align="center">
                             <input type="submit" name="signup" id="signup"
-                             value="register" onClick={PostData} 
+                             value="Save" onClick={PostData} 
                             />
                             <br/><br/>
-                            <a className="nav-link" href="/login"><strong>I am already registered</strong></a>
+                            {/* <a className="nav-link" href="/login"><strong></strong></a> */}
                         </div>
                     </form>
     </section>
@@ -143,4 +146,4 @@ const SignUp =() =>{
   )
 }
 
-export default SignUp
+export default Editdetails

@@ -6,6 +6,7 @@ import Contact from "./components/Contact"
 import About from "./components/About"
 import Signup from "./components/Signup"
 import Login from "./components/Login"
+import Editdetails from "./components/Editdetails"
 import PatientLogin from "./components/PatientLogin"
 import PatientRegister from "./components/PatientRegister"
 import ErrorPage from "./components/Errorpage"
@@ -40,6 +41,7 @@ const App =() =>{
         <Route path= "/registration" element={<Signup/>} />
         <Route path= "/patientLogin" element={<PatientLogin/>} />
         <Route path= "/patientRegister" element={<PatientRegister/>} />
+        <Route path= "/Editdetails" element={<Editdetails/>} />
       </Routes>
       {/* <Route>
         <ErrorPage/>
