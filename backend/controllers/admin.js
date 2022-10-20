@@ -3,7 +3,7 @@ const rejected_patients = require('../models/rejected_patients');
 
 const patient_update = async (req,res,next) =>{
     try{
-        
+
         const verified_patients = req.body.verified_patients;
         const rejected_patients = req.body.rejected_patients;
 
@@ -24,4 +24,8 @@ const patient_update = async (req,res,next) =>{
     }catch(err){
         next(err);
     }
+};
+
+module.exports = {
+    patient_update
 };

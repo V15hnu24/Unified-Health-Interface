@@ -42,6 +42,7 @@ const patientSchema = new mongoose.Schema({
     // status : 1 = pending approval
     // status : 2 = approved
     // status : 3 = rejected
+    // status : 4 = blocked
 },{timestamps:true});
 
 module.exports = mongoose.model("paitent", patientSchema);

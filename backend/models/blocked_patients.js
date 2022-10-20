@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
-const rejected_patientSchema = new mongoose.Schema({
-    id:{
+const blocked_patinetSchema = new mongoose.Schema({
+    patient_id:{
         type:String,
         required:true
     },
@@ -14,5 +14,3 @@ const rejected_patientSchema = new mongoose.Schema({
         required:true
     }
 });
-
-module.exports = mongoose.model("rejected_patient", rejected_patientSchema);
