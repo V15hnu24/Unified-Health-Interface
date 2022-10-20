@@ -4,6 +4,7 @@ const dotenv = require('dotenv').config();
 const app = express();
 app.use(express.json());
 const cookieParser = require('cookie-parser');
+const authRoute = require('./routes/auth');
 
 const DB_Connection_URL = process.env.Mongo;
 
@@ -25,6 +26,9 @@ mongoose.connection.on('disconnected', ()=>{
 mongoose.connection.on('connected', ()=>{
     console.log("MongoDB Connected");
 });
+
+app.use(cookieParser());
+app.use('/api/auth', authRoute);
 
 app.use((err, req, res, next)=>{
     const errorStatus = err.status || 500;
