@@ -26,6 +26,14 @@ const patient_update = async (req,res,next) =>{
     }
 };
 
+const block_patients = async (req,res,next) =>{
+    try{
+        
+    }catch(err){
+        next(err);
+    }
+};
+
 module.exports = {
     patient_update
 };
