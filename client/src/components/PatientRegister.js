@@ -18,7 +18,7 @@ const PatientRegister =() =>{
 
     const PostData =async(e)=>{
         e.preventDefault();
-        const{name,email,phone,profession,gender,dob,pincode,work,password,cpassword} =user;
+        const{name,email,phone,gender,dob,pincode,work,password,cpassword} =user;
         console.log("Hello")
         const res =await fetch('/register', {
         method:"POST",

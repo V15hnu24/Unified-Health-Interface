@@ -3,11 +3,13 @@ const router = express.Router();
 const bcrypt =require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const authenticate =require("../middleware/authenticate");
+const authenticateOrganization =require("../middleware/authenticateOrganization");
 const protect =require("../middleware/protect");
 const cookieParser = require('cookie-parser');
 router.use(cookieParser());
 require('../db/conn');
 const User =require("../models/userSchema");
+const UserOrganization =require("../models/OrganizationSchema");
 router.get('/',(req,res)=>{
     res.send('Hello world from the server router js');
 });
@@ -32,6 +34,8 @@ router.get('/',(req,res)=>{
 //         }).catch((err)=>res.status(500).json({error:"Failed to registered"}));
 //     }).catch(err=>{console.log(err);});
 // })
+
+// Patient Register 
 router.post('/register', async (req,res)=>{
 
     const { name, email, phone,work,gender,dob,pincode, password, cpassword} =req.body;
@@ -66,7 +70,42 @@ router.post('/register', async (req,res)=>{
         console.log(err);
     }
 })
-//login route
+// Organization Router Register
+router.post('/registerOrganization', async (req,res)=>{
+
+    const { name, email, phone,work,pincode, password, cpassword} =req.body;
+    if(!name || !email || !phone  || !pincode || !work || !password ||! cpassword)
+    {
+        return res.status(422).json({error:"Plz filled the field properly."});
+    }
+    try{
+        const userExist =await UserOrganization.findOne({email:email});
+        if(userExist){
+            return res.status(422).json({error:"Email already exists."});
+        }
+        else  if(password!=cpassword)
+        {
+         res.status(422).json({message:"Password are not matching."})
+        }
+        else{
+            const user = new UserOrganization({name, email, phone, work,pincode, password, cpassword})
+
+            //Hashing before saving in the databse
+    
+            const userRegister =  await user.save();
+            if(userRegister)
+            {
+                res.status(201).json({message:"User registered successfully."})
+            }else{
+                res.status(500).json({error:"Failed to registered"});
+            }
+        }
+    }catch(err)
+    {
+        console.log(err);
+    }
+})
+//login route Patient
 
 router.post('/signin',async (req,res)=>{
 //   console.log(req.body);
@@ -113,20 +152,76 @@ router.post('/signin',async (req,res)=>{
  }
 })
 
-// router.use(cookieParser());
-// About Us page
+//login route Organization
+
+router.post('/signinOrganization',async (req,res)=>{
+    //   console.log(req.body);
+    //   res.json({message:"awesome"});
+    
+     try{
+        let token2;
+        const{email,password} = req.body;
+    
+        if(! email || !password)
+        {
+            return res.status(400).json({error:"Plz Filled the data."})
+        }
+        const userLogin = await UserOrganization.findOne({email:email});
+        //console.log(userLogin);
+        //console.log(token);
+    
+        // res.cookie("jwt",token=>{
+        //     expires:new Date(Date.now()+ 2589200000000000)
+        //     httpOnly:true
+        // });
+    
+        if(userLogin)
+        {
+            const isMatch =await bcrypt.compare(password,userLogin.password);
+    
+            token2 = await userLogin.generateAuthtoken();  // Userschema jwt not Organization jwt
+            res.cookie("jwtoken2",token2,{
+                expires:new Date(Date.now()+ 2589200000000000),
+                httpOnly:true
+            });
+            console.log("Hello My token name 2 is:",token2);
+            if(!isMatch){
+            res.json({error:"Invalid Credentials"});
+            }else{
+                res.json({message:"user Signin Sucessfully."});
+            }
+        }else{
+            res.status(400).json({error:"Invalid Credentials"});
+        }
+     }catch(err)
+     {
+        console.log(err);
+     }
+    })
+
+
+
+
+// About Us page of Patient
 router.get('/about',authenticate,(req,res)=>{
     //res.send(`Hello World my About`);
     res.send(req.rootUser);
 });
 
-// Get Information from User Home Page
+// Get Information from User Home Page of Patient
 router.get('/getdata',authenticate,(req,res)=>{
     console.log("Hello My User's Data");
     res.send(req.rootUser);
 })
 
-// Edit Details
+// Get Information from User Home Page of Organization
+router.get('/getdataOrganization',authenticateOrganization,(req,res)=>{
+    console.log("Hello My Organization's Data");
+    res.send(req.rootUser);
+})
+
+
+// Edit Details of Patient
 router.post('/Editdetails',authenticate,async(req,res)=>{
      
     try{
@@ -171,7 +266,7 @@ router.post('/Editdetails',authenticate,async(req,res)=>{
     }
 });
 
-// Logout Page
+// Logout Page of Patient
 router.get('/logout',(req,res)=>{
     console.log("Hello My Logout Page");
     res.clearCookie('jwtoken', {path:'/'});

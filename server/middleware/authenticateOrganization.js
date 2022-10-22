@@ -1,12 +1,12 @@
 const jwt =require("jsonwebtoken")
-const User =require("../models/userSchema");
+const User =require("../models/OrganizationSchema");
 //const token =require("../router/auth")
 // const cookieParser = require("../router/auth");
-const Authenticate = async(req,res,next) =>{
+const organizationauthenticate = async(req,res,next) =>{
     try{
-        //console.log("My awesome token" + token);
+       
         console.log("TOken :",req.cookies.jwt);
-        const token =req.cookies.jwtoken;
+        const token =req.cookies.jwtoken2;
         console.log("My awesome token" + token);
         const verifyToken =jwt.verify(token, process.env.SECRET_KEY);
 
@@ -30,5 +30,5 @@ const Authenticate = async(req,res,next) =>{
 
 }
 
-module.exports = Authenticate;
+module.exports = organizationauthenticate;
  

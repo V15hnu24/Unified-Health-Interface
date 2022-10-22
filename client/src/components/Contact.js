@@ -3,7 +3,7 @@ import {userContext} from "../App";
 const Contact =() =>{
 
   const {state,dispatch} = useContext(userContext);
-  dispatch({type:"USER", payload:true});
+  // dispatch({type:"USER", payload:true});
   return(
     <>
     

@@ -20,9 +20,9 @@ const Navbar =() =>{
         <li className="nav-item">
         <a className="nav-link" href="/about">About</a>
         </li>
-        <li className="nav-item">
+        {/* <li className="nav-item">
         <a className="nav-link" href="/contact">Contact</a>
-        </li>
+        </li> */}
         <li className="nav-item">
         <a className="nav-link" href="/logout">Logout</a>
         </li>
@@ -52,7 +52,7 @@ const Navbar =() =>{
         </a>
         <div className="dropdown-menu" aria-labelledby="navbarDropdown">
           <a className="dropdown-item" href="/PatientRegister">Patients Register</a>
-          <a className="dropdown-item" href="#">Organization Register</a>
+          <a className="dropdown-item" href="/OrganizationRegister">Organization Register</a>
           {/* <div className="dropdown-divider"></div> */}
           <a className="dropdown-item" href="#">Hospital Professionals Register</a>
         </div>
@@ -63,7 +63,7 @@ const Navbar =() =>{
         </a>
         <div className="dropdown-menu" aria-labelledby="navbarDropdown">
           <a className="dropdown-item" href="/PatientLogin">Patients Login</a>
-          <a className="dropdown-item" href="#">Organization Login</a>
+          <a className="dropdown-item" href="/OrganizationLogin">Organization Login</a>
           <div className="dropdown-divider"></div>
           <a className="dropdown-item" href="#">Hospital Professionals</a>
         </div>

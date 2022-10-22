@@ -9,6 +9,9 @@ import Login from "./components/Login"
 import Editdetails from "./components/Editdetails"
 import PatientLogin from "./components/PatientLogin"
 import PatientRegister from "./components/PatientRegister"
+import OrganizationRegister from "./components/OrganizationRegister"
+import OrganizationLogin from "./components/OrganizationLogin"
+import OrganizationHome from "./components/OrganizationHome"
 import Logout from "./components/Logout"
 import { initialState, reducer } from "../src/reducer/UseReducer" 
 import ErrorPage from "./components/Errorpage"
@@ -27,6 +30,9 @@ const Routing =() =>{
         <Route path= "/registration" element={<Signup/>} />
         <Route path= "/patientLogin" element={<PatientLogin/>} />
         <Route path= "/patientRegister" element={<PatientRegister/>} />
+        <Route path= "/OrganizationRegister" element={<OrganizationRegister/>} />
+        <Route path= "/OrganizationLogin" element={<OrganizationLogin/>} />
+        <Route path= "/OrganizationHome" element={<OrganizationHome/>} />
         <Route path= "/Editdetails" element={<Editdetails/>} />
         <Route path= "/logout" element ={<Logout/>}/>  
       </Routes>

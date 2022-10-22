@@ -57,8 +57,13 @@
 
 import React,{useState} from 'react'
 import {useNavigate} from 'react-router-dom'
+import {useContext} from 'react'
+import { userContext } from "../App";
+
 
 const PatientLogin =() =>{
+
+    const {state,dispatch} = useContext(userContext);
     let navigate =useNavigate();
     const [email, setEmail] =useState('');
     const [password, setPassword] = useState('');
@@ -84,6 +89,7 @@ const PatientLogin =() =>{
             window.alert("Invalid Credentials");
         }
         else{
+            dispatch({type:"USER", payload:true});
             window.alert("Login Sucessful");
             navigate("/");
         }
