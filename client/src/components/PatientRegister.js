@@ -40,7 +40,7 @@ const PatientRegister =() =>{
         window.alert("Registartion Successful");
         console.log("Successful Registration");
        // alert("Hello");
-        navigate("/Login");
+        navigate("/PatientLogin");
         }
        
     }
@@ -55,11 +55,8 @@ const PatientRegister =() =>{
     <h1 align="center">Register <span className="justfordemo"> Patient</span> Details</h1>
     </div>
     <section className='="signup'>
-        <div className="container mt-5">
-            <div className="signup-content">
-                <div className="signup-form">
-                    <h2 className="form-title" align="center">Sign up</h2>
-                    <form className="register-form" id="register-form">
+    <h2 className="form-title" align="center">Sign up</h2>
+                    <form method="POST">
                         <div className="form-group" align="center">
                             <input type ="text" name="name" id="name" autoComplete="off"
                             //  placeholder="Patient's Name"
@@ -134,10 +131,6 @@ const PatientRegister =() =>{
                             <a className="nav-link" href="/PatientLogin"><strong>I am already registered</strong></a>
                         </div>
                     </form>
-
-                </div>
-            </div>
-        </div>
     </section>
     {/* <form>
   <div className="form-group">

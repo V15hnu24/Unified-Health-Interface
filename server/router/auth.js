@@ -119,12 +119,70 @@ router.get('/about',authenticate,(req,res)=>{
     //res.send(`Hello World my About`);
     res.send(req.rootUser);
 });
-router.post('/Editdetails',protect,(req,res)=>{
 
-    const rootUser =req.body;
-    res.send(rootUser);
-      
+// Get Information from User Home Page
+router.get('/getdata',authenticate,(req,res)=>{
+    console.log("Hello My User's Data");
+    res.send(req.rootUser);
+})
+
+// Edit Details
+router.post('/Editdetails',authenticate,async(req,res)=>{
+     
+    try{
+
+        const {name, email, phone, work,gender,dob,pincode} = req.body;
+        console.log(name);
+        console.log(email);
+        console.log(phone);
+        console.log(work);
+        console.log(gender);
+        console.log(dob);
+        console.log(pincode);
+        if(!name || !email || !phone || !work || !gender || !dob || !pincode)
+        {
+            console.log("Error in Updation");
+            return res.json("Plz filled the Updation form.");
+        }
+
+        const userUpdate =await User.findOne({_id: req.userID});
+        console.log(userUpdate);
+        var newvalues = { $set: { name: name, email:email, phone:phone,gender:gender,work:work,dob:dob,pincode:pincode} };
+        if(userUpdate)
+        {
+            try{
+            const result = await User.updateOne({_id:req.userID},{
+                $set :{
+                    name: name, email:email, phone:phone,gender:gender,work:work,dob:dob,pincode:pincode
+                }
+                });
+                console.log(result);
+              
+        }catch(err){
+            console.log("Error in Updating");
+        }
+    //    await userUpdate.save();
+       await result.save();
+    }
+    await userUpdate.save();
+    }catch(error){
+        console.log("Error in Updating.");
+        res.status(400).json({error:"Error in Updating"});
+    }
 });
+
+// Logout Page
+router.get('/logout',(req,res)=>{
+    console.log("Hello My Logout Page");
+    res.clearCookie('jwtoken', {path:'/'});
+    res.status(200).send('User Logout');
+})
+// router.post('/Editdetails',protect,(req,res)=>{
+
+//     const rootUser =req.body;
+//     res.send(rootUser);
+      
+// });
 
 // router.get('/about',(req,res)=>{
 //     //res.send(`Hello World my About`);

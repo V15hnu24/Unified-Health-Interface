@@ -1,8 +1,12 @@
-import React from 'react'
-
+import React,{useContext} from 'react'
+import {userContext} from "../App";
 const Contact =() =>{
+
+  const {state,dispatch} = useContext(userContext);
+  dispatch({type:"USER", payload:true});
   return(
     <>
+    
     <div className="contact_info">
       <div className="container-fluid">
         <div className="col-lg-10 offset-">

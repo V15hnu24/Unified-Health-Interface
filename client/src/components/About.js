@@ -1,9 +1,10 @@
-import React, { useEffect,useState } from 'react';
+import React, { useEffect,useState,useContext } from 'react';
 import {useNavigate} from 'react-router-dom';
+import {userContext} from "../App";
 
 const About =() =>{
 
-
+  const {state,dispatch} = useContext(userContext);
   let navigate = useNavigate();
   const[userData, setUserData] = useState({});
   const callAboutPage = async (req,res)=>{
@@ -26,6 +27,9 @@ const About =() =>{
       {
           const error = new Error(res.error);
           throw error;
+      }
+      else{
+        dispatch({type:"USER", payload:true});
       }
     }catch(err)
     {
@@ -78,6 +82,10 @@ const About =() =>{
     <tr>
       <th scope="col">Email ID::</th>
       <td>{userData.email}</td>
+    </tr>
+    <tr>
+      <th scope="col">Gender:</th>
+      <td>{userData.gender}</td>
     </tr>
     <tr>
       <th scope="col">Phone Number:</th>
