@@ -10,3 +10,5 @@ const imageSchema = new mongoose.Schema({
         contentType:String
     }
 });
+
+module.exports = mongoose.model("image", imageSchema);
