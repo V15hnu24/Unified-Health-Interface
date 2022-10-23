@@ -3,7 +3,7 @@ import {useContext} from 'react'
 import {useNavigate} from 'react-router-dom'
 import { userContext } from "../App";
 
-const Login =() =>{
+const OrganizationLogin =() =>{
 
     const {state,dispatch} = useContext(userContext);
     console.log(state);
@@ -15,7 +15,7 @@ const Login =() =>{
     const loginUser =async (e) =>{
         e.preventDefault();
 
-        const res =await fetch('/signin', 
+        const res =await fetch('/signinOrganization', 
         {
             method:"POST",
             headers:{
@@ -35,14 +35,14 @@ const Login =() =>{
         else{
             dispatch({type:"USER", payload:true});
             window.alert("Login Sucessful");
-            navigate("/");
+            navigate("/OrganizationHome");
         }
     }
 
   return(   
     <>
        <section className='="signup'>
-                    <h2 className="form-title" align="center">Patient's Login</h2>
+                    <h2 className="form-title" align="center">Organization Login Portal</h2>
                     <form method="POST">
                         <div className="form-group" align="center">
                         
@@ -73,4 +73,5 @@ const Login =() =>{
   )
 }
 
-export default Login
+export default OrganizationLogin
+

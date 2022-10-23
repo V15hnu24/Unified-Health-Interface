@@ -1,9 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect,useState,useContext } from 'react';
 import {useNavigate} from 'react-router-dom';
+import {userContext} from "../App";
+
 const About =() =>{
 
-
+  const {state,dispatch} = useContext(userContext);
   let navigate = useNavigate();
+  const[userData, setUserData] = useState({});
   const callAboutPage = async (req,res)=>{
 
     console.log("Hello");
@@ -19,11 +22,14 @@ const About =() =>{
 
       const data  =await res.json();
       console.log(data);
-
+      setUserData(data);
       if(!res.status ==200)
       {
           const error = new Error(res.error);
           throw error;
+      }
+      else{
+        dispatch({type:"USER", payload:true});
       }
     }catch(err)
     {
@@ -34,8 +40,13 @@ const About =() =>{
   useEffect(()=>{
     callAboutPage();
   },[]);
+  navigate =useNavigate();
+  const Edit=()=>{
 
-
+    navigate("/Editdetails");
+  
+  }
+  
   return(
     <>
     <div>
@@ -66,15 +77,31 @@ const About =() =>{
     </tr>  
     <tr>
       <th scope="col">NAME:</th>
-      <td>Larry</td>
+      <td>{userData.name}</td>
     </tr>
     <tr>
-      <th scope="col">AGE:</th>
-      <td>40</td>
+      <th scope="col">Email ID::</th>
+      <td>{userData.email}</td>
+    </tr>
+    <tr>
+      <th scope="col">Gender:</th>
+      <td>{userData.gender}</td>
     </tr>
     <tr>
       <th scope="col">Phone Number:</th>
-      <td>98XXXXXXX12</td>
+      <td>{userData.phone}</td>
+    </tr>
+    <tr>
+      <th scope="col">DOB:</th>
+      <td>{userData.dob}</td>
+    </tr>
+    <tr>
+      <th scope="col">Pincode:</th>
+      <td>{userData.pincode}</td>
+    </tr>
+    <tr>
+      <th scope="col">Profession:</th>
+      <td>{userData.work}</td>
     </tr>
     {/* <tr>
       <th scope="row">3</th>
@@ -83,14 +110,21 @@ const About =() =>{
   </div>
 
 </table>
+<br/><br/>
+
 </form>
 
     </div> 
     <div align="center">
-    <button  type="button" class="btn btn-primary">Edit Profile</button>
+    <input type="submit"  value="Edit Details" onClick={Edit} 
+    />
     </div>
-    </>
-  )
+
+
+<br/><br/>
+</>
+
+)
 }
 
 export default About

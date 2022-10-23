@@ -1,9 +1,7 @@
-// import React from 'react'
-// import "../App.css"
 import React, { useEffect,useState,useContext } from 'react';
 import {useNavigate} from 'react-router-dom';
 import {userContext} from "../App";
-const Home =() =>{
+const OrganizationHome =() =>{
 
     const {state,dispatch} = useContext(userContext);
     const [show,setShow]  =useState(false);
@@ -13,7 +11,7 @@ const Home =() =>{
   
       console.log("Hello");
       try{
-        const res = await fetch('/getdata',{
+        const res = await fetch('/getdataOrganization',{
           method: "GET",
           headers:{
             Accept:"application/json",
@@ -58,4 +56,4 @@ const Home =() =>{
   )
 }
 
-export default Home
+export default OrganizationHome

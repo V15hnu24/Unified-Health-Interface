@@ -2,7 +2,7 @@ import React,{useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 
 
-const SignUp =() =>{
+const OrganizationRegister =() =>{
     let navigate =useNavigate();
     const[user,setUser ] = useState({                          // Do this same in Patient Register
         name:"", email:"", phone:"", gender:"",dob:"",pincode:"", work:"", password:"", cpassword: "",
@@ -18,15 +18,15 @@ const SignUp =() =>{
 
     const PostData =async(e)=>{
         e.preventDefault();
-        const{name,email,phone,gender,dob,pincode,work,password,cpassword} =user;
+        const{name,email,phone,pincode,work,password,cpassword} =user;
         console.log("Hello")
-        const res =await fetch('/register', {
+        const res =await fetch('/registerOrganization', {
         method:"POST",
         headers:{
             "Content-Type" : "application/json"
          },
         body:JSON.stringify({
-            name,email,phone,gender,dob,pincode,work,password,cpassword
+            name,email,phone,pincode,work,password,cpassword
          })
         });
        
@@ -40,7 +40,7 @@ const SignUp =() =>{
         window.alert("Registartion Successful");
         console.log("Successful Registration");
        // alert("Hello");
-        navigate("/Login");
+        navigate("/OrganizationLogin");
         }
        
     }
@@ -51,46 +51,31 @@ const SignUp =() =>{
   return(
     <>
     <section className="signup">
-                    <h2 className="form-title" align="center">Sign up</h2>
+                    <h2 className="form-title" align="center">Organization Registeration Portal</h2>
                     <form method="POST">
                         <div className="form-group" align="center">
                             <input type ="text" name="name" id="name" autoComplete="off"
                             value={user.name}
                             onChange={handleInputs}
-                            placeholder="Your Name"
+                            placeholder="Hospital Name"
                             />
                             <br/><br/>
                             <input type ="text"  name="email" id="email" autoComplete="off"
                                value={user.email}
                                onChange={handleInputs}
-                             placeholder="Your Email" required="true"
+                             placeholder="Hospital's Email" required="true"
                             />
                             <br/><br/>
                             <input type ="text"   name="phone" id="phone" autoComplete="off"
                                value={user.phone}
                                onChange={handleInputs}
-                             placeholder="Your Phone Number" 
+                             placeholder="Phone Number" 
                             />
                             <br/><br/>
                             <input type ="text"  name="work" id="work" autoComplete="off"
                                value={user.work}
                                onChange={handleInputs}
                              placeholder="Your Profession" 
-                            />
-                            <br></br>
-                            <br></br>
-                            <input type ="text" name="gender" id="gender" autoComplete="off"
-                            //  placeholder="Your Gender" required="true"
-                            value={user.gender}
-                             onChange={handleInputs}
-                             placeholder="Your Gender" 
-                            />
-                            <br/><br/>
-                            <input type ="text" name="dob" id="dob" autoComplete="off"
-                            //  placeholder="Your DOB" required="true"
-                             value={user.dob}
-                             onChange={handleInputs}
-                             placeholder="Your DOB" 
                             />
                             <br/><br/>
                             <input type ="Number" name="pincode" id="pincode" autoComplete="off"
@@ -143,4 +128,4 @@ const SignUp =() =>{
   )
 }
 
-export default SignUp
+export default OrganizationRegister

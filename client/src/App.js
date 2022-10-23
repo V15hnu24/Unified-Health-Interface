@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { createContext, useReducer } from 'react'
 import{Route,Routes} from "react-router-dom";
 import Home from './components/Home'
 import Navbar from "./components/Navbar"
@@ -6,12 +6,44 @@ import Contact from "./components/Contact"
 import About from "./components/About"
 import Signup from "./components/Signup"
 import Login from "./components/Login"
+import Editdetails from "./components/Editdetails"
 import PatientLogin from "./components/PatientLogin"
 import PatientRegister from "./components/PatientRegister"
+import OrganizationRegister from "./components/OrganizationRegister"
+import OrganizationLogin from "./components/OrganizationLogin"
+import OrganizationHome from "./components/OrganizationHome"
+import Logout from "./components/Logout"
+import { initialState, reducer } from "../src/reducer/UseReducer" 
 import ErrorPage from "./components/Errorpage"
+
+
+// Context API
+export const userContext = createContext();
+
+const Routing =() =>{
+  return(
+        <Routes>
+        <Route path="/" element={ <Home/> } />
+        <Route path="/about" element={ <About/> } />
+        <Route path="/contact" element={ <Contact/> } />
+        <Route path="/login" element={<Login/>} />
+        <Route path= "/registration" element={<Signup/>} />
+        <Route path= "/patientLogin" element={<PatientLogin/>} />
+        <Route path= "/patientRegister" element={<PatientRegister/>} />
+        <Route path= "/OrganizationRegister" element={<OrganizationRegister/>} />
+        <Route path= "/OrganizationLogin" element={<OrganizationLogin/>} />
+        <Route path= "/OrganizationHome" element={<OrganizationHome/>} />
+        <Route path= "/Editdetails" element={<Editdetails/>} />
+        <Route path= "/logout" element ={<Logout/>}/>  
+      </Routes>
+  )
+}
 const App =() =>{
+
+  const [state,dispatch] = useReducer(reducer, initialState);
   return(
     <>
+    <userContext.Provider value ={{state, dispatch}}>
     <Navbar/>
     {/* <Routes>
      <Route path="/" element={<Home/>} />
@@ -32,7 +64,7 @@ const App =() =>{
     <Routes>
     <Route path= "/signup" element={<Signup/>} />
     </Routes> */}
-     <Routes>
+     {/* <Routes>
         <Route path="/" element={ <Home/> } />
         <Route path="/about" element={ <About/> } />
         <Route path="/contact" element={ <Contact/> } />
@@ -40,7 +72,11 @@ const App =() =>{
         <Route path= "/registration" element={<Signup/>} />
         <Route path= "/patientLogin" element={<PatientLogin/>} />
         <Route path= "/patientRegister" element={<PatientRegister/>} />
-      </Routes>
+        <Route path= "/Editdetails" element={<Editdetails/>} />
+        <Route path= "/logout" element ={<Logout/>}/>  
+      </Routes> */}
+      <Routing/>
+      </userContext.Provider>
       {/* <Route>
         <ErrorPage/>
       </Route> */}
