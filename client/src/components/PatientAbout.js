@@ -2,7 +2,7 @@ import React, { useEffect,useState,useContext } from 'react';
 import {useNavigate} from 'react-router-dom';
 import {userContext} from "../App";
 
-const About =() =>{
+const PatientAbout =() =>{
 
   const {state,dispatch} = useContext(userContext);
   let navigate = useNavigate();
@@ -43,7 +43,7 @@ const About =() =>{
   navigate =useNavigate();
   const Edit=()=>{
 
-    navigate("/Editdetails");
+    navigate("/PatientEditdetails");
   
   }
   
@@ -127,4 +127,4 @@ const About =() =>{
 )
 }
 
-export default About
+export default PatientAbout

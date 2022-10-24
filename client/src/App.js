@@ -1,13 +1,12 @@
 import React, { createContext, useReducer } from 'react'
 import{Route,Routes} from "react-router-dom";
-import Home from './components/Home'
+import PatientHome from './components/PatientHome'
 import Navbar from "./components/Navbar"
 import Contact from "./components/Contact"
-import About from "./components/About"
-import Signup from "./components/Signup"
-import Login from "./components/Login"
-import Editdetails from "./components/Editdetails"
+import PatientAbout from "./components/PatientAbout"
+import PatientEditdetails from "./components/PatientEditdetails"
 import PatientLogin from "./components/PatientLogin"
+import PatientIntermediateLogin from "./components/PatientIntermediateLogin"
 import PatientRegister from "./components/PatientRegister"
 import OrganizationRegister from "./components/OrganizationRegister"
 import OrganizationLogin from "./components/OrganizationLogin"
@@ -23,17 +22,16 @@ export const userContext = createContext();
 const Routing =() =>{
   return(
         <Routes>
-        <Route path="/" element={ <Home/> } />
-        <Route path="/about" element={ <About/> } />
+        <Route path="/PatientHome" element={ <PatientHome/> } />
+        <Route path="/Patientabout" element={ <PatientAbout/> } />
         <Route path="/contact" element={ <Contact/> } />
-        <Route path="/login" element={<Login/>} />
-        <Route path= "/registration" element={<Signup/>} />
         <Route path= "/patientLogin" element={<PatientLogin/>} />
         <Route path= "/patientRegister" element={<PatientRegister/>} />
         <Route path= "/OrganizationRegister" element={<OrganizationRegister/>} />
         <Route path= "/OrganizationLogin" element={<OrganizationLogin/>} />
         <Route path= "/OrganizationHome" element={<OrganizationHome/>} />
-        <Route path= "/Editdetails" element={<Editdetails/>} />
+        <Route path= "/PatientEditdetails" element={<PatientEditdetails/>} />
+        <Route path= "/PatientIntermediateLogin" element={<PatientIntermediateLogin/>} />
         <Route path= "/logout" element ={<Logout/>}/>  
       </Routes>
   )

@@ -15,10 +15,10 @@ const Navbar =() =>{
        return(
         <>
         <li className="nav-item active">
-        <a className="nav-link" href="/">Home<span className="sr-only"></span></a>
+        <a className="nav-link" href="/PatientHome">Home<span className="sr-only"></span></a>
         </li>
         <li className="nav-item">
-        <a className="nav-link" href="/about">About</a>
+        <a className="nav-link" href="/Patientabout">About</a>
         </li>
         {/* <li className="nav-item">
         <a className="nav-link" href="/contact">Contact</a>
@@ -32,20 +32,14 @@ const Navbar =() =>{
       return(
         <>
          <li className="nav-item active">
-        <a className="nav-link" href="/">Home<span className="sr-only"></span></a>
+        <a className="nav-link" href="/PatientHome">Home<span className="sr-only"></span></a>
         </li>
         <li className="nav-item">
-        <a className="nav-link" href="/about">About</a>
+        <a className="nav-link" href="/Patientabout">About</a>
         </li>
         <li className="nav-item">
         <a className="nav-link" href="/contact">Contact</a>
         </li>
-        <li className="nav-item">
-        <a className="nav-link" href="/login">Login</a>
-      </li> 
-      <li className="nav-item">
-        <a className="nav-link" href="/registration">Registration</a>
-      </li>
       <li className="nav-item dropdown">
         <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Registration

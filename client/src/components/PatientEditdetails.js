@@ -1,9 +1,11 @@
 import React, { useEffect,useState } from 'react';
 import {useNavigate} from 'react-router-dom';
+import {useContext} from 'react'
+import { userContext } from "../App";
 
-const Editdetails =() =>{
+const PatientEditdetails =() =>{
 
-
+  const {state,dispatch} = useContext(userContext);
   let navigate = useNavigate();
   const[userData, setUserData] = useState({name:"", email:"",phone:"",gender:"",dob:"",pincode:"",work:""});
   const callAboutPage = async (req,res)=>{
@@ -27,6 +29,9 @@ const Editdetails =() =>{
       {
           const error = new Error(res.error);
           throw error;
+      }
+      else{
+        dispatch({type:"USER", payload:true});
       }
     }catch(err)
     {
@@ -209,7 +214,7 @@ const Editdetails =() =>{
 )
 }
 
-export default Editdetails
+export default PatientEditdetails
 // import React,{useState} from 'react'
 // import {useNavigate} from 'react-router-dom'
 // const UserDetails =require("./About");

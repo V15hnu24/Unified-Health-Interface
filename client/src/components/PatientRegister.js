@@ -5,7 +5,7 @@ import {useNavigate} from 'react-router-dom'
 const PatientRegister =() =>{
     let navigate =useNavigate();
     const[user,setUser ] = useState({                          // Do this same in Patient Register
-        name:"", email:"", phone:"",profession:"",gender:"",dob:"",pincode:"",work:"", password:"", cpassword: "",
+        name:"", email:"", mobile:"",country:"", gender:"",state:"",city:"",dob:"",pincode:"", password:"", cpassword: "",
     });
     let name,value;
     const handleInputs =(e)=>{
@@ -18,7 +18,11 @@ const PatientRegister =() =>{
 
     const PostData =async(e)=>{
         e.preventDefault();
-        const{name,email,phone,gender,dob,pincode,work,password,cpassword} =user;
+        const{name,email,mobile,country,gender,state,city,dob,pincode,password,cpassword} =user;
+        if(password!=cpassword)
+        {
+            window.alert("Password are not Matching.");
+        }
         console.log("Hello")
         const res =await fetch('/register', {
         method:"POST",
@@ -26,7 +30,7 @@ const PatientRegister =() =>{
             "Content-Type" : "application/json"
          },
         body:JSON.stringify({
-            name,email,phone,gender,dob,pincode,work,password,cpassword
+            name,email,mobile,country,gender,state,city,dob,pincode,password,
          })
         });
        
@@ -40,7 +44,7 @@ const PatientRegister =() =>{
         window.alert("Registartion Successful");
         console.log("Successful Registration");
        // alert("Hello");
-        navigate("/PatientLogin");
+        navigate("/PatientIntermediateLogin");
         }
        
     }
@@ -50,42 +54,36 @@ const PatientRegister =() =>{
      }
   return(
     <>
-    <div>
-    {/* <p className="pt-5">Welcome</p> */}
-    <h1 align="center">Register <span className="justfordemo"> Patient</span> Details</h1>
-    </div>
-    <section className='="signup'>
-    <h2 className="form-title" align="center">Sign up</h2>
+    <section className="signup">
+                    <h1 align="center">Register <span className="justfordemo"> Patient</span> Details</h1>
+                    <h2 className="form-title" align="center">Sign up</h2>
                     <form method="POST">
                         <div className="form-group" align="center">
                             <input type ="text" name="name" id="name" autoComplete="off"
-                            //  placeholder="Patient's Name"
                             value={user.name}
-                             onChange={handleInputs}
-                             placeholder="Patient's Name" 
+                            onChange={handleInputs}
+                            placeholder="Your Name"
                             />
                             <br/><br/>
-                            <input type ="text" name="email" id="email" autoComplete="off"
-                            //  placeholder="Your Email" required="true"
-                            value={user.email}
-                             onChange={handleInputs}
-                             placeholder="Your Emal ID:" 
+                            <input type ="text"  name="email" id="email" autoComplete="off"
+                               value={user.email}
+                               onChange={handleInputs}
+                             placeholder="Your Email" required="true"
                             />
                             <br/><br/>
-                            <input type ="text" name="phone" id="phone" autoComplete="off"
-                            //  placeholder="Your Phone Number" required="true"
-                             value={user.phone}
-                             onChange={handleInputs}
+                            <input type ="text"   name="mobile" id="mobile" autoComplete="off"
+                               value={user.mobile}
+                               onChange={handleInputs}
                              placeholder="Your Phone Number" 
                             />
                             <br/><br/>
-                            <input type ="text" name="work" id="work" autoComplete="off"
-                            //  placeholder="Your Profession" required="true"
-                             value={user.work}
-                             onChange={handleInputs}
-                             placeholder="Your Work" 
+                            <input type ="text"  name="country" id="country" autoComplete="off"
+                               value={user.country}
+                               onChange={handleInputs}
+                             placeholder="Your Country" 
                             />
-                            <br/><br/>
+                            <br></br>
+                            <br></br>
                             <input type ="text" name="gender" id="gender" autoComplete="off"
                             //  placeholder="Your Gender" required="true"
                             value={user.gender}
@@ -93,6 +91,19 @@ const PatientRegister =() =>{
                              placeholder="Your Gender" 
                             />
                             <br/><br/>
+                            <input type ="text"  name="state" id="state" autoComplete="off"
+                               value={user.state}
+                               onChange={handleInputs}
+                             placeholder="Your state" 
+                            />
+                            <br/><br/>
+                            <input type ="text"  name="city" id="city" autoComplete="off"
+                               value={user.city}
+                               onChange={handleInputs}
+                             placeholder="Your City" 
+                            />
+                            <br></br>
+                            <br></br>
                             <input type ="text" name="dob" id="dob" autoComplete="off"
                             //  placeholder="Your DOB" required="true"
                              value={user.dob}
@@ -107,28 +118,26 @@ const PatientRegister =() =>{
                              placeholder="Your Pincode" 
                             />
                             <br/><br/>
-                            <input type ="password" name="password" id="name" autoComplete="off"
-                            //  placeholder="Your password" required="true"
-                            value={user.password}
+                            <input type ="password" name="password" id="password" autoComplete="off"
+                               value={user.password}
                                onChange={handleInputs}
-                             placeholder="Confirm Your password"
+                             placeholder="Your password" 
                             />
                             <br/><br/>
-                            <input type ="password" name="cpassword" id="name" autoComplete="off"
-                            //  placeholder="Confirm Your password" required="true"
-                             value={user.cpassword}
-                             onChange={handleInputs}
-                             placeholder="Confirm Your password"
+                            <input type ="password"  name="cpassword" id="cpassword" autoComplete="off"
+                               value={user.cpassword}
+                               onChange={handleInputs}
+                             placeholder="Confirm Your password" 
                              
                             />
                         </div>
                         <br/><br/>
-                        <div className="form-group form-button" align="center">
-                            <input type="submit" name="signup" id="signup" className="form-submit"
-                            //  value="Register" onClick={PostData} 
+                        <div  align="center">
+                            <input type="submit" name="signup" id="signup"
+                             value="register" onClick={PostData} 
                             />
                             <br/><br/>
-                            <a className="nav-link" href="/PatientLogin"><strong>I am already registered</strong></a>
+                            <a className="nav-link" href="/login"><strong>I am already registered</strong></a>
                         </div>
                     </form>
     </section>
@@ -153,3 +162,4 @@ const PatientRegister =() =>{
 }
 
 export default PatientRegister
+

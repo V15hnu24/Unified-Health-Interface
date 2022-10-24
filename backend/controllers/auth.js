@@ -3,6 +3,7 @@ const patient = require("../models/patient");
 const admin = require("../models/admin");
 const createError = require('../utils/error');
 const jwt = require('jsonwebtoken');
+const upload = require('../middleware/upload');
 
 const patient_register = async (req,res,next) =>{
     try {
@@ -10,15 +11,25 @@ const patient_register = async (req,res,next) =>{
         const hash = bcrypt.hashSync(req.body.password, salt);
         const newUser = new patient({
             username:req.body.username,
-            email:req.body.email,
+            // email:req.body.email,
             password:hash,
-            mobile:req.body.mobile,
-            status:1,
-            country:req.body.country,
-            city:req.body.city,
-            state:req.body.state,
-            pincode:req.body.pincode
+            // mobile:req.body.mobile,
+            // status:1,
+            // country:req.body.country,
+            // city:req.body.city,
+            // state:req.body.state,
+            // pincode:req.body.pincode
         });
+
+        if(req.files){
+            let path = '';
+            req.files.forEach((file) => {
+                path = path + file.path + ',';
+            });
+            path = path.substring(0, path.lastIndexOf(","));
+            new_patient.register_documents = path;
+        }
+
         await newUser.save();
         res.status(200).json(newUser);
     } catch (error) {

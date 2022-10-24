@@ -6,7 +6,7 @@ app.use(express.json());
 const cookieParser = require('cookie-parser');
 const authRoute = require('./routes/auth');
 const mutler = require('multer');
-
+app.use('/uploads', express.static('uploads'));
 const DB_Connection_URL = process.env.Mongo;
 
 const DBconnect = async () => {

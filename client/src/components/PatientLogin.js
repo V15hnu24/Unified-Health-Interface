@@ -91,7 +91,7 @@ const PatientLogin =() =>{
         else{
             dispatch({type:"USER", payload:true});
             window.alert("Login Sucessful");
-            navigate("/");
+            navigate("/PatientHome");
         }
     }
 
