@@ -5,7 +5,7 @@ import {useNavigate} from 'react-router-dom'
 const SignUp =() =>{
     let navigate =useNavigate();
     const[user,setUser ] = useState({                          // Do this same in Patient Register
-        name:"", email:"", phone:"", gender:"",dob:"",pincode:"", work:"", password:"", cpassword: "",
+        username:"", email:"", mobile:"",country:"", gender:"",state:"",city:"",dob:"",pincode:"", password:"", cpassword: "",
     });
     let name,value;
     const handleInputs =(e)=>{
@@ -18,15 +18,19 @@ const SignUp =() =>{
 
     const PostData =async(e)=>{
         e.preventDefault();
-        const{name,email,phone,gender,dob,pincode,work,password,cpassword} =user;
+        const{username,email,mobile,country,gender,state,city,dob,pincode,password,cpassword} =user;
+        if(password!=cpassword)
+        {
+            window.alert("Password are not Matching.");
+        }
         console.log("Hello")
-        const res =await fetch('/register', {
+        const res =await fetch('/patient_register', {
         method:"POST",
         headers:{
             "Content-Type" : "application/json"
          },
         body:JSON.stringify({
-            name,email,phone,gender,dob,pincode,work,password,cpassword
+            username,email,mobile,gender,state,city,dob,country,pincode,password
          })
         });
        
@@ -54,8 +58,8 @@ const SignUp =() =>{
                     <h2 className="form-title" align="center">Sign up</h2>
                     <form method="POST">
                         <div className="form-group" align="center">
-                            <input type ="text" name="name" id="name" autoComplete="off"
-                            value={user.name}
+                            <input type ="text" name="username" id="name" autoComplete="off"
+                            value={user.username}
                             onChange={handleInputs}
                             placeholder="Your Name"
                             />
@@ -66,16 +70,16 @@ const SignUp =() =>{
                              placeholder="Your Email" required="true"
                             />
                             <br/><br/>
-                            <input type ="text"   name="phone" id="phone" autoComplete="off"
+                            <input type ="text"   name="mobile" id="mobile" autoComplete="off"
                                value={user.phone}
                                onChange={handleInputs}
                              placeholder="Your Phone Number" 
                             />
                             <br/><br/>
-                            <input type ="text"  name="work" id="work" autoComplete="off"
-                               value={user.work}
+                            <input type ="text"  name="country" id="country" autoComplete="off"
+                               value={user.country}
                                onChange={handleInputs}
-                             placeholder="Your Profession" 
+                             placeholder="Your Country" 
                             />
                             <br></br>
                             <br></br>
@@ -86,6 +90,19 @@ const SignUp =() =>{
                              placeholder="Your Gender" 
                             />
                             <br/><br/>
+                            <input type ="text"  name="state" id="state" autoComplete="off"
+                               value={user.state}
+                               onChange={handleInputs}
+                             placeholder="Your state" 
+                            />
+                            <br/><br/>
+                            <input type ="text"  name="city" id="city" autoComplete="off"
+                               value={user.city}
+                               onChange={handleInputs}
+                             placeholder="Your City" 
+                            />
+                            <br></br>
+                            <br></br>
                             <input type ="text" name="dob" id="dob" autoComplete="off"
                             //  placeholder="Your DOB" required="true"
                              value={user.dob}

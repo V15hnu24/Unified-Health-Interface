@@ -33,6 +33,7 @@ const admin_register = async (req,res,next) =>{
         const newUser = new admin({
             username:req.body.username,
             email:req.body.email,
+            mobile:req.body.mobile,
             isAdmin:req.body.isAdmin,
             password:hash
         });
@@ -71,7 +72,7 @@ const patient_login = async (req,res,next) =>{
 
 const admin_login = async (req,res,next) =>{
     try {
-        const tempUser = await admin.findOne({username:req.body.email});
+        const tempUser = await admin.findOne({username:req.body.username});
         if(!tempUser) return next(createError(404, "User not Found"));
 
         const isPasswordCorrect = await bcrypt.compare(

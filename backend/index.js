@@ -29,7 +29,7 @@ mongoose.connection.on('connected', ()=>{
 });
 
 app.use(cookieParser());
-app.use('/api/auth', authRoute);
+app.use('/auth', authRoute);
 
 app.use((err, req, res, next)=>{
     const errorStatus = err.status || 500;

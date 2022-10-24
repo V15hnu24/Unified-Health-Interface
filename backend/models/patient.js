@@ -35,6 +35,8 @@ const patientSchema = new mongoose.Schema({
         type:Number,
         required:true
     },
+    
+    // Not for frontend: Not for body 
     status:{
         type:Number,
         default:1

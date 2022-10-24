@@ -13,7 +13,7 @@ const Home =() =>{
   
       console.log("Hello");
       try{
-        const res = await fetch('/getdata',{
+        const res = await fetch('/patient_home',{
           method: "GET",
           headers:{
             Accept:"application/json",

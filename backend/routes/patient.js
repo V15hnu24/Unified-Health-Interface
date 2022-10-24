@@ -21,5 +21,4 @@ router.get("/verified_patients", verifyAdmin, getAllVerifiedPatients);
 //GetAll pending for verfication patients
 router.get("/verifyPending_patients", verifyAdmin, getAllVerifiedPatients);
 
-
 module.export = router;
