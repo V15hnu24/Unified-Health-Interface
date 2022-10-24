@@ -1,5 +1,10 @@
 # Patient-Data-Management-System
 
+API Calls sheet:  
+https://docs.google.com/spreadsheets/d/1S39JvMCZdbzDy4UoScUE-_y7S8v8qvf4MLVIpC_YIwc/edit#gid=0
+
+
+
 Delete the Node Modules Folder for client and server.
 Zip it and share
 Unzip the folder then copy the folder in new path
