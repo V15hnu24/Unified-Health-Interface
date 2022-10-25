@@ -5,7 +5,7 @@ import {useNavigate} from 'react-router-dom'
 const PatientRegister =() =>{
     let navigate =useNavigate();
     const[user,setUser ] = useState({                          // Do this same in Patient Register
-        name:"", email:"", mobile:"",country:"", gender:"",state:"",city:"",dob:"",pincode:"", password:"", cpassword: "",
+        name:"", email:"", mobile:"",country:"", gender:"",state:"",city:"",dob:"",pincode:"", password:"",cpassword:"",
     });
     let name,value;
     const handleInputs =(e)=>{
@@ -30,7 +30,7 @@ const PatientRegister =() =>{
             "Content-Type" : "application/json"
          },
         body:JSON.stringify({
-            name,email,mobile,country,gender,state,city,dob,pincode,password,
+            name,email,mobile,country,gender,state,city,dob,pincode,password,cpassword
          })
         });
        
