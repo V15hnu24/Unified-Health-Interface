@@ -75,6 +75,11 @@ const PatientHome =() =>{
         navigate("/PatientSearchOrganizations");
       
       }
+      const SearchHealthCareProfessional =()=>{
+    
+        navigate("/PatientSearchHealthCareProfessionals");
+      
+      }
 
 
 
@@ -99,6 +104,11 @@ const PatientHome =() =>{
         {/* <input type="text" placeholder="Search Health Organizations"/> */}
         <div align="center">
        <input type="submit"  value="Search Organizations" onClick={SearchData} />
+        </div>
+        <br></br>
+        <br></br>
+        <div align="center">
+       <input type="submit"  value="Search HealthCare Professionals" onClick={SearchHealthCareProfessional} />
         </div>
         {/* <div className="list"> */}
           {/* {userData.map((user)=>{

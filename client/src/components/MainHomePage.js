@@ -4,13 +4,13 @@ import { useEffect,useState,useContext } from 'react';
 import {Navigate, useNavigate} from 'react-router-dom';
 import {userContext} from "../App";
 import '../HomePage.css'
+import styled from 'styled-components'
 
 
 const MainHomePage =() =>{
 
     // const {state,dispatch} = useContext(userContext);
     // const [show,setShow]  =useState(false);
-    let navigate = useNavigate();
     // const[userData, setUserData] = useState('');
     // const userHomePage = async (req,res)=>{
   
@@ -77,19 +77,39 @@ const MainHomePage =() =>{
     //     navigate("/PatientSearchOrganizations");
       
     //   }
+const Button = styled.button`
+  background-color: black;
+  color: white;
 
-        const PatientLogin= ()=>{
-                navigate("/PatientLogin");
-        }
+  font-size: 20px;
+  padding: 10px 60px;
+  border-radius: 5px;
+  margin: 10px 0px;
+  cursor: pointer;
+`;
+    let navigate = useNavigate();
+    const AdminLogin= ()=>{
+        navigate("/AdminLogin");
+    }
+    const PatientLogin= ()=>{
+        navigate("/PatientLogin");
+    }
+    const PatientRegister =()=>{
+            navigate("/PatientRegister");
+    }
+    const OrganizationLogin =()=>{
+        navigate("/OrganizationLogin");
+    }
+    const OrganizationRegister =()=>{
+        navigate("/OrganizationRegister");
+}
 
-        navigate =useNavigate();
-        const OrganizationLogin= ()=>{
-            navigate("/OrganizationLogin");
-        }
-
-        const HealthProfessionalLogin= ()=>{
-            navigate("/HealthProfessionalLogin");
-        }
+    const HealthProfessionalLogin= ()=>{
+            navigate("/HealthCareProfessionalLogin");
+    }
+    const HealthProfessionalRegister= ()=>{
+        navigate("/HealthCareProfessionalRegister");
+}
 
 
 //      }
@@ -105,20 +125,47 @@ const MainHomePage =() =>{
     {/* <p className="pt-5">Welcome</p> */}
     <h1 align="center">Welcome to<span> Patient</span>  HealthCare System</h1>
     <br></br>
+    <br></br>
+    {/* <button class="button2">Organizations</button> */}
+    </div> 
     <div align="center">
-    <button class="button">Patients</button>
-    <button  onClick={PatientLogin}class ="button">Login</button>
     <br></br>
-
-    <br></br>
-    <button class="button">Organizations</button>
-    <button onCLick={OrganizationLogin}class="button">Login</button>
+    <Button onClick={AdminLogin}>
+    Admin Login
+    </Button>
     <br></br>
     <br></br>
-    <button class="button button3">Health Professionals</button>
-    <button  onCLick={HealthProfessionalLogin}class="button">Login</button>
     <br></br>
-    </div>
+    <Button onClick={PatientRegister}>
+    Patient Registration
+    </Button>
+    &nbsp;&nbsp;&nbsp;
+    <Button onClick={PatientLogin}>
+    Login Patient
+    </Button>
+    <br></br>
+    <br></br>
+    <br></br>
+    <Button onClick={OrganizationRegister}>
+    Organization Registration
+    </Button>
+    &nbsp;&nbsp;&nbsp;
+    <Button onClick={OrganizationLogin}>
+    Organization Login
+    </Button>
+    <br></br>
+    <br></br>
+    <br></br>
+    <Button onClick={HealthProfessionalRegister}>
+    HealthProfessional Registration
+    </Button>
+    &nbsp;&nbsp;&nbsp;
+    <Button onClick={HealthProfessionalLogin}>
+    HealthProfessionalLogin
+    </Button>
+    <br></br>
+    <br></br>
+    <br></br>
     </div>
     </div>
   )

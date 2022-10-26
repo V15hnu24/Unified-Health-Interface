@@ -8,10 +8,14 @@ import PatientEditdetails from "./components/PatientEditdetails"
 import PatientLogin from "./components/PatientLogin"
 import PatientIntermediateLogin from "./components/PatientIntermediateLogin"
 import PatientSearchOrganizations from "./components/PatientSearchOrganizations"
+import PatientSearchHealthCareProfessionals from "./components/PatientSearchHealthCareProfessionals"
 import PatientRegister from "./components/PatientRegister"
 import OrganizationRegister from "./components/OrganizationRegister"
 import OrganizationLogin from "./components/OrganizationLogin"
 import OrganizationHome from "./components/OrganizationHome"
+import HealthCareProfessionalHome from './components/HealthCareProfessionalHome';
+import HealthCareProfessionalRegister from './components/HealthCareProfessionalRegister';
+import HealthCareProfessionalLogin from './components/HealthCareProfessionalLogin';
 import MainHomePage from "./components/MainHomePage"
 import Logout from "./components/Logout"
 import { initialState, reducer } from "../src/reducer/UseReducer" 
@@ -38,6 +42,10 @@ const Routing =() =>{
         <Route path= "/PatientEditdetails" element={<PatientEditdetails/>} />
         <Route path= "/PatientIntermediateLogin" element={<PatientIntermediateLogin/>} />
         <Route path= "/PatientSearchOrganizations" element={<PatientSearchOrganizations/>} />
+        <Route path= "/PatientSearchHealthCareProfessionals" element={<PatientSearchHealthCareProfessionals/>} />
+        <Route path= "/HealthCareProfessionalHome" element={<HealthCareProfessionalHome/>} />
+        <Route path= "/HealthCareProfessionalRegister" element={<HealthCareProfessionalRegister/>} />
+        <Route path= "/HealthCareProfessionalLogin" element={<HealthCareProfessionalLogin/>} />
         <Route path= "/logout" element ={<Logout/>}/>  
       </Routes>
   )

@@ -2,10 +2,10 @@ import React,{useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 
 
-const OrganizationRegister =() =>{
+const HealthCareProfessionalRegister =() =>{
     let navigate =useNavigate();
     const[user,setUser ] = useState({                          // Do this same in Patient Register
-        name:"", email:"", phone:"",work:"",location:"",pincode:"", password:"", cpassword: "",
+        name:"", email:"", phone:"",work:"",gender:"",dob:"",location:"",pincode:"", password:"", cpassword: "",
     });
     let name,value;
     const handleInputs =(e)=>{
@@ -18,15 +18,15 @@ const OrganizationRegister =() =>{
 
     const PostData =async(e)=>{
         e.preventDefault();
-        const{name,email,phone,work,location,pincode,password,cpassword} =user;
+        const{name,email,phone,work,gender,dob,location,pincode,password,cpassword} =user;
         console.log("Hello")
-        const res =await fetch('/registerOrganization', {
+        const res =await fetch('/HealthCareProfessionalRegister', {
         method:"POST",
         headers:{
             "Content-Type" : "application/json"
          },
         body:JSON.stringify({
-            name,email,phone,location,work,pincode,password,cpassword
+            name,email,phone,work,gender,dob,location,pincode,password,cpassword
          })
         });
        
@@ -40,7 +40,7 @@ const OrganizationRegister =() =>{
         window.alert("Registartion Successful");
         console.log("Successful Registration");
        // alert("Hello");
-        navigate("/OrganizationLogin");
+        navigate("/HealthCareProfessionalLogin");
         }
        
     }
@@ -51,19 +51,19 @@ const OrganizationRegister =() =>{
   return(
     <>
     <section className="signup">
-                    <h2 className="form-title" align="center">Organization Registeration Portal</h2>
+                    <h2 className="form-title" align="center">HealthCareProfessional Registeration Portal</h2>
                     <form method="POST">
                         <div className="form-group" align="center">
                             <input type ="text" name="name" id="name" autoComplete="off"
                             value={user.name}
                             onChange={handleInputs}
-                            placeholder="Hospital Name"
+                            placeholder="Name"
                             />
                             <br/><br/>
                             <input type ="text"  name="email" id="email" autoComplete="off"
                                value={user.email}
                                onChange={handleInputs}
-                             placeholder="Hospital's Email" required="true"
+                             placeholder="Email" required="true"
                             />
                             <br/><br/>
                             <input type ="text"   name="phone" id="phone" autoComplete="off"
@@ -75,7 +75,19 @@ const OrganizationRegister =() =>{
                             <input type ="text"  name="work" id="work" autoComplete="off"
                                value={user.work}
                                onChange={handleInputs}
-                             placeholder="Your Profession" 
+                             placeholder="Your Working Hospital Name" 
+                            />
+                            <br></br>
+                            <input type ="text"  name="gender" id="gender" autoComplete="off"
+                               value={user.gender}
+                               onChange={handleInputs}
+                             placeholder="Your Gender" 
+                            />
+                            <br></br>
+                            <input type ="text"  name="dob" id="dob" autoComplete="off"
+                               value={user.dob}
+                               onChange={handleInputs}
+                             placeholder="Your DOB" 
                             />
                             <br></br>
                              <input type ="text"  name="location" id="work" autoComplete="off"
@@ -134,4 +146,4 @@ const OrganizationRegister =() =>{
   )
 }
 
-export default OrganizationRegister
+export default HealthCareProfessionalRegister

@@ -3,7 +3,7 @@ import {useNavigate} from 'react-router-dom';
 import {useContext} from 'react'
 import { userContext } from "../App";
 
-const PatientSearchOrganizations =() =>{
+const PatientSearchHealthCareProfessionals=() =>{
 
   const {state,dispatch} = useContext(userContext);
   let navigate = useNavigate();
@@ -14,7 +14,7 @@ const PatientSearchOrganizations =() =>{
 
     console.log("Hello");
     try{
-      const res = await fetch('/getdataOrganization',{
+      const res = await fetch('/getSearchHealthCareProfessional',{
         method: "GET",
         headers:{
           Accept:"application/json",
@@ -110,7 +110,7 @@ const PatientSearchOrganizations =() =>{
   return(
     <>
     <div>
-    <h1>Hello Aditya Peer from About.js</h1>
+    <h1>Welcome To Health Care Professionals</h1>
     <br/>
     {/* <div class="container">
       <h2>Patient Details</h2>
@@ -128,16 +128,17 @@ const PatientSearchOrganizations =() =>{
 </div>8/*/}
 
 <div align="center">
-    <input type="text"  onChange={handleFilter}value={filterVal}  placeholder="Search Hospitals"/>
+    <input type="text"  onChange={handleFilter}value={filterVal}  placeholder="Search HealthCare Professionals"/>
   </div>
 <table class="table">
   <br></br>
 <div align="center">
-  <h2>Orgnaization Details</h2>
+  <h2>HealthCare Professional Details</h2>
   
-    <th>HOSPITAL NAME</th>
+    <th>NAME</th>
     <th>Email</th>
     <th>Phone</th>
+    <th>Work</th>
     <th>Pincode</th>
     <th>Location</th>
     <th>Description</th>
@@ -170,4 +171,4 @@ const PatientSearchOrganizations =() =>{
 )
 }
 
-export default PatientSearchOrganizations
+export default PatientSearchHealthCareProfessionals
