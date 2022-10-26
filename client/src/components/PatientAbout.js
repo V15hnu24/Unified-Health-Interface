@@ -89,7 +89,7 @@ const PatientAbout =() =>{
     </tr>
     <tr>
       <th scope="col">Phone Number:</th>
-      <td>{userData.phone}</td>
+      <td>{userData.mobile}</td>
     </tr>
     <tr>
       <th scope="col">DOB:</th>

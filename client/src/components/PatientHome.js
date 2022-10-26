@@ -69,6 +69,12 @@ const PatientHome =() =>{
       //     // setUserData({... userData, name:"",});
       //     // navigate("/about");
       //   }
+      navigate =useNavigate();
+      const SearchData =()=>{
+    
+        navigate("/PatientSearchOrganizations");
+      
+      }
 
 
 
@@ -90,10 +96,10 @@ const PatientHome =() =>{
     
     <form  align="center"action="Search Health Organizations">
       <div>
-        <input type="text" placeholder="Search Health Organizations"/>
-        {/* <div align="center">
+        {/* <input type="text" placeholder="Search Health Organizations"/> */}
+        <div align="center">
        <input type="submit"  value="Search Organizations" onClick={SearchData} />
-        </div> */}
+        </div>
         {/* <div className="list"> */}
           {/* {userData.map((user)=>{
               <li className='listItem'>Apollo</li>
