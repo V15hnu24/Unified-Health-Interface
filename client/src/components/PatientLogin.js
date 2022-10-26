@@ -121,7 +121,7 @@ const PatientLogin =() =>{
                              onClick={loginUser}
                             />
                             <br/><br/>
-                            <a className="nav-link" href="/registration"><strong>Create an Account</strong></a>
+                            <a className="nav-link" href="/PatientRegister"><strong>Create an Account</strong></a>
                         </div>
                     </form>
     </section>

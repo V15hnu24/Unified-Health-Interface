@@ -7,7 +7,7 @@ const PatientEditdetails =() =>{
 
   const {state,dispatch} = useContext(userContext);
   let navigate = useNavigate();
-  const[userData, setUserData] = useState({name:"", email:"",mobile:"",gender:"",dob:"",pincode:"",work:""});
+  const[userData, setUserData] = useState({name:"", email:"",mobile:"",country:"",gender:"",state:"",city:"",dob:"",pincode:""});
   const callAboutPage = async (req,res)=>{
 
     console.log("Hello");
@@ -24,7 +24,7 @@ const PatientEditdetails =() =>{
       const data  =await res.json();
       console.log(data);
     //   setUserData(data);
-    setUserData({...userData, name: data.name, email:data.email, mobile:data.mobile, gender:data.gender, dob:data.dob, pincode:data.pincode, work:data.work});
+    setUserData({...userData, name: data.name, email:data.email, mobile:data.mobile, country:data.country, gender:data.gender, state:data.state, city:data.city, dob:data.dob, pincode:data.pincode,});
       if(!res.status ==200)
       {
           const error = new Error(res.error);
@@ -42,7 +42,7 @@ const PatientEditdetails =() =>{
   const Edit2= async(e)=>{
  
     e.preventDefault();
-    const {name, email, mobile ,gender, dob, pincode, work} = userData;
+    const {name, email, mobile , country,gender,state,city, dob, pincode,} = userData;
     console.log(name);
     console.log(email);
     const res = await fetch('/Editdetails',{
@@ -51,7 +51,7 @@ const PatientEditdetails =() =>{
         "Content-Type":"application/json"
       },
       body:JSON.stringify({
-        name, email, mobile ,gender, dob, pincode, work
+        name, email, mobile ,country,gender,state,city, dob, pincode, 
       })
     });
     console.log("Hello");
@@ -65,7 +65,7 @@ const PatientEditdetails =() =>{
     else{
       alert("Details Updated");
       setUserData({... userData, name:"",});
-      navigate("/about");
+      navigate("/PatientAbout");
     }
     
     // navigate("/Editdetails");
@@ -181,12 +181,32 @@ const PatientEditdetails =() =>{
       </input>
     </tr>
     <tr>
-      <th scope="col">Profession:</th>
-      <td>{userData.work}</td>
+      <th scope="col">Country:</th>
+      <td>{userData.country}</td>
       <input type="submit"  value="Edit Profession" 
     />
       <input type="text"
-      name ="work"
+      name ="country"
+      onChange={handleInputs}>
+      </input>
+    </tr>
+    <tr>
+      <th scope="col">State:</th>
+      <td>{userData.state}</td>
+      <input type="submit"  value="Edit Profession" 
+    />
+      <input type="text"
+      name ="state"
+      onChange={handleInputs}>
+      </input>
+    </tr>
+    <tr>
+      <th scope="col">City:</th>
+      <td>{userData.city}</td>
+      <input type="submit"  value="Edit Profession" 
+    />
+      <input type="text"
+      name ="city"
       onChange={handleInputs}>
       </input>
     </tr>

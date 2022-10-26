@@ -12,9 +12,11 @@ import PatientRegister from "./components/PatientRegister"
 import OrganizationRegister from "./components/OrganizationRegister"
 import OrganizationLogin from "./components/OrganizationLogin"
 import OrganizationHome from "./components/OrganizationHome"
+import MainHomePage from "./components/MainHomePage"
 import Logout from "./components/Logout"
 import { initialState, reducer } from "../src/reducer/UseReducer" 
 import 'bootstrap/dist/css/bootstrap.css'
+import "./HomePage.css"
 import ErrorPage from "./components/Errorpage"
 
 
@@ -24,11 +26,12 @@ export const userContext = createContext();
 const Routing =() =>{
   return(
         <Routes>
+        <Route path="/MainHomePage" element={ <MainHomePage/> } />
         <Route path="/PatientHome" element={ <PatientHome/> } />
         <Route path="/Patientabout" element={ <PatientAbout/> } />
         <Route path="/contact" element={ <Contact/> } />
-        <Route path= "/patientLogin" element={<PatientLogin/>} />
-        <Route path= "/patientRegister" element={<PatientRegister/>} />
+        <Route path= "/PatientLogin" element={<PatientLogin/>} />
+        <Route path= "/PatientRegister" element={<PatientRegister/>} />
         <Route path= "/OrganizationRegister" element={<OrganizationRegister/>} />
         <Route path= "/OrganizationLogin" element={<OrganizationLogin/>} />
         <Route path= "/OrganizationHome" element={<OrganizationHome/>} />
@@ -46,6 +49,7 @@ const App =() =>{
     <>
     <userContext.Provider value ={{state, dispatch}}>
     <Navbar/>
+    {/* <MainHomePage/> */}
     {/* <Routes>
      <Route path="/" element={<Home/>} />
     </Routes> 

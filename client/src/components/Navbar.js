@@ -32,7 +32,7 @@ const Navbar =() =>{
       return(
         <>
          <li className="nav-item active">
-        <a className="nav-link" href="/PatientHome">Home<span className="sr-only"></span></a>
+        <a className="nav-link" href="/MainHomePage">Home<span className="sr-only"></span></a>
         </li>
         <li className="nav-item">
         <a className="nav-link" href="/Patientabout">About</a>
