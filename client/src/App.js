@@ -1,7 +1,7 @@
 import React, { createContext, useReducer } from 'react'
 import{Route,Routes} from "react-router-dom";
 import PatientHome from './components/PatientHome'
-import Navbar from "./components/Navbar"
+// import Navbar from "./components/Navbar"
 import Contact from "./components/Contact"
 import PatientAbout from "./components/PatientAbout"
 import PatientEditdetails from "./components/PatientEditdetails"
@@ -16,6 +16,7 @@ import Logout from "./components/Logout"
 import { initialState, reducer } from "../src/reducer/UseReducer" 
 import 'bootstrap/dist/css/bootstrap.css'
 import ErrorPage from "./components/Errorpage"
+import CreateNavbar from "./components/CustomNavbar"
 
 
 // Context API
@@ -44,45 +45,11 @@ const App =() =>{
   const [state,dispatch] = useReducer(reducer, initialState);
   return(
     <>
-    <userContext.Provider value ={{state, dispatch}}>
-    <Navbar/>
-    {/* <Routes>
-     <Route path="/" element={<Home/>} />
-    </Routes> 
 
-    <Routes>
-    <Route path="/about" element={<About/>} />
-    </Routes>
-
-    <Routes>
-    <Route path="/contact" element={<Contact/>} />
-    </Routes>
-
-    <Routes>
-    <Route path="/login" element={<Login/>} />
-    </Routes>
-
-    <Routes>
-    <Route path= "/signup" element={<Signup/>} />
-    </Routes> */}
-     {/* <Routes>
-        <Route path="/" element={ <Home/> } />
-        <Route path="/about" element={ <About/> } />
-        <Route path="/contact" element={ <Contact/> } />
-        <Route path="/login" element={<Login/>} />
-        <Route path= "/registration" element={<Signup/>} />
-        <Route path= "/patientLogin" element={<PatientLogin/>} />
-        <Route path= "/patientRegister" element={<PatientRegister/>} />
-        <Route path= "/Editdetails" element={<Editdetails/>} />
-        <Route path= "/logout" element ={<Logout/>}/>  
-      </Routes> */}
-      <Routing/>
+      <userContext.Provider value ={{state, dispatch}}>
+      <CreateNavbar />
+      <Routing />
       </userContext.Provider>
-      {/* <Route>
-        <ErrorPage/>
-      </Route> */}
-
-  
     </>
   )
 }
