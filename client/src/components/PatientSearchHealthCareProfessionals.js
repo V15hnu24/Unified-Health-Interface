@@ -138,7 +138,6 @@ const PatientSearchHealthCareProfessionals=() =>{
     <th>NAME</th>
     <th>Email</th>
     <th>Phone</th>
-    <th>Work</th>
     <th>Pincode</th>
     <th>Location</th>
     <th>Description</th>

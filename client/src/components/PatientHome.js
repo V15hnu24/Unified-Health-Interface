@@ -80,6 +80,11 @@ const PatientHome =() =>{
         navigate("/PatientSearchHealthCareProfessionals");
       
       }
+      const PatientUploadDocuments =()=>{
+    
+        navigate("/PatientUploadDocuments");
+      
+      }
 
 
 
@@ -109,6 +114,11 @@ const PatientHome =() =>{
         <br></br>
         <div align="center">
        <input type="submit"  value="Search HealthCare Professionals" onClick={SearchHealthCareProfessional} />
+        </div>
+        <br></br>
+        <br></br>
+        <div align="center">
+       <input type="submit"  value="Upload Patient Documents" onClick={PatientUploadDocuments} />
         </div>
         {/* <div className="list"> */}
           {/* {userData.map((user)=>{

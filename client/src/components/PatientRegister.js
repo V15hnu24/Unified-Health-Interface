@@ -44,7 +44,7 @@ const PatientRegister =() =>{
         window.alert("Registartion Successful");
         console.log("Successful Registration");
        // alert("Hello");
-        navigate("/PatientIntermediateLogin");
+        navigate("/PatientUploadDocuments");
         }
        
     }
