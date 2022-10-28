@@ -14,12 +14,11 @@ const User =require("../models/userSchema");
 const UserOrganization =require("../models/OrganizationSchema");
 const HealthCareProfessional =require("../models/HealthCareProfessionalSchema");
 const PatientDocuments = require('../models/PatientDocumentsLinksSchema');
-// const PaytmChecksum = require('../PaytmChecksum');
-// require('dotenv').config({path:'../env'})
-// const {v4 :uuidv4}=require('uuid');
 const crypto =require("crypto");
-
 const Razorpay = require('razorpay');
+const Payment = require("../models/PaymentSchema");
+
+
 router.get('/',(req,res)=>{
     res.send('Hello world from the server router js');
 });
@@ -457,72 +456,7 @@ router.post('/PostPdfFiletoAdmin',(req,res)=>{
     // res.send(req.rootUser);
 })
 
-router.post('/payment', (req,res)=>{
 
-//     const{amount,email} = req.body;
-//     const totalAmount =JSON.stringify(amount);
-//     console.log(totalAmount);
-//     body = "{/*YOUR_COMPLETE_REQUEST_BODY_HERE*/}"
-//     var params={};
-//     params['MID'] = process.env.PAYTM_MID,
-//     console.log(params['MID']);
-//     params['WEBSITE'] = process.env.PAYTM_WEBSITE,
-//     params['CHANNEL_ID'] = process.env.PAYTM_CHANNEL_ID,
-//     params['INDUSTRY_TYPE_ID'] = process.env.PAYTM_INDUSTRY_TYPE_ID,
-//     params['ORDER_ID'] = uuidv4(),
-//     // params['CUST_ID'] = process.env.PAYTM_CUST_ID,
-//     params['TXN_AMOUNT'] = totalAmount,
-//     params['CALLBACK_URL'] = 'http://localhost:5000/payment',
-//     params['EMAIL'] =email,
-//     params['MOBILE_NO'] = '9876543210'
-// /**
-// * Generate checksum by parameters we have
-// * Find your Merchant Key in your Paytm Dashboard at https://dashboard.paytm.com/next/apikeys 
-// */
-// var paytmChecksum = PaytmChecksum.generateSignature(params,process.env.PAYTM_MERCHANT_KEY);
-// paytmChecksum.then(function(result){
-// 	console.log("generateSignature Returns: " + result);
-//     let paytmParams={
-//         ...params,
-//         "CHECKSUMHASH":checksum,
-//     }
-//     res.json(paytmParams);
-// }).catch(function(error){
-// 	console.log(error);
-// });
-const{amount,email}=req.body;
-
-    /* import checksum generation utility */
-const totalAmount=JSON.stringify(amount);
-var params = {};
-
-/* initialize an array */
-params['MID'] = process.env.PAYTM_MID,
-params['WEBSITE'] = process.env.PAYTM_WEBSITE,
-params['CHANNEL_ID'] = process.env.PAYTM_CHANNEL_ID,
-params['INDUSTRY_TYPE_ID'] = process.env.PAYTM_INDUSTRY_TYPE_ID,
-params['ORDER_ID'] = uuidv4(),
-params['CUST_ID'] = process.env.PAYTM_CUST_ID,
-params['TXN_AMOUNT'] = totalAmount,
-params['CALLBACK_URL'] = 'http://localhost:5000/api/callback',
-params['EMAIL'] =email,
-params['MOBILE_NO'] = '9876543210'
-
-/**
-* Generate checksum by parameters we have
-* Find your Merchant Key in your Paytm Dashboard at https://dashboard.paytm.com/next/apikeys 
-*/
-var paytmChecksum = PaytmChecksum.generateSignature(params, process.env.PAYTM_MERCHANT_KEY);
-paytmChecksum.then(function(checksum){
-    let paytmParams={
-        ...params,
-        "CHECKSUMHASH":checksum
-    }
-    res.json(paytmParams)
-}).catch(function(error){
-	console.log(error);
-});
-})
 
 // router.post('/Editdetails',protect,(req,res)=>{
 
@@ -539,13 +473,12 @@ paytmChecksum.then(function(checksum){
 
 
 
-
-
-
 // New Backend
 // router.post("/patient_register", patient_register);
 // router.post("/patient_login", patient_login);
 // router.get("/PatientHome", patient_Home);
+
+
 const instance = new Razorpay({
      key_id: process.env.RAZORPAY_API_KEY,
      key_secret:process.env.RAZORPAY_API_SECRET 
@@ -566,7 +499,7 @@ router.post("/checkout",async(req,res)=>{
             order,
         })
 });
-router.post("/paymentVerification",(req,res)=>{
+router.post("/paymentVerification",async (req,res)=>{
     console.log(req.body);
 
     const {razorpay_order_id ,razorpay_payment_id,razorpay_signature } =req.body;
@@ -585,7 +518,13 @@ router.post("/paymentVerification",(req,res)=>{
     {
         // Database comes here
 
-        res.redirect("http://localhost:3000/")
+        await Payment.create({
+            razorpay_order_id ,
+            razorpay_payment_id,
+            razorpay_signature 
+        })
+
+        res.redirect(`http://localhost:3000/PaymentSuccess?reference=${razorpay_payment_id}`);
     }
     else{
         res.status(200).json({

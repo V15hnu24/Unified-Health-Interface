@@ -20,6 +20,7 @@ import HealthCareProfessionalLogin from './components/HealthCareProfessionalLogi
 import MainHomePage from "./components/MainHomePage"
 import Logout from "./components/Logout"
 import RazorPay from './components/RazorPay';
+import PaymentSuccess from './components/PaymentSucess';
 import { initialState, reducer } from "../src/reducer/UseReducer" 
 import 'bootstrap/dist/css/bootstrap.css'
 import "./HomePage.css"
@@ -50,6 +51,7 @@ const Routing =() =>{
         <Route path= "/HealthCareProfessionalRegister" element={<HealthCareProfessionalRegister/>} />
         <Route path= "/HealthCareProfessionalLogin" element={<HealthCareProfessionalLogin/>} />
         <Route path= "/RazorPay" element={<RazorPay/>} />
+        <Route path= "/PaymentSuccess" element={<PaymentSuccess/>} />
         <Route path= "/logout" element ={<Logout/>}/>  
       </Routes>
   )
