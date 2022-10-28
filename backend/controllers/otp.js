@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const nodemailer = require("nodemailer");
+const process = require('process');
 
 const email_otp = async (req,res,next) =>{
     try {
@@ -62,7 +63,7 @@ async function email_otp_sender(otp, email) {
     secure: false, // true for 465, false for other ports
     auth: {
       user: "patientservicesfcsiiitd@gmail.com", // generated ethereal user
-      pass: "nftgiujmidocrkro", 
+      pass: process.env.email_password, // generated ethereal password
     },
   });
   // send mail with defined transport object
@@ -75,9 +76,6 @@ async function email_otp_sender(otp, email) {
   });
 
   console.log("Message sent: %s", info.messageId);
-  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
-  // Preview only available when sending through an Ethereal account
-//   console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
 };
 
 module.exports = {email_otp, verify_otp};
