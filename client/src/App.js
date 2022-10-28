@@ -18,6 +18,7 @@ import HealthCareProfessionalHome from './components/HealthCareProfessionalHome'
 import HealthCareProfessionalRegister from './components/HealthCareProfessionalRegister';
 import HealthCareProfessionalLogin from './components/HealthCareProfessionalLogin';
 import MainHomePage from "./components/MainHomePage"
+import AdminHomePage from './components/AdminHomePage';
 import Logout from "./components/Logout"
 import RazorPay from './components/RazorPay';
 import PaymentSuccess from './components/PaymentSucess';
@@ -48,6 +49,7 @@ const Routing =() =>{
         <Route path= "/PatientSearchHealthCareProfessionals" element={<PatientSearchHealthCareProfessionals/>} />
         <Route path= "/PatientUploadDocuments" element={<PatientUploadDocuments/>} />
         <Route path= "/HealthCareProfessionalHome" element={<HealthCareProfessionalHome/>} />
+        <Route path= "/AdminHomePage" element={<AdminHomePage/>} />
         <Route path= "/HealthCareProfessionalRegister" element={<HealthCareProfessionalRegister/>} />
         <Route path= "/HealthCareProfessionalLogin" element={<HealthCareProfessionalLogin/>} />
         <Route path= "/RazorPay" element={<RazorPay/>} />
