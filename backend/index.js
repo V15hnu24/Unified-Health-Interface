@@ -8,6 +8,11 @@ const authRoute = require('./routes/auth');
 const mutler = require('multer');
 app.use('/uploads', express.static('uploads'));
 const DB_Connection_URL = process.env.Mongo;
+const cors = require('cors');
+const patientRoute = require('./models/patient');
+const adminRoute = require('./routes/admin');
+
+app.use(cors());
 
 const DBconnect = async () => {
     try{
@@ -19,6 +24,7 @@ const DBconnect = async () => {
     }
 };
 
+app.use(express.static('build'));
 
 mongoose.connection.on('disconnected', ()=>{
     console.log("MongoDb Disconnected");
@@ -28,8 +34,15 @@ mongoose.connection.on('connected', ()=>{
     console.log("MongoDB Connected");
 });
 
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'build/index.html'));
+});
+
 app.use(cookieParser());
 app.use('/auth', authRoute);
+app.use('/patient', patientRoute);
+app.use('/admin', adminRoute);
+
 
 app.use((err, req, res, next)=>{
     const errorStatus = err.status || 500;

@@ -1,0 +1,83 @@
+const mongoose = require('mongoose');
+const nodemailer = require("nodemailer");
+
+const email_otp = async (req,res,next) =>{
+    try {
+        const otp = Math.floor(100000 + Math.random() * 900000);
+        const email = req.body.email;
+        const user = await user.findOne({email:email});
+        if(user){
+            user.otp = otp;
+            await user.save();
+        }
+        else{
+            const newUser = new user({
+                email:email,
+                otp:otp
+            });
+            await newUser.save();
+        }
+
+        try {
+            email_otp_sender(otp, email);
+        } catch (error) {
+            next(error);
+        }
+    } catch (error) {
+        next(error);
+    }
+};
+
+const verify_otp = async (req,res,next) =>{
+    try {
+        const otp = req.body.otp;
+        const email = req.body.email;
+        const user = await user.findOne({email:email});
+        if(user){
+            if(user.otp == otp){
+                res.status(200).json({message:"OTP verified"});
+            }
+            else{
+                res.status(400).json({message:"OTP incorrect"});
+            }
+        }
+        else{
+            res.status(400).json({message:"User not found"});
+        }
+    } catch (error) {
+        next(error);
+    }
+};
+
+
+async function email_otp_sender(otp, email) {
+  // Generate test SMTP service account from ethereal.email
+  // Only needed if you don't have a real mail account for testing
+  let testAccount = await nodemailer.createTestAccount();
+
+  // create reusable transporter object using the default SMTP transport
+  let transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 587,
+    secure: false, // true for 465, false for other ports
+    auth: {
+      user: "patientservicesfcsiiitd@gmail.com", // generated ethereal user
+      pass: "nftgiujmidocrkro", 
+    },
+  });
+  // send mail with defined transport object
+  let info = await transporter.sendMail({
+    from: '"Otp data security services" <no-reply@datasecurity.com>', // sender address
+    to: email, // list of receivers
+    subject: "OTP from Patient data management system", // Subject line
+    text: "OTP is " + otp // plain text body
+    // html: "<b>Hello world </b>", // html body
+  });
+
+  console.log("Message sent: %s", info.messageId);
+  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+  // Preview only available when sending through an Ethereal account
+//   console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+};
+
+module.exports = {email_otp, verify_otp};

@@ -1,5 +1,4 @@
 import React from 'react'
-// import "../App.css"
 import { useEffect,useState,useContext } from 'react';
 import {useNavigate} from 'react-router-dom';
 import {userContext} from "../App";
@@ -28,47 +27,21 @@ const PatientHome =() =>{
       // setUserName(data.name);
       setUserData({...userData, name: data.name, email:data.email, phone:data.phone, gender:data.gender, dob:data.dob, pincode:data.pincode, work:data.work});
       setShow(true);
-        if(!res.status ==200)
+        if(res.status ==200)
         {
-            const error = new Error(res.error);
-            throw error;
+          dispatch({type:"USER", payload:true});
         }
         else{
-          dispatch({type:"USER", payload:true});
+          const error = new Error(res.error);
+          throw error;
         }
       }catch(err)
       {
-          console.log(err);
-          navigate('/login');
+          console.log("Errorrrr");
+          navigate('/PatientLogin');
       }
     }
-      
-      // navigate("/Editdetails");
-      // const SearchData =async(req,res)=>{
-      //   console.log("Hello Bro");
-      //   const [searchInput, setSearchInput] = useState([]);
-      //   const res2 = await fetch('/getdataOrganization',{
-      //     method: "GET",
-      //     headers:{
-      //       Accept:"application/json",
-      //       "Content-Type":"application/json"
-      //     },
-      //     credentials:"include"
-      //   })
-      //   const data = await res2.json();
-      //   console.log(data);
-      //   setSearchInput(data);
-      //   console.log(searchInput.name);
-      //   if(!data)
-      //   {
-      //     const error = new Error(res.error);
-      //     throw error;
-      //   }
-      //   else{
-      //      alert("Details Shown");
-      //     // setUserData({... userData, name:"",});
-      //     // navigate("/about");
-      //   }
+    
       navigate =useNavigate();
       const SearchData =()=>{
     
@@ -76,15 +49,11 @@ const PatientHome =() =>{
       
       }
 
-
-
-//      }
     
     useEffect(()=>{
       userHomePage();
       //  SearchData();
     },[]);  
-   // const {query} = useGlobalContext();
 
   return(
     <div>

@@ -7,7 +7,7 @@ const PatientSearchOrganizations =() =>{
 
   const {state,dispatch} = useContext(userContext);
   let navigate = useNavigate();
-  const[userData, setUserData] = useState({name:"", email:"",mobile:"",pincode:"",work:""});
+  const[userData, setUserData] = useState({name:"", email:"",phone:"",pincode:"",work:""});
   const callAboutPage = async (req,res)=>{
 
     console.log("Hello");
@@ -24,7 +24,7 @@ const PatientSearchOrganizations =() =>{
       const data  =await res.json();
       console.log(data);
     //   setUserData(data);
-    setUserData({...userData, name: data.name, email:data.email, mobile:data.mobile, pincode:data.pincode, work:data.work});
+    setUserData({...userData, name: data.name, email:data.email, phone:data.phone, pincode:data.pincode, work:data.work});
       if(!res.status ==200)
       {
           const error = new Error(res.error);
@@ -142,7 +142,7 @@ const PatientSearchOrganizations =() =>{
     </tr>
     <tr>
       <th scope="col">Phone Number:</th>
-      <td>{userData.mobile}</td>
+      <td>{userData.phone}</td>
       <input type="submit"  value="Edit Phone Number" 
     />
       <input type="text"

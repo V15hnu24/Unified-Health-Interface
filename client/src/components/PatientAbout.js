@@ -100,8 +100,16 @@ const PatientAbout =() =>{
       <td>{userData.pincode}</td>
     </tr>
     <tr>
-      <th scope="col">Profession:</th>
-      <td>{userData.work}</td>
+      <th scope="col">Country:</th>
+      <td>{userData.country}</td>
+    </tr>
+    <tr>
+      <th scope="col">State:</th>
+      <td>{userData.state}</td>
+    </tr>
+    <tr>
+      <th scope="col">City:</th>
+      <td>{userData.city}</td>
     </tr>
     {/* <tr>
       <th scope="row">3</th>

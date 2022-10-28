@@ -24,14 +24,15 @@ const PatientRegister =() =>{
             window.alert("Password are not Matching.");
         }
         console.log("Hello")
-        const res =await fetch('/register', {
-        method:"POST",
-        headers:{
-            "Content-Type" : "application/json"
-         },
-        body:JSON.stringify({
-            name,email,mobile,country,gender,state,city,dob,pincode,password,cpassword
-         })
+        const res =await fetch('http://localhost:8800/auth/patient_register', {
+          method:"POST",
+          headers:{
+              "Content-Type" : "application/json"
+          },
+          body:JSON.stringify({
+              // name,email,mobile,country,gender,state,city,dob,pincode,password
+              name, password
+          })
         });
        
        const data = await res.json();
@@ -54,10 +55,11 @@ const PatientRegister =() =>{
      }
   return(
     <>
+    <div>
     <section className="signup">
                     <h1 align="center">Register <span className="justfordemo"> Patient</span> Details</h1>
                     <h2 className="form-title" align="center">Sign up</h2>
-                    <form method="POST">
+                    <form >
                         <div className="form-group" align="center">
                             <input type ="text" name="name" id="name" autoComplete="off"
                             value={user.name}
@@ -141,22 +143,7 @@ const PatientRegister =() =>{
                         </div>
                     </form>
     </section>
-    {/* <form>
-  <div className="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"></input>
-            <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
-        </div>
-        <div className="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input type="password" className="form-control" id="exampleInputPassword1"></input>
-        </div>
-        <div className="form-group form-check">
-            <input type="checkbox" className="form-check-input" id="exampleCheck1"></input>
-            <label className="form-check-label" for="exampleCheck1">Check me out</label>
-        </div>
-        <button type="submit" className="btn btn-primary" align="center">Submit</button>
-</form> */}
+    </div>
     </>
   )
 }

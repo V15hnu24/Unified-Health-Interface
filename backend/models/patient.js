@@ -6,43 +6,51 @@ const patientSchema = new mongoose.Schema({
         required:true
         // unique:true
     },
-    // mobile:{
-    //     type:Number,
-    //     required:true,
-    //     unique:true
-    // },
-    // email:{
-    //     type:String,
-    //     required:true
-    // },
+    password:{
+        type:String,
+        required:true
+    },
+    mobile:{
+        type:Number,
+        required:true,
+        unique:true
+    },
+    email:{
+        type:String,
+        required:true,
+        unique:true
+    },
     password:{
         type: String,
         required:true
     },
-    // country:{
-    //     type:String,
-    //     required:true
-    // },
-    // state:{
-    //     type:String,
-    //     required:true
-    // },
-    // city:{
-    //     type:String,
-    //     required:true
-    // },
-    // pincode:{
-    //     type:Number,
-    //     required:true
-    // },
-    register_documents:{
+    country:{
+        type:String,
+        required:true
+    },
+    state:{
+        type:String,
+        required:true
+    },
+    city:{
+        type:String,
+        required:true
+    },
+    pincode:{
+        type:Number,
+        required:true
+    },
+    registration_documents:[String],
+    gender:{
         type:String
     },
-    
     // Not for frontend: Not for body 
     status:{
         type:Number,
         default:1
+    },
+    otp:{
+        type:Number
     }
     // status : 1 = pending approval
     // status : 2 = approved
