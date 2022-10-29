@@ -1,11 +1,10 @@
 import React,{useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 
-
 const PatientRegister =() =>{
     let navigate =useNavigate();
-    const[user,setUser ] = useState({                          // Do this same in Patient Register
-        name:"", email:"", mobile:"",country:"", gender:"",state:"",city:"",dob:"",pincode:"", password:"",cpassword:"",
+    const[user,setUser ] = useState({           // Do this same in Patient Register
+        name:"", email:"", mobile:"",country:"", gender:"",state:"",city:"",dob:"",pincode:"", password:"",cpassword:"", doc1:"", doc2:""
     });
     let name,value;
     const handleInputs =(e)=>{
@@ -18,36 +17,35 @@ const PatientRegister =() =>{
 
     const PostData =async(e)=>{
         e.preventDefault();
-        const{name,email,mobile,country,gender,state,city,dob,pincode,password,cpassword} =user;
+        const{name,email,mobile,country,gender,state,city,dob,pincode,password,cpassword, doc1, doc2} =user;
+        const documents = [doc1, doc2];
         if(password!=cpassword)
         {
             window.alert("Password are not Matching.");
         }
         console.log("Hello")
         const res =await fetch('http://localhost:8800/auth/patient_register', {
-          method:"POST",
-          headers:{
-              "Content-Type" : "application/json"
-          },
-          body:JSON.stringify({
-              // name,email,mobile,country,gender,state,city,dob,pincode,password
-              name, password
-          })
+        method:"POST",
+        headers:{
+            "Content-Type" : "application/json"
+         },
+        body:JSON.stringify({
+            name,email,mobile,country,gender,state,city,dob,pincode,password, documents
+         })
         });
        
        const data = await res.json();
-       if(res.status==422 || !data)
-       {
-            window.alert("Invalid Registration");
-            console.log("Invalid Registration");
+       if(res.status==200)
+        {
+            window.alert("Registartion Successful");
+            console.log("Successful Registration");
+        // alert("Hello");
+            navigate("/PatientLogin");
        }
        else{
-        window.alert("Registartion Successful");
-        console.log("Successful Registration");
-       // alert("Hello");
-        navigate("/PatientIntermediateLogin");
+            window.alert(res.json.message);
+            console.log("Invalid Registration");
         }
-       
     }
     function foo() {
         alert("Submit button clicked!");
@@ -55,11 +53,10 @@ const PatientRegister =() =>{
      }
   return(
     <>
-    <div>
     <section className="signup">
                     <h1 align="center">Register <span className="justfordemo"> Patient</span> Details</h1>
                     <h2 className="form-title" align="center">Sign up</h2>
-                    <form >
+                    <form method="POST">
                         <div className="form-group" align="center">
                             <input type ="text" name="name" id="name" autoComplete="off"
                             value={user.name}
@@ -132,8 +129,23 @@ const PatientRegister =() =>{
                              placeholder="Confirm Your password" 
                              
                             />
+                            <br/><br/>
+                            <input type ="doc1"  name="doc1" id="doc1" autoComplete="off"
+                               value={user.doc11}
+                               onChange={handleInputs}
+                             placeholder="Document 1" 
+                             
+                            />
+                            <br/><br/>
+                            <input type ="doc2"  name="doc2" id="doc2" autoComplete="off"
+                               value={user.doc2}
+                               onChange={handleInputs}
+                             placeholder="Document 2" 
+                             
+                            />
                         </div>
                         <br/><br/>
+
                         <div  align="center">
                             <input type="submit" name="signup" id="signup"
                              value="register" onClick={PostData} 
@@ -143,7 +155,6 @@ const PatientRegister =() =>{
                         </div>
                     </form>
     </section>
-    </div>
     </>
   )
 }
