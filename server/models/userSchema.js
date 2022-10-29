@@ -46,6 +46,7 @@ const userSchema = new mongoose.Schema({
         type:String,
         required:true
     },
+    documents :[String],
     tokens:[
         {
            token:{

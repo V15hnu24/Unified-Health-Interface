@@ -65,7 +65,7 @@ OrganizationSchema.methods.generateAuthtoken = async function()
         await this.save();
         return token;
     }catch{
-        console.log(err);
+        console.log("Error");
     }
 }
 // const User = mongoose.model('USER',userSchema)

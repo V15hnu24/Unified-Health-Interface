@@ -40,6 +40,9 @@ const HealthCareProfessionalHome=() =>{
     }
       
       // navigate("/Editdetails");
+      const PatientApointmentStatus=()=>{
+        //try and fetch patient  Appointment records.
+      }
     
     useEffect(()=>{
       userHomePage();
@@ -50,6 +53,10 @@ const HealthCareProfessionalHome=() =>{
     {/* <p className="pt-5">Welcome</p> */}
     <h1 align="center">Welcome to<span> Health Care</span> Professional Page</h1>
     <h2 align="center">Welcome Dr. {userData.name}</h2>
+    <br></br>
+    <div align="center">
+      <input type="submit"  value="Patients Appointment Status" onClick={PatientApointmentStatus} />
+    </div>
     <h7 align="center">{show  ? 'Welcome you are logged in' : 'Mern'}</h7>
     </div>
     </div>

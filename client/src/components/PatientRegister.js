@@ -5,7 +5,7 @@ import {useNavigate} from 'react-router-dom'
 const PatientRegister =() =>{
     let navigate =useNavigate();
     const[user,setUser ] = useState({                          // Do this same in Patient Register
-        name:"", email:"", mobile:"",country:"", gender:"",state:"",city:"",dob:"",pincode:"", password:"",cpassword:"",
+        name:"", email:"", mobile:"",country:"", gender:"",state:"",city:"",dob:"",pincode:"", password:"",cpassword:"",doc1:"", doc2:""
     });
     let name,value;
     const handleInputs =(e)=>{
@@ -18,7 +18,8 @@ const PatientRegister =() =>{
 
     const PostData =async(e)=>{
         e.preventDefault();
-        const{name,email,mobile,country,gender,state,city,dob,pincode,password,cpassword} =user;
+        const{name,email,mobile,country,gender,state,city,dob,pincode,password,cpassword,doc1, doc2} =user;
+        const documents = [doc1, doc2];
         if(password!=cpassword)
         {
             window.alert("Password are not Matching.");
@@ -30,7 +31,7 @@ const PatientRegister =() =>{
             "Content-Type" : "application/json"
          },
         body:JSON.stringify({
-            name,email,mobile,country,gender,state,city,dob,pincode,password,cpassword
+            name,email,mobile,country,gender,state,city,dob,pincode,password,cpassword,documents
          })
         });
        
@@ -44,7 +45,7 @@ const PatientRegister =() =>{
         window.alert("Registartion Successful");
         console.log("Successful Registration");
        // alert("Hello");
-        navigate("/PatientUploadDocuments");
+        navigate("/PatientLogin");
         }
        
     }
@@ -132,6 +133,21 @@ const PatientRegister =() =>{
                             />
                         </div>
                         <br/><br/>
+                        <br/><br/>
+                            <input type ="doc1"  name="doc1" id="doc1" autoComplete="off"
+                               value={user.doc11}
+                               onChange={handleInputs}
+                             placeholder="Document 1" 
+                             
+                            />
+                            <br/><br/>
+                            <input type ="doc2"  name="doc2" id="doc2" autoComplete="off"
+                               value={user.doc2}
+                               onChange={handleInputs}
+                             placeholder="Document 2" 
+                             
+                            />
+                            <br></br>
                         <div  align="center">
                             <input type="submit" name="signup" id="signup"
                              value="register" onClick={PostData} 

@@ -4,8 +4,7 @@ import {useContext} from 'react'
 import { userContext } from "../App";
 import { ChakraProvider } from '@chakra-ui/react'
 import {Box, Stack} from '@chakra-ui/react'
-import Card from './Card'
-import axios from "axios";
+import Card from './Card.jsx'
 // const Razorpay = require('razorpay');
 
 const RazorPay_ =() =>{
@@ -84,7 +83,11 @@ const RazorPay_ =() =>{
         <button onClick={makePayment}>PAY USING PAYTM</button>
     </div> */}
     <Box>
-        <Stack h={"100vh"}alignItems="center" justifyContent="center" direction={["column","row"]}>
+        {/* <Stack h={"100vh"}alignItems="center" justifyContent="center" direction={["column","row"]}>
+            <Card amount ={500} img={"https://5.imimg.com/data5/KD/BS/MY-5337377/paracetamol-tablets-500x500.jpg"} checkoutHandler={checkoutHandler}/>
+            <Card amount ={300} img={"https://4.imimg.com/data4/CC/XM/MY-4092588/vitamin-tablet-500x500.jpg"} checkoutHandler={checkoutHandler}/>
+        </Stack> */}
+        <Stack h={"100vh"}direction={["column","row"]}>
             <Card amount ={500} img={"https://5.imimg.com/data5/KD/BS/MY-5337377/paracetamol-tablets-500x500.jpg"} checkoutHandler={checkoutHandler}/>
             <Card amount ={300} img={"https://4.imimg.com/data4/CC/XM/MY-4092588/vitamin-tablet-500x500.jpg"} checkoutHandler={checkoutHandler}/>
         </Stack>

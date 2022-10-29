@@ -47,8 +47,8 @@ router.get('/',(req,res)=>{
 // Patient Register 
 router.post('/register', async (req,res)=>{
 
-    const { name, email, mobile,country,gender,state,city,dob,pincode, password,cpassword} =req.body;
-    if(!name || !email || !mobile ||!country|| !gender || !state|| !city|| !dob || !pincode || !password ||!cpassword)
+    const { name, email, mobile,country,gender,state,city,dob,pincode, password,cpassword,documents} =req.body;
+    if(!name || !email || !mobile ||!country|| !gender || !state|| !city|| !dob || !pincode || !password ||!cpassword || !documents)
     {
         return res.status(422).json({error:"Plz filled the field properly."});
     }
@@ -62,7 +62,7 @@ router.post('/register', async (req,res)=>{
         //  res.status(422).json({message:"Password are not matching."})
         // }
         else{
-            const user = new User({name, email, mobile,country,gender,state,city,dob,pincode, password,cpassword})
+            const user = new User({name, email, mobile,country,gender,state,city,dob,pincode, password,cpassword,documents})
 
             //Hashing before saving in the databse
     
@@ -118,6 +118,7 @@ router.post('/registerOrganization', async (req,res)=>{
 router.post('/HealthCareProfessionalRegister', async (req,res)=>{
 
     const { name, email, phone,work,gender,dob,location,pincode, password, cpassword} =req.body;
+
     if(!name || !email || !phone  || !pincode ||!gender ||!dob || !work || !location || !password ||! cpassword)
     {
         return res.status(422).json({error:"Plz filled the field properly."});
@@ -524,7 +525,7 @@ router.post("/paymentVerification",async (req,res)=>{
             razorpay_signature 
         })
 
-        res.redirect(`http://localhost:3000/PaymentSuccess?reference=${razorpay_payment_id}`);
+        // res.redirect(`http://localhost:3000/PaymentSuccess?reference=${razorpay_payment_id}`);
     }
     else{
         res.status(200).json({

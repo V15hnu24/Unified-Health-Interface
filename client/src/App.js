@@ -20,13 +20,16 @@ import HealthCareProfessionalLogin from './components/HealthCareProfessionalLogi
 import MainHomePage from "./components/MainHomePage"
 import AdminHomePage from './components/AdminHomePage';
 import Logout from "./components/Logout"
+import CartNavbar from './components/CartNavbar';
+import Amazon from './components/amazon';
+import CartRoute from './components/CartRoute';
 import RazorPay from './components/RazorPay';
 import PaymentSuccess from './components/PaymentSucess';
 import { initialState, reducer } from "../src/reducer/UseReducer" 
 import 'bootstrap/dist/css/bootstrap.css'
 import "./HomePage.css"
 import ErrorPage from "./components/Errorpage"
-
+import { useState, useEffect } from "react";
 
 // Context API
 export const userContext = createContext();
@@ -52,6 +55,9 @@ const Routing =() =>{
         <Route path= "/AdminHomePage" element={<AdminHomePage/>} />
         <Route path= "/HealthCareProfessionalRegister" element={<HealthCareProfessionalRegister/>} />
         <Route path= "/HealthCareProfessionalLogin" element={<HealthCareProfessionalLogin/>} />
+        {/* <Route path="/CartNavbar" element={<CartNavbar/>}/> */}
+        {/* <Route path= "/Amazon" element={<Amazon/>} /> */}
+        <Route path= "/CartRoute" element={<CartRoute/>} />
         <Route path= "/RazorPay" element={<RazorPay/>} />
         <Route path= "/PaymentSuccess" element={<PaymentSuccess/>} />
         <Route path= "/logout" element ={<Logout/>}/>  
@@ -61,10 +67,14 @@ const Routing =() =>{
 const App =() =>{
 
   const [state,dispatch] = useReducer(reducer, initialState);
+  
+
   return(
     <>
     <userContext.Provider value ={{state, dispatch}}>
     <Navbar/>
+
+    
     {/* <MainHomePage/> */}
     {/* <Routes>
      <Route path="/" element={<Home/>} />
