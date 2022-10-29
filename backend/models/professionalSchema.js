@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');   
-const professionalSchema = new mongooose.Schema({
+const professionalSchema = new mongoose.Schema({
     name: {
         type: String,
         required:true

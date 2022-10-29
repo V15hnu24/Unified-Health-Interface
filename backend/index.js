@@ -11,6 +11,7 @@ const DB_Connection_URL = process.env.Mongo;
 const cors = require('cors');
 const patientRoute = require('./models/patient');
 const adminRoute = require('./routes/admin');
+const adminpanelrouter = require('./routes/adminpanel');
 
 app.use(cors());
 
@@ -24,7 +25,6 @@ const DBconnect = async () => {
     }
 };
 
-app.use(express.static('build'));
 
 mongoose.connection.on('disconnected', ()=>{
     console.log("MongoDb Disconnected");
@@ -34,15 +34,13 @@ mongoose.connection.on('connected', ()=>{
     console.log("MongoDB Connected");
 });
 
-app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'build/index.html'));
-});
+
 
 app.use(cookieParser());
 app.use('/auth', authRoute);
 app.use('/patient', patientRoute);
-app.use('/admin', adminRoute);
-
+// app.use('/admin', adminRoute);
+app.use('/adminpanel', adminpanelrouter);
 
 app.use((err, req, res, next)=>{
     const errorStatus = err.status || 500;
@@ -53,7 +51,59 @@ app.use((err, req, res, next)=>{
         message: errorMessage,
         stack: err.stack
     });
-})
+});
+
+// Admin bro
+
+const AdminBro = require('admin-bro');
+const mongooseAdminBro = require('@admin-bro/mongoose');
+const expressAdminBro = require('@admin-bro/express');
+
+const connection = mongoose.connection;
+
+// const {createConnection} = require('typeorm');
+// const {AdminBroOptions} = require('admin-bro');
+// const {Database, Resource} = require('admin-bro-typeorm');
+
+// const {validate} = require('class-validator');
+
+// import "reflect-metadata";
+// import {createConnection} from "typeorm";
+// import express from 'express'
+// import AdminBro, { AdminBroOptions } from 'admin-bro'
+// import * as AdminBroExpress from 'admin-bro-expressjs'
+// import { Database, Resource } from "admin-bro-typeorm";
+
+// import {validate} from 'class-validator'
+// Resource.validate = validate
+
+
+const patient = require('./models/patient');
+const Admin = require('./models/admin');
+const rejected_patient = require('./models/rejected_patients');
+const blocked_patient = require('./models/blocked_patients');
+const email_otp = require('./models/email_otp');
+const organisation = require('./models/organisationSchema');
+const proffesional = require('./models/professionalSchema');
+const adminUpdate = require('./models/admin_update');
+
+
+const { verifyAdmin } = require('./utils/verifyToken');
+
+AdminBro.registerAdapter(mongooseAdminBro)
+const optionnss = {
+  resources: [Admin, patient, rejected_patient]
+}
+
+const adminBro = new AdminBro(optionnss)
+const router = expressAdminBro.buildRouter(adminBro)
+
+app.use(adminBro.options.rootPath, router);
+
+app.get('/', (req, res) => {
+    res.send('Hello World!');
+});
+
 
 app.listen(8800, ()=>{
     DBconnect();

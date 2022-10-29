@@ -124,8 +124,7 @@ const admin_login = async (req,res,next) =>{
     } catch (error) {
         next(error);
     }
-};
-
+}; 
 
 module.exports = {
     patient_register,patient_login,admin_register,admin_login
