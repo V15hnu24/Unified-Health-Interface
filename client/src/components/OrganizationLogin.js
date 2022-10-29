@@ -42,6 +42,7 @@ const OrganizationLogin =() =>{
   return(   
     <>
        <section className='="signup'>
+                    <div align="center"></div><div align="center">
                     <h2 className="form-title" align="center">Organization Login Portal</h2>
                     <form method="POST">
                         <div className="form-group" align="center">
@@ -68,6 +69,7 @@ const OrganizationLogin =() =>{
                             <a className="nav-link" href="/registration"><strong>Create an Account</strong></a>
                         </div>
                     </form>
+                    </div>
     </section>
     </>
   )

@@ -55,7 +55,9 @@ const PatientRegister =() =>{
      }
   return(
     <>
+    
     <section className="signup">
+    <div align="center"></div><div align="center">
                     <h1 align="center">Register <span className="justfordemo"> Patient</span> Details</h1>
                     <h2 className="form-title" align="center">Sign up</h2>
                     <form method="POST">
@@ -148,6 +150,7 @@ const PatientRegister =() =>{
                              
                             />
                             <br></br>
+                            <br></br>
                         <div  align="center">
                             <input type="submit" name="signup" id="signup"
                              value="register" onClick={PostData} 
@@ -156,7 +159,9 @@ const PatientRegister =() =>{
                             <a className="nav-link" href="/login"><strong>I am already registered</strong></a>
                         </div>
                     </form>
+                    </div>
     </section>
+    
     {/* <form>
   <div className="form-group">
             <label for="exampleInputEmail1">Email address</label>

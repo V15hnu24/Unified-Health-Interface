@@ -26,6 +26,7 @@ import CartRoute from './components/CartRoute';
 import RazorPay from './components/RazorPay';
 import PaymentSuccess from './components/PaymentSucess';
 import { initialState, reducer } from "../src/reducer/UseReducer" 
+import AdminLogin from './components/AdminLoginPage';
 import 'bootstrap/dist/css/bootstrap.css'
 import "./HomePage.css"
 import ErrorPage from "./components/Errorpage"
@@ -61,6 +62,7 @@ const Routing =() =>{
         <Route path= "/RazorPay" element={<RazorPay/>} />
         <Route path= "/PaymentSuccess" element={<PaymentSuccess/>} />
         <Route path= "/logout" element ={<Logout/>}/>  
+        <Route path= "/AdminLogin" element ={<AdminLogin/>}/> 
       </Routes>
   )
 }

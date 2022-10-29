@@ -1,13 +1,12 @@
 import React,{useState} from 'react'
-import {useContext} from 'react'
 import {useNavigate} from 'react-router-dom'
+import {useContext} from 'react'
 import { userContext } from "../App";
 
-const HealthCareProfessionalLogin=() =>{
+
+const AdminLogin =() =>{
 
     const {state,dispatch} = useContext(userContext);
-    console.log(state);
-
     let navigate =useNavigate();
     const [email, setEmail] =useState('');
     const [password, setPassword] = useState('');
@@ -15,7 +14,7 @@ const HealthCareProfessionalLogin=() =>{
     const loginUser =async (e) =>{
         e.preventDefault();
 
-        const res =await fetch('/HealthCareProfessionalLogin', 
+        const res =await fetch('/signin', 
         {
             method:"POST",
             headers:{
@@ -35,15 +34,15 @@ const HealthCareProfessionalLogin=() =>{
         else{
             dispatch({type:"USER", payload:true});
             window.alert("Login Sucessful");
-            navigate("/HealthCareProfessionalHome");
+            navigate("/PatientHome");
         }
     }
 
   return(   
     <>
        <section className='="signup'>
-       <div align="center"></div><div align ="center">
-                    <h2 className="form-title" align="center">HealthCare Professionals Login Portal</h2>
+       <div align="center"></div> <div align="center">
+                    <h2 className="form-title" align="center"> Admin Login Portal</h2>
                     <form method="POST">
                         <div className="form-group" align="center">
                         
@@ -66,8 +65,9 @@ const HealthCareProfessionalLogin=() =>{
                              onClick={loginUser}
                             />
                             <br/><br/>
-                            <a className="nav-link" href="/registration"><strong>Create an Account</strong></a>
+                            <a className="nav-link" href="/PatientRegister"><strong>Create an Account</strong></a>
                         </div>
+                    
                     </form>
                     </div>
     </section>
@@ -75,4 +75,4 @@ const HealthCareProfessionalLogin=() =>{
   )
 }
 
-export default HealthCareProfessionalLogin
+export default AdminLogin

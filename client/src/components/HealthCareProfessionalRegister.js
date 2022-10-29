@@ -51,6 +51,7 @@ const HealthCareProfessionalRegister =() =>{
   return(
     <>
     <section className="signup">
+    <div align="center"></div><div align="center">
                     <h2 className="form-title" align="center">HealthCareProfessional Registeration Portal</h2>
                     <form method="POST">
                         <div className="form-group" align="center">
@@ -125,6 +126,7 @@ const HealthCareProfessionalRegister =() =>{
                             <a className="nav-link" href="/login"><strong>I am already registered</strong></a>
                         </div>
                     </form>
+                    </div>
     </section>
     {/* <form>
   <div className="form-group">
