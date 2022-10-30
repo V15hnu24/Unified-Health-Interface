@@ -30,7 +30,7 @@ router.get("/patient_documents/:id", verifyUser, getAlldocuments);
 router.post("/documents/:id", verifyUser, updateDocumentAccess);
 
 //To get particular document send document_id in req.body.document_id
-// and the user_type and user_email in req.body.user_type and req.body.user_email
+// and the user_type and user_email in req.body.user_type and req.body.user_email as we have kept email as unique identifier for every user for now
 router.get("/patient_document/:id", verifyDocumentAccess, getDocument);
 
 module.export = router;
