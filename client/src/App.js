@@ -1,7 +1,7 @@
 import React, { createContext, useReducer } from 'react'
 import{Route,Routes} from "react-router-dom";
 import PatientHome from './components/PatientHome'
-import Navbar from "./components/Navbar"
+import CreateNavbar from "./components/CustomNavbar"
 import Contact from "./components/Contact"
 import PatientAbout from "./components/PatientAbout"
 import PatientEditdetails from "./components/PatientEditdetails"
@@ -74,7 +74,7 @@ const App =() =>{
   return(
     <>
     <userContext.Provider value ={{state, dispatch}}>
-    <Navbar/>
+    <CreateNavbar />
 
     
     {/* <MainHomePage/> */}

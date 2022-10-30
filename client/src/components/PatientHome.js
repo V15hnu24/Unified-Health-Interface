@@ -3,6 +3,12 @@ import React from 'react'
 import { useEffect,useState,useContext } from 'react';
 import {useNavigate} from 'react-router-dom';
 import {userContext} from "../App";
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button'
+import Card from 'react-bootstrap/Card';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
 
 const PatientHome =() =>{
 
@@ -96,42 +102,71 @@ const PatientHome =() =>{
     },[]);  
    // const {query} = useGlobalContext();
 
-  return(
-    <div>
-      <div className="home-div">
-    {/* <p className="pt-5">Welcome</p> */}
-    <h1 align="center">Welcome to<span> Patient</span>  HealthCare System</h1>
-    <h2 align="center">Welcome {userData.name}</h2>
-    <br></br>
+  // return(
+  //   <div>
+  //     <div className="home-div">
+  //   {/* <p className="pt-5">Welcome</p> */}
+  //   <h1 align="center">Welcome to<span> Patient</span>  HealthCare System</h1>
+  //   <h2 align="center">Welcome {userData.name}</h2>
+  //   <br></br>
     
-    <form  align="center"action="Search Health Organizations">
-      <div>
-        {/* <input type="text" placeholder="Search Health Organizations"/> */}
-        <div align="center">
-       <input type="submit"  value="Search Organizations" onClick={SearchData} />
-        </div>
-        <br></br>
-        <br></br>
-        <div align="center">
-       <input type="submit"  value="Search HealthCare Professionals" onClick={SearchHealthCareProfessional} />
-        </div>
-        <br></br>
-        <br></br>
-        <div align="center">
-       <input type="submit"  value="Upload Patient Documents" onClick={PatientUploadDocuments} />
-        </div>
-        {/* <div className="list"> */}
-          {/* {userData.map((user)=>{
-              <li className='listItem'>Apollo</li>
-          })} */}
-        {/* </div> */}
-      </div>
-    </form>
+  //   <form  align="center"action="Search Health Organizations">
+  //     <div>
+  //       {/* <input type="text" placeholder="Search Health Organizations"/> */}
+  //       <div align="center">
+  //      <input type="submit"  value="Search Organizations" onClick={SearchData} />
+  //       </div>
+  //       <br></br>
+  //       <br></br>
+  //       <div align="center">
+  //      <input type="submit"  value="Search HealthCare Professionals" onClick={SearchHealthCareProfessional} />
+  //       </div>
+  //       <br></br>
+  //       <br></br>
+  //       <div align="center">
+  //      <input type="submit"  value="Upload Patient Documents" onClick={PatientUploadDocuments} />
+  //       </div>
+  //       {/* <div className="list"> */}
+  //         {/* {userData.map((user)=>{
+  //             <li className='listItem'>Apollo</li>
+  //         })} */}
+  //       {/* </div> */}
+  //     </div>
+  //   </form>
 
-    <h7 align="center">{show  ? 'Welcome you are logged in' : 'Mern'}</h7>
-    </div>
-    </div>
-  )
+  //   <h7 align="center">{show  ? 'Welcome you are logged in' : 'Mern'}</h7>
+  //   </div>
+  //   </div>
+  // )
+
+    return (
+
+      <Container>
+        <Row>
+          <Col></Col>
+          <Col xs={6}>
+            <h1 style={{'paddingTop':40, 'textAlign':'center', 'fontFamily':'Serif', 'fontSize':40}}>Welcome to MedChain, {userData.name}!</h1>
+            <div>
+              <Card bg="dark" key="dark" text="white" style={{ width: "100%" }} className="mb-2">
+              <Card.Body style={{"paddingTop":40, "paddingBottom":40, "paddingLeft":100}}>
+                <Card.Title>What would you like to do?</Card.Title>
+                <Card.Text>
+                  <ButtonGroup size="lg" className="mb-2" vertical style={{paddingTop:20}}>
+                      <Button variant="light" onClick={SearchData}>Search Health Organizations</Button>
+                      <Button variant="light" onClick={SearchHealthCareProfessional}>Search HealthCare Professionals</Button>
+                      <Button variant="light" onClick={PatientUploadDocuments}>Upload Patient Documents</Button>
+                  </ButtonGroup>
+                </Card.Text>
+              </Card.Body>
+              </Card>
+            </div>
+          </Col>
+          <Col></Col>
+        </Row>
+      </Container>
+
+    )
+
 }
 
 export default PatientHome
