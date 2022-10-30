@@ -33,4 +33,20 @@ const verifyAdmin = (req,res, next)=>{
     });
 };
 
-module.exports = {verifyToken , verifyUser, verifyAdmin};
+const verifyDocumentAccess = (req,res, next)=>{
+    verifyToken(req,res, next ,()=>{
+        const tempDocument = document.findById(req.body.document_id); 
+        const ary = tempDocument.access_to;
+        if(req.user.id == req.params.id || req.user.isAdmin){
+            next();
+        }
+        else if(ary.some((item)=>item.user_id == req.params.id)){
+            next();
+        }
+        else{
+            next(createError(403, "You are not authenticated!"));
+        }
+    });
+};
+
+module.exports = {verifyToken , verifyUser, verifyAdmin, verifyDocumentAccess};

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const patientSchema = new mongoose.Schema({
-    username:{
+    name:{
         type:String,
         required:true
         // unique:true
@@ -11,7 +11,7 @@ const patientSchema = new mongoose.Schema({
         required:true
     },
     mobile:{
-        type:Number,
+        type:String,
         required:true,
         unique:true
     },
@@ -37,7 +37,7 @@ const patientSchema = new mongoose.Schema({
         required:true
     },
     pincode:{
-        type:Number,
+        type:String,
         required:true
     },
     registration_documents:[String],
@@ -48,6 +48,9 @@ const patientSchema = new mongoose.Schema({
     status:{
         type:Number,
         default:1
+    },
+    dob:{
+        type:String  
     },
     otp:{
         type:Number

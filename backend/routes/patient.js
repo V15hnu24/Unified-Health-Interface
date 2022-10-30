@@ -1,7 +1,7 @@
 const express = require('express');
-const { getAllRejectedPatients, getAllVerifiedPatients, updatePatient, deletePatient, getPatient } = require('../controllers/patient');
+const { getAllRejectedPatients, getAllVerifiedPatients, updatePatient, deletePatient, getPatient, updateDocumentAccess, getAlldocuments, getDocument } = require('../controllers/patient');
 const router =  express.Router();
-const {verifyToken, verifyUser, verifyAdmin}  = require('../utils/verifyToken');
+const {verifyToken, verifyUser, verifyAdmin, verifyDocumentAccess}  = require('../utils/verifyToken');
 
 //Update
 router.put("/:id",verifyUser, updatePatient);
@@ -20,5 +20,14 @@ router.get("/verified_patients", verifyAdmin, getAllVerifiedPatients);
 
 //GetAll pending for verfication patients
 router.get("/verifyPending_patients", verifyAdmin, getAllVerifiedPatients);
+
+//get all documents of a patient req.params.id == patient_id
+router.get("/patient_documents/:id", verifyUser, getAlldocuments);
+
+//Update the document access send the document_id in req.body.document_id
+router.post("/documents/:id", verifyUser, updateDocumentAccess);
+
+//To get particular document send document_id in req.body.document_id
+router.get("/patient_document/:id", verifyDocumentAccess, getDocument);
 
 module.export = router;

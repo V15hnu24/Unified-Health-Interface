@@ -65,6 +65,36 @@ const getAllPatients = async (req,res,next)=>{
     }
 };
 
+const getAlldocuments = async (req,res,next)=>{
+    try{
+        const allDocuemts = await document.find({user_id:req.params.id});
+        res.status(200).json(allDocuemts);
+    }catch(err){
+        next(err);
+    }
+};
+
+const updateDocumentAccess = async (req,res,next)=>{
+    try{
+        const updateDocument = await document.findById(req.body.document_id);
+        const ary = updateDocument.access_to;
+        ary.push({user_type:req.body.user_type, user_id:req.body.user_id});
+        const set_updateDocument = await document.findByIdAndUpdate(req.params.id,{$set:{access_to:ary}},{new:true});
+        res.status(200).json(set_updateDocument);
+    }catch(err){
+        next(err);
+    }
+} ;
+
+const getDocument = async (req,res,next)=>{
+    try{
+        const tempDocument = await document.findById(req.body.document_id);
+        res.status(200).json(tempDocument);
+    }catch(err){
+        next(err);
+    }
+};
+
 module.exports = {
-    updatePatient,deletePatient,getPatient,getAllVerifiedPatients,getAllRejectedPatients,getAllPendingforApproval_patients,getAllPatients
+    updatePatient,deletePatient,getPatient,getAllVerifiedPatients,getAllRejectedPatients,getAllPendingforApproval_patients,getAllPatients, getAlldocuments, updateDocumentAccess, getDocument
 };

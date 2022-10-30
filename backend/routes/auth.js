@@ -4,6 +4,7 @@ const { email_otp, verify_otp } = require('../controllers/otp');
 const upload = require('../middleware/upload');
 const router = express.Router();
 
+router.post('/patient_register', patient_register);
 router.post("/patient_login", patient_login);
 router.post("/admin_register", admin_register);
 router.post("/admin_login", admin_login);
