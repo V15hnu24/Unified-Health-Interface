@@ -35,12 +35,11 @@ const verifyAdmin = (req,res, next)=>{
 
 const verifyDocumentAccess = (req,res, next)=>{
     verifyToken(req,res, next ,()=>{
-        const tempDocument = document.findById(req.body.document_id); 
+        const tempDocument = document.findById(req.params.id);
+        if(!tempDocument) return next(createError(404, "Document not found!"));
+
         const ary = tempDocument.access_to;
-        if(req.user.id == req.params.id || req.user.isAdmin){
-            next();
-        }
-        else if(ary.some((item)=>item.user_id == req.params.id)){
+        if(ary.some((item)=>item.user_email == user.email || req.user.isAdmin)){
             next();
         }
         else{

@@ -15,7 +15,7 @@ const documentSchema = new mongoose.Schema({
         required:true
     },
     // access_to[i].type = user type and access_to[i].id = user id of that particular user type
-    access_to:[{user_type:String, user_id:String}]
+    access_to:[{user_type:String, user_email:String}]
 });
 
 module.exports = mongoose.model("document", documentSchema);

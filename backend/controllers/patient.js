@@ -78,7 +78,7 @@ const updateDocumentAccess = async (req,res,next)=>{
     try{
         const updateDocument = await document.findById(req.body.document_id);
         const ary = updateDocument.access_to;
-        ary.push({user_type:req.body.user_type, user_id:req.body.user_id});
+        ary.push({user_type:req.body.user_type, user_email:req.body.user_email});
         const set_updateDocument = await document.findByIdAndUpdate(req.params.id,{$set:{access_to:ary}},{new:true});
         res.status(200).json(set_updateDocument);
     }catch(err){

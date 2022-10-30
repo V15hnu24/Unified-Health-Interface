@@ -22,12 +22,15 @@ router.get("/verified_patients", verifyAdmin, getAllVerifiedPatients);
 router.get("/verifyPending_patients", verifyAdmin, getAllVerifiedPatients);
 
 //get all documents of a patient req.params.id == patient_id
+// You will be able to get all documents of a patient 
 router.get("/patient_documents/:id", verifyUser, getAlldocuments);
 
 //Update the document access send the document_id in req.body.document_id
+// and the user_type and user_email in req.body.user_type and req.body.user_email
 router.post("/documents/:id", verifyUser, updateDocumentAccess);
 
 //To get particular document send document_id in req.body.document_id
+// and the user_type and user_email in req.body.user_type and req.body.user_email
 router.get("/patient_document/:id", verifyDocumentAccess, getDocument);
 
 module.export = router;
