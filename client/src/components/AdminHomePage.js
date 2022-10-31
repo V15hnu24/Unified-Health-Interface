@@ -3,7 +3,7 @@ import {useNavigate} from 'react-router-dom';
 import {useContext} from 'react'
 import { userContext } from "../App";
 
-const PatientSearchOrganizations =() =>{
+const AdminHomePage =() =>{
 
   const {state,dispatch} = useContext(userContext);
   let navigate = useNavigate();
@@ -13,39 +13,39 @@ const PatientSearchOrganizations =() =>{
   const callAboutPage = async (req,res)=>{
 
     console.log("Hello");
-    try{
-      const res = await fetch('/getdataOrganization',{
-        method: "GET",
-        headers:{
-          Accept:"application/json",
-          "Content-Type":"application/json"
-        },
-        credentials:"include"
-      });
+    // try{
+    //   const res = await fetch('/',{
+    //     method: "GET",
+    //     headers:{
+    //       Accept:"application/json",
+    //       "Content-Type":"application/json"
+    //     },
+    //     credentials:"include"
+    //   });
 
-      const data  =await res.json();
-      // console.log(data);
-    setUserData(data);
-    setSearchApiData(data);
-    console.log(data.name);
-    for(let i = 0; i < data.length; i++) {
-      let obj = data[i];
+    //   const data  =await res.json();
+    //   // console.log(data);
+    // setUserData(data);
+    // setSearchApiData(data);
+    // console.log(data.name);
+    // for(let i = 0; i < data.length; i++) {
+    //   let obj = data[i];
      
-      console.log(obj.phone);
-     }
-      if(!res.status ==200)
-      {
-          const error = new Error(res.error);
-          throw error;
-      }
-      else{
-        dispatch({type:"USER", payload:true});
-      }
-    }catch(err)
-    {
-        console.log(err);
-        navigate('/login');
-    }
+    //   console.log(obj.phone);
+    //  }
+    //   if(!res.status ==200)
+    //   {
+    //       const error = new Error(res.error);
+    //       throw error;
+    //   }
+    //   else{
+    //     dispatch({type:"USER", payload:true});
+    //   }
+    // }catch(err)
+    // {
+    //     console.log(err);
+    //     navigate('/login');
+    // }
   }
   useEffect(()=>{
     callAboutPage();
@@ -76,23 +76,22 @@ const PatientSearchOrganizations =() =>{
   return(
     <>
     <div>
-    <h1>Hello Aditya Peer from About.js</h1>
+    <h1>Hello Aditya Peer from Admin.js</h1>
     <br/>
 
-<div align="center">
+{/* <div align="center">
     <input type="text"  onChange={handleFilter}value={filterVal}  placeholder="Search Hospitals"/>
-  </div>
+  </div> */}
+  <div className='App'>
 <table class="table">
   <br></br>
 <div align="center">
-  <h2>Orgnaization Details</h2>
+  <h2>Admin</h2>
   
-    <th>HOSPITAL NAME</th>
-    <th>Email</th>
-    <th>Phone</th>
-    <th>Pincode</th>
-    <th>Location</th>
-    <th>Description</th>
+    <th>Blocked</th>
+    <th>Pending</th>
+    <th>Approved</th>
+    <th>Rejected</th>
     {
       userData.map(item =>{
         return(
@@ -101,8 +100,6 @@ const PatientSearchOrganizations =() =>{
             <td>{item.email}</td>
             <td>{item.phone}</td>
             <td>{item.pincode}</td>
-            <td>{item.location}</td>
-            <td>{item.work}</td>
           </tr>
         )
       })
@@ -111,6 +108,7 @@ const PatientSearchOrganizations =() =>{
   </div>
 
 </table>
+</div>
 <br/><br/>
 </div> 
 
@@ -122,4 +120,4 @@ const PatientSearchOrganizations =() =>{
 )
 }
 
-export default PatientSearchOrganizations
+export default AdminHomePage

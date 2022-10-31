@@ -8,37 +8,63 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button'
 
-const PatientLogin =() =>{
+const PatientSendDocuments =() =>{
 
     const {state,dispatch} = useContext(userContext);
     let navigate =useNavigate();
-    const [email, setEmail] =useState('');
-    const [password, setPassword] = useState('');
+    const [email1, setEmail1] =useState('');
+    const [email2, setEmail2] =useState('');
 
-    const loginUser =async (e) =>{
+    const DocumentSendDoctor =async (e) =>{
         e.preventDefault();
 
-        const res =await fetch('/auth/patient_login', 
+        const res =await fetch('/DocumentSendDoctor', 
         {
             method:"POST",
             headers:{
             "Content-Type" : "application/json"
          },
         body:JSON.stringify({
-           email,password
+           email1,
          })
+       
         });
 
         const data =res.json();
 
-        if(res.status==200){            
+        if(res.status==400 || !data){
+            window.alert("Invalid Credentials");
+        }
+        else{
             dispatch({type:"USER", payload:true});
             window.alert("Login Sucessful");
             navigate("/PatientHome");
         }
+    }
+    const DocumentSendOrganization =async (e) =>{
+        e.preventDefault();
+
+        const res =await fetch('/DocumentSendOrganization', 
+        {
+            method:"POST",
+            headers:{
+            "Content-Type" : "application/json"
+         },
+        body:JSON.stringify({
+           email2
+         })
+       
+        });
+
+        const data =res.json();
+
+        if(res.status==400 || !data){
+            window.alert("Invalid Credentials");
+        }
         else{
-            window.alert(res.message + " ");
-            console.log(res);
+            dispatch({type:"USER", payload:true});
+            window.alert("Login Sucessful");
+            navigate("/PatientHome");
         }
     }
 
@@ -82,26 +108,33 @@ const PatientLogin =() =>{
                 <Row>
                 <Col></Col>
                 <Col xs={4}>
-                    <h1 style={{'paddingTop':40, 'textAlign':'center', 'fontFamily':'Serif', 'fontSize':50}}>Patient Login</h1>
+                    <h1 style={{'paddingTop':40, 'textAlign':'center', 'fontFamily':'Serif', 'fontSize':50}}>Send Documents</h1>
                     <div style={{'paddingTop':20}}>
                         <Form>
                             <Form.Group className="mb-3" controlId="formBasicEmail">
-                                <Form.Label>Email address</Form.Label>
-                                <Form.Control type="email" placeholder="Enter email" value={email} onChange={(e)=>setEmail(e.target.value)} required={true} />
-                            </Form.Group>
-                            <Form.Group className="mb-3" controlId="formBasicEmail">
-                                <Form.Label>Password</Form.Label>
-                                <Form.Control type ="password" name="password" id="name" autoComplete="off" value ={password} onChange ={(e)=> setPassword(e.target.value)} placeholder="Password" required={true} />
+                                <Form.Label>Send Documents to Email address of Doctor</Form.Label>
+                                <Form.Control type="email" placeholder="Enter email of Doctor" value={email1} onChange={(e)=>setEmail1(e.target.value)} required={true} />
                             </Form.Group>
                         </Form>
                     </div>
                     <div className="d-grid gap-2">
-                        <Button variant="dark" size="lg" type="submit" name="signin" id="signin" className="form-submit" value="Login" onClick={loginUser}>
-                            Login
+                        <Button variant="dark" size="lg" type="submit" name="signin" id="signin" className="form-submit" value="Login" onClick={DocumentSendDoctor}>
+                            Send Documents to Doctor
                         </Button>
                     </div>
-                    <div style={{'textAlign':'center', 'paddingTop':20}}>
-                        <a href="/PatientRegister">Don't have an account? Click here to sign up!</a>
+                    <br></br><br></br>
+                    <div style={{'paddingTop':20}}>
+                        <Form>
+                            <Form.Group className="mb-3" controlId="formBasicEmail">
+                                <Form.Label>Send Documents to Email address of Organization</Form.Label>
+                                <Form.Control type="email" placeholder="Enter email of Organization" value={email2} onChange={(e)=>setEmail2(e.target.value)} required={true} />
+                            </Form.Group>
+                        </Form>
+                    </div>
+                    <div className="d-grid gap-2">
+                        <Button variant="dark" size="lg" type="submit" name="signin" id="signin" className="form-submit" value="Login" onClick={DocumentSendOrganization}>
+                            Send Documents to Organization
+                        </Button>
                     </div>
 
                 </Col>
@@ -112,4 +145,4 @@ const PatientLogin =() =>{
         )
 }
 
-export default PatientLogin
+export default PatientSendDocuments
