@@ -9,7 +9,7 @@ import Button from 'react-bootstrap/Button'
 const OrganizationRegister =() =>{
     let navigate =useNavigate();
     const[user,setUser ] = useState({                          // Do this same in Patient Register
-        name:"", email:"", phone:"",work:"",location:"",pincode:"", password:"", cpassword: "",
+        name:"", email:"", phone:"",work:"",location:"",pincode:"", password:"", cpassword: "", doc1:"", doc2:""
     });
     let name,value;
     const handleInputs =(e)=>{
@@ -22,7 +22,8 @@ const OrganizationRegister =() =>{
 
     const PostData =async(e)=>{
         e.preventDefault();
-        const{name,email,phone,work,location,pincode,password,cpassword} =user;
+        const{name,email,phone,work,location,pincode,password,cpassword, doc1, doc2} =user;
+        const documents = [doc1, doc2]
         console.log("Hello")
         const res =await fetch('/registerOrganization', {
         method:"POST",
@@ -30,7 +31,7 @@ const OrganizationRegister =() =>{
             "Content-Type" : "application/json"
          },
         body:JSON.stringify({
-            name,email,phone,location,work,pincode,password,cpassword
+            name,email,phone,location,work,pincode,password,cpassword,documents
          })
         });
        
@@ -202,6 +203,32 @@ return (
                              value={user.pincode}
                              onChange={handleInputs}
                              placeholder="Your Pincode"  />
+                        </Col>
+                    </Form.Group>
+
+                    <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
+                        <Form.Label column lg={2}>
+                        Document 1
+                        </Form.Label>
+                        <Col sm={10}>
+                        <Form.Control type ="text" name="doc1" id="doc1" autoComplete="off"
+                            //  placeholder="Your Pincode" required="true"
+                             value={user.doc1}
+                             onChange={handleInputs}
+                             placeholder="Document drive link"  />
+                        </Col>
+                    </Form.Group>
+
+                    <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
+                        <Form.Label column lg={2}>
+                        Document 2
+                        </Form.Label>
+                        <Col sm={10}>
+                        <Form.Control type ="text" name="doc2" id="doc2" autoComplete="off"
+                            //  placeholder="Your Pincode" required="true"
+                             value={user.doc2}
+                             onChange={handleInputs}
+                             placeholder="Document drive link"  />
                         </Col>
                     </Form.Group>
 
