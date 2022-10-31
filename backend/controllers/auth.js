@@ -91,7 +91,7 @@ const organisation_resgister = async (req,res,next) =>{
             description:req.body.description,
             location:req.body.location,
             organisationType:req.body.organisationType,
-            registration_documents: req.body.documents
+            registration_documents: req.body.registration_documents
             
         });
 
