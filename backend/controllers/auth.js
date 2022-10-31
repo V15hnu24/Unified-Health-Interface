@@ -17,12 +17,6 @@ const patient_register = async (req,res,next) =>{
         
         console.log(req.body);
 
-        // const newUser = new user({
-        //     email:req.body.email,
-        //     user_type:"patient"
-        // });
-        // await newUser.save();
-
 
         const newPatient = new patient({
             name:req.body.name,

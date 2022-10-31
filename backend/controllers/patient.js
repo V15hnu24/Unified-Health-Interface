@@ -88,7 +88,7 @@ const updateDocumentAccess = async (req,res,next)=>{
 
 const getDocument = async (req,res,next)=>{
     try{
-        const tempDocument = await document.findById(req.body.document_id);
+        const tempDocument = await document.findById(req.params.id);
         res.status(200).json(tempDocument);
     }catch(err){
         next(err);
