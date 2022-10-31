@@ -20,8 +20,8 @@ const professionalSchema = new mongoose.Schema({
          type: String,
         required:true
     },
-    register_documents:{
-        type:String
+    registration_documents:{
+        type:[String]
     },
     // status 1: to be approved
     // status 2: approved
