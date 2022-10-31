@@ -155,6 +155,7 @@ const logout = async (req,res,next) =>{
     }
 };
 
+ 
 
 module.exports = {
     patient_register,patient_login,admin_register,admin_login, logout

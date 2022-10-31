@@ -4,7 +4,6 @@ const organisation = require("../models/organisationSchema");
 const createError = require('../utils/error');
 const jwt = require('jsonwebtoken');
 
-
 const professional_register = async (req,res,next) =>{
     try {
         const salt = bcrypt.genSaltSync(10);
