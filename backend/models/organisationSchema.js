@@ -12,7 +12,7 @@ const organisationSchema = new mongoose.Schema({
         type: Number,
         required:true
     },
-    Description: {
+    description: {
          type: String,
         required:true
     },
@@ -20,8 +20,8 @@ const organisationSchema = new mongoose.Schema({
          type: String,
         required:true
     },
-    register_documents:{
-        type:String
+    registration_documents:{
+        type:[String]
     },
     location: {
         type:String
