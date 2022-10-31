@@ -12,8 +12,8 @@ const patient_register = async (req,res,next) =>{
         const salt = bcrypt.genSaltSync(10);
         const hash = bcrypt.hashSync(req.body.password, salt);
         
-        const check_user = await user.findOne({email:req.body.email});
-        if(check_user) return next(createError(400, "User already exists as " + check_user.user_type));
+        const check_user = await patient.findOne({email:req.body.email});
+        if(check_user) return next(createError(400, "User already exists as "));
         
         console.log(req.body);
 
@@ -35,13 +35,10 @@ const patient_register = async (req,res,next) =>{
             state:req.body.state,
             pincode:req.body.pincode,
             dob:req.body.dob,
-            registration_documents: req.body.documents
+            gender:req.body.gender
+            // registration_documents: req.body.documents
         });
-
-        console.log(newUser);
-
         await newPatient.save();
-
         
         const newDocument1 = new document({
             user: "patient",
@@ -59,9 +56,13 @@ const patient_register = async (req,res,next) =>{
         });
         await newDocument2.save();
 
-
+        const docs = [newDocument1._id,newDocument2._id];
+        await patient.findByIdAndUpdate(newPatient._id,{$set:{registration_documents:docs}});
+        
+        console.log(newPatient);
         res.status(200).json(newPatient);
     } catch (error) {
+        console.log(error);
         next(error);
     }
 };
@@ -148,8 +149,19 @@ const admin_login = async (req,res,next) =>{
     }
 }; 
 
+const logout = async (req,res,next) =>{
+    try {
+        res
+            .cookie("access_token", "", {
+                httpOnly:true
+            })
+            .status(200).json({message:"Logged out successfully"});
+    } catch (error) {
+        next(error);
+    }
+};
 
 
 module.exports = {
-    patient_register,patient_login,admin_register,admin_login
+    patient_register,patient_login,admin_register,admin_login, logout
 };

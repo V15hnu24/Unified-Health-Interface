@@ -12,7 +12,6 @@ const patientSchema = new mongoose.Schema({
     },
     mobile:{
         type:String,
-        required:true,
         unique:true
     },
     email:{
@@ -21,24 +20,19 @@ const patientSchema = new mongoose.Schema({
         unique:true
     },
     password:{
-        type: String,
-        required:true
+        type: String
     },
     country:{
-        type:String,
-        required:true
+        type:String
     },
     state:{
-        type:String,
-        required:true
+        type:String
     },
     city:{
-        type:String,
-        required:true
+        type:String
     },
     pincode:{
-        type:String,
-        required:true
+        type:String
     },
     registration_documents:[String],
     gender:{
