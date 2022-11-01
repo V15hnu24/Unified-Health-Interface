@@ -1,5 +1,5 @@
 const express = require('express');
-const { updateProfessional,deleteProfessional,getProfessional,getAllVerifiedProfessionals,getAllRejectedProfessionals,getAllPendingforApproval_Professionals,getAllProfessionals,updateDocumentAccess, getAlldocuments, getDocument} = require('../controllers/professional');
+const { updateProfessional,deleteProfessional,getProfessional,getAllVerifiedProfessionals,getAllRejectedProfessionals,getAllPendingforApproval_Professionals,getAllProfessionals,updateDocumentAccess, getAlldocuments, getDocument, getDocumentPatients} = require('../controllers/professional');
 const router =  express.Router();
 const {verifyToken, verifyUser, verifyAdmin, verifyDocumentAccess}  = require('../utils/verifyToken');
 router.put("/:id",verifyUser, updateProfessional);
@@ -22,4 +22,5 @@ router.get("/verifyPending_professionals", verifyAdmin, getAllPendingforApproval
 router.get("/professional_documents/:id", verifyUser, getAlldocuments);
 router.post("/documents/:id", verifyUser, updateDocumentAccess);
 router.get("/professional_document/:id", verifyDocumentAccess, getDocument);
+router.get("/professional_get_doc/:id", verifyUser, getDocumentPatients);
 module.export = router;
