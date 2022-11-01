@@ -12,7 +12,9 @@ const cors = require('cors');
 const patientRoute = require('./models/patient');
 const adminRoute = require('./routes/admin');
 const adminpanelrouter = require('./routes/adminpanel');
-
+const organisationRoute = require("./routes/v_org");
+const proffesionalRoute = require("./routes/v_pro");
+const razorpayRoute = require('./routes/razorpay');
 app.use(cors());
 
 const DBconnect = async () => {
@@ -41,6 +43,9 @@ app.use('/auth', authRoute);
 app.use('/patient', patientRoute);
 // app.use('/admin', adminRoute);
 app.use('/adminpanel', adminpanelrouter);
+app.use('/organisation', organisationRoute);
+app.use('/professional', proffesionalRoute);
+app.use('/razorpay', razorpayRoute);
 
 app.use((err, req, res, next)=>{
     const errorStatus = err.status || 500;
