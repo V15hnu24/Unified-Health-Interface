@@ -54,7 +54,7 @@ const patient_register = async (req,res,next) =>{
         await patient.findByIdAndUpdate(newPatient._id,{$set:{registration_documents:docs}});
         
         console.log(newPatient);
-        res.status(200).json(newPatient);
+        res.json({status:200,newPatient});
     } catch (error) {
         console.log(error);
         next(error);
@@ -83,7 +83,7 @@ const admin_register = async (req,res,next) =>{
             password:hash
         });
         await newAdmin.save();
-        res.status(200).json(newUser);
+        res.json({status:200,newUser});
     } catch (error) {
         next(error);
     }
@@ -106,11 +106,14 @@ const patient_login = async (req,res,next) =>{
         );
 
         const { password, ...otherDetails } = tempUser._doc;
+        console.log(otherDetails);
+        console.log(userToken);
         res
             .cookie("access_token", userToken, {
                 httpOnly:true
             })
-            .status(200).json({...otherDetails});
+            .json({status: 200 , ...otherDetails});
+        // res.status(200).send(tempUser._doc);
     } catch (error) {
         next(error);
     }
@@ -133,11 +136,12 @@ const admin_login = async (req,res,next) =>{
         );
 
         const { password, isAdmin, ...otherDetails } = tempUser._doc;
+        
         res
             .cookie("access_token", userToken, {
                 httpOnly:true
             })
-            .status(200).json({...otherDetails});
+            .json({status:200,...otherDetails});
     } catch (error) {
         next(error);
     }
@@ -149,7 +153,7 @@ const logout = async (req,res,next) =>{
             .cookie("access_token", "", {
                 httpOnly:true
             })
-            .status(200).json({message:"Logged out successfully"});
+            .json({status:200,message:"Logged out successfully"});
     } catch (error) {
         next(error);
     }

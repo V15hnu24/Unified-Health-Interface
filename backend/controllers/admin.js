@@ -20,7 +20,7 @@ const patient_update = async (req,res,next) =>{
             await new_rejected_patient.save();
         }
 
-        res.status(200).json("Patients status updated");
+        res.json({status:200, message:"Patients status updated"});
     }catch(err){
         next(err);
     }

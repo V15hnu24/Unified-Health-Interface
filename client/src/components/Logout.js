@@ -7,7 +7,7 @@ const Logout =() =>{
   const {state,dispatch} = useContext(userContext);
   const navigate =useNavigate();
   useEffect(()=>{
-    fetch('/logout',{
+    fetch('/auth/logout',{
         method :"GET",
         headers:{
             Accept:"application/json",
@@ -15,6 +15,7 @@ const Logout =() =>{
           },
           credentials:"include"
     }).then((res)=>{
+        window.localStorage.clear();
         dispatch({type:"USER", payload:false});
         navigate('/login',{replace:true});
         if(res.status!=200)

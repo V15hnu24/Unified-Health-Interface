@@ -77,46 +77,8 @@ const App =() =>{
     <>
     <userContext.Provider value ={{state, dispatch}}>
     <CreateNavbar />
-
-    
-    {/* <MainHomePage/> */}
-    {/* <Routes>
-     <Route path="/" element={<Home/>} />
-    </Routes> 
-
-    <Routes>
-    <Route path="/about" element={<About/>} />
-    </Routes>
-
-    <Routes>
-    <Route path="/contact" element={<Contact/>} />
-    </Routes>
-
-    <Routes>
-    <Route path="/login" element={<Login/>} />
-    </Routes>
-
-    <Routes>
-    <Route path= "/signup" element={<Signup/>} />
-    </Routes> */}
-     {/* <Routes>
-        <Route path="/" element={ <Home/> } />
-        <Route path="/about" element={ <About/> } />
-        <Route path="/contact" element={ <Contact/> } />
-        <Route path="/login" element={<Login/>} />
-        <Route path= "/registration" element={<Signup/>} />
-        <Route path= "/patientLogin" element={<PatientLogin/>} />
-        <Route path= "/patientRegister" element={<PatientRegister/>} />
-        <Route path= "/Editdetails" element={<Editdetails/>} />
-        <Route path= "/logout" element ={<Logout/>}/>  
-      </Routes> */}
       <Routing/>
       </userContext.Provider>
-      {/* <Route>
-        <ErrorPage/>
-      </Route> */}
-
-  
     </>
   )
 }

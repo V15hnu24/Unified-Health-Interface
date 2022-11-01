@@ -9,6 +9,7 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button'
 import Card from 'react-bootstrap/Card';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import jwt_decode from "jwt-decode";
 
 const PatientHome =() =>{
 
@@ -16,11 +17,15 @@ const PatientHome =() =>{
     const [show,setShow]  =useState(false);
     let navigate = useNavigate();
     const[userData, setUserData] = useState('');
+
+
+
+
     const userHomePage = async (req,res)=>{
-  
-      console.log("Hello");
+      var id = window.localStorage.getItem('id');
+      console.log("Hello"); 
       try{
-        const res = await fetch('/getdata',{
+        const res = await fetch('/patient/$id',{
           method: "GET",
           headers:{
             Accept:"application/json",

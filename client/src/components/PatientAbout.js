@@ -13,10 +13,12 @@ const PatientAbout =() =>{
   let navigate = useNavigate();
   const[userData, setUserData] = useState({});
   const callAboutPage = async (req,res)=>{
-
+    console.log("IN call about page");
+    const id = window.localStorage.getItem('id');
     console.log("Hello");
+    //`${this.url}?id=${n}`
     try{
-      const res = await fetch('/about',{
+      const res = await fetch(`/patient/?id=${id}`,{
         method: "GET",
         headers:{
           Accept:"application/json",
