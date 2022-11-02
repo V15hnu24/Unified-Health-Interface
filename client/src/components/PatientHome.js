@@ -21,40 +21,73 @@ const PatientHome =() =>{
 
 
 
-    const userHomePage = async (req,res)=>{
-      var id = window.localStorage.getItem('id');
-      console.log("Hello"); 
-      try{
-        const res = await fetch('/patient/$id',{
-          method: "GET",
-          headers:{
-            Accept:"application/json",
-            "Content-Type":"application/json"
-          },
-        });
+    // const userHomePage = async (req,res)=> {
+    //   var id = window.localStorage.getItem('id');
+    //   // console.log("Hello"); 
+      
+    //   try{
+    //     const res = await fetch(`/patient/${id}`,{
+    //       method: "GET",
+    //       headers:{
+    //         Accept:"application/json",
+    //         "Content-Type":"application/json"
+    //       },
+    //     });
   
-        const data  =await res.json();
-        console.log(data);
-      //   setUserData(data);
-      // setUserName(data.name);
-      setUserData({...userData, name: data.name, email:data.email, phone:data.phone, gender:data.gender, dob:data.dob, pincode:data.pincode, work:data.work});
-      setShow(true);
-        if(!res.status ==200)
-        {
-            const error = new Error(res.error);
-            throw error;
+    //     const data  =await res.json();
+
+    //     console.log(data);
+    //   //   setUserData(data);
+    //   // setUserName(data.name);
+    //   setUserData({...userData, name: data.name, email:data.email, phone:data.phone, gender:data.gender, dob:data.dob, pincode:data.pincode, work:data.work});
+    //   setShow(true);
+    //     if(!res.status ===200)
+    //     {
+    //         const error = new Error(res.error);
+    //         throw error;
+    //     }
+    //     else{
+    //       dispatch({type:"USER", payload:true});
+    //     }
+    //   }catch(err)
+    //   {
+    //       console.log(err);
+    //       navigate('/login');
+    //   }
+    // }
+
+    const userHomePage = async(req, res) => {
+
+      const id = window.localStorage.getItem('id');
+
+      var fetch_url = "/patient/" + id
+      console.log(fetch_url)
+      fetch(fetch_url, {
+        method: "GET",
+        headers:{
+          // Accept:"application/json",
+          "Content-Type":"application/json"
+        },
+      })
+      .then(res => {
+
+        if (res.status === 200) {
+          res.json()
+          .then( (data) => {
+            setUserData( {...userData, name: data.tempPatient.name});
+            setShow(true);
+            dispatch({type:"USER", payload:true});
+          })
+        } else {
+          const error = new Error(res.error);
+          throw error;
         }
-        else{
-          dispatch({type:"USER", payload:true});
-        }
-      }catch(err)
-      {
-          console.log(err);
-          navigate('/login');
-      }
+
+      })
+
     }
       
-      navigate =useNavigate();
+      navigate = useNavigate();
       const SearchData =()=>{
     
         navigate("/PatientSearchOrganizations");
