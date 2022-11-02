@@ -33,4 +33,4 @@ router.post("/documents/:id", verifyUser, updateDocumentAccess);
 // and the user_type and user_email in req.body.user_type and req.body.user_email as we have kept email as unique identifier for every user for now
 router.get("/patient_document/:id", verifyDocumentAccess, getDocument);
 
-module.export = router;
+module.exports = router;
