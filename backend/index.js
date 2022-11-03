@@ -1,13 +1,13 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const dotenv = require('dotenv').config({path:'./config.env'});
+const dotenv = require('dotenv').config();
 const app = express();
 app.use(express.json());
 const cookieParser = require('cookie-parser');
 const authRoute = require('./routes/auth');
 const mutler = require('multer');
 app.use('/uploads', express.static('uploads'));
-const DB_Connection_URL = process.env.DATABASE;
+const DB_Connection_URL = process.env.MONGO_URL;
 const cors = require('cors');
 const patientRoute = require('./routes/patient');
 const adminRoute = require('./routes/admin');
