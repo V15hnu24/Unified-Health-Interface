@@ -224,6 +224,17 @@ const PatientRegister =() =>{
                          placeholder="Confirm Your password" />
                         </Col>
                     </Form.Group>
+                    <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
+                        <Form.Label column lg={2}>
+                        Confirm Password
+                        </Form.Label>
+                        <Col sm={10}>
+                        <Form.Control type ="password"  name="cpassword" id="cpassword" autoComplete="off"
+                           value={user.cpassword}
+                           onChange={handleInputs}
+                         placeholder="Confirm Your password" />
+                        </Col>
+                    </Form.Group>
 
                 </Form>
             </div>
