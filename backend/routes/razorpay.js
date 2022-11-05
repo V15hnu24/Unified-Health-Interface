@@ -1,3 +1,10 @@
+const crypto =require("crypto");
+const Razorpay = require('razorpay');
+const express = require('express');
+const bcrypt =require('bcryptjs');
+const Payment = require("../models/PaymentSchema");
+const router = express.Router();
+
 const instance = new Razorpay({
     key_id: process.env.RAZORPAY_API_KEY,
     key_secret:process.env.RAZORPAY_API_SECRET 
@@ -59,4 +66,8 @@ router.get("/getKey", async (req,res)=>{
        res.status(200).json({key:process.env.RAZORPAY_API_KEY});
 })
 
+<<<<<<< HEAD
 module.export = router;
+=======
+module.exports = router;
+>>>>>>> 9b49db0b92d1bbd5731a335547a8a1883b93cd0e

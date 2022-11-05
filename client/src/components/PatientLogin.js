@@ -36,6 +36,8 @@ const PatientLogin =() =>{
         console.log(data);
 
         window.localStorage.setItem('id',data._id); 
+        console.log(data._id);
+        
         if(res.status==200){
                        
             dispatch({type:"USER", payload:true});

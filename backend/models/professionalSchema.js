@@ -16,17 +16,30 @@ const professionalSchema = new mongoose.Schema({
          type: String,
         required:true
     },
+    gender: {
+        type: String,
+       required:true
+   },
+   dob: {
+         type: String,
+        required:true
+    },
+    location: {
+        type: String,
+        required:true
+    },
+    pincode: {
+        type: String,
+        required:true
+    },
     password: {
          type: String,
         required:true
     },
+
     registration_documents:{
         type:[String]
     },
-    // status 1: to be approved
-    // status 2: approved
-    // status : 3 = rejected
-    // status : 4 = blocked 
     status:{
         type:Number,
         default:1

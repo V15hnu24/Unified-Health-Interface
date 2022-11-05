@@ -3,6 +3,8 @@ const professional = require("../models/professionalSchema");
 const organisation = require("../models/organisationSchema");
 const createError = require('../utils/error');
 const jwt = require('jsonwebtoken');
+const document = require('../models/document');
+
 
 const professional_register = async (req,res,next) =>{
     try {
@@ -13,20 +15,45 @@ const professional_register = async (req,res,next) =>{
             email:req.body.email,
             password:hash,
             phone:req.body.phone,
-            status:1,
             qualification:req.body.qualification,
-            registration_documents: req.body.registration_documents
+            gender:req.body.gender,
+            dob:req.body.dob,
+            location:req.body.location,
+            pincode:req.body.pincode,
+            status:1,
+            //registration_documents: req.body.registration_documents
         });
         await newProfessional.save();
-        res.status(200).json(newProfessional);
+
+        const newDocument1 = new document({
+            user: "professional",
+            user_id:newProfessional._id,
+            document_type:"registration document 1",
+            document:req.body.documents[0]
+        });
+        await newDocument1.save();
+
+        const newDocument2 = new document({
+            user: "professional",
+            user_id:newProfessional._id,
+            document_type:"registration document 2",
+            document:req.body.documents[1]
+        });
+        await newDocument2.save();
+        const docs = [newDocument1._id,newDocument2._id];
+        await professional.findByIdAndUpdate(newProfessional._id,{$set:{registration_documents:docs}});
+        console.log(newProfessional);
+        //res.status(200).json(newProfessional);
+        res.json({status:200,newProfessional});
     } catch (error) {
+        console.log(error);
         next(error);
     }
 };
 
 const professional_login = async (req,res,next) =>{
     try {
-        const t = await professional.findOne({name:req.body.name});
+        const t = await professional.findOne({email:req.body.email});
         if(!t) return next(createError(404, "User not Found"));
 
         const isPasswordCorrect = await bcrypt.compare(
@@ -40,11 +67,12 @@ const professional_login = async (req,res,next) =>{
         );
 
         const { password, ...otherDetails } = t._doc;
+        console.log(userToken);
         res
             .cookie("access_token", userToken, {
                 httpOnly:true
             })
-            .status(200).json({...otherDetails});
+            .json({status: 200 , ...otherDetails});
     } catch (error) {
         next(error);
     }
@@ -53,7 +81,7 @@ const professional_login = async (req,res,next) =>{
 
 const organisation_login = async (req,res,next) =>{
     try {
-        const t = await organisation.findOne({name:req.body.name});
+        const t = await organisation.findOne({email:req.body.email});
         if(!t) return next(createError(404, "User not Found"));
 
         const isPasswordCorrect = await bcrypt.compare(
@@ -71,7 +99,7 @@ const organisation_login = async (req,res,next) =>{
             .cookie("access_token", userToken, {
                 httpOnly:true
             })
-            .status(200).json({...otherDetails});
+            .json({status: 200 , ...otherDetails});
     } catch (error) {
         next(error);
     }
@@ -90,14 +118,34 @@ const organisation_resgister = async (req,res,next) =>{
             description:req.body.description,
             location:req.body.location,
             organisationType:req.body.organisationType,
-            registration_documents: req.body.registration_documents
+            //registration_documents: req.body.registration_documents
             
         });
-
-
         await newOrganisation.save();
-        res.status(200).json(newOrganisation);
+
+        const newDocument1 = new document({
+            user: "organisation",
+            user_id:newOrganisation._id,
+            document_type:"registration document 1",
+            document:req.body.documents[0]
+        });
+        await newDocument1.save();
+
+        const newDocument2 = new document({
+            user: "organisation",
+            user_id:newOrganisation._id,
+            document_type:"registration document 2",
+            document:req.body.documents[1]
+        });
+        await newDocument2.save();
+
+        const docs = [newDocument1._id,newDocument2._id];
+        await organisation.findByIdAndUpdate(newOrganisation._id,{$set:{registration_documents:docs}});
+        console.log(newOrganisation);
+        //res.status(200).json(newProfessional);
+        res.json({status:200,newOrganisation});
     } catch (error) {
+        console.log(error);
         next(error);
     }
 };

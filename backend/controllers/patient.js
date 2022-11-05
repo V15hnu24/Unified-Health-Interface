@@ -22,7 +22,7 @@ const deletePatient = async(req,res,next) =>{
 };
 
 const getPatient = async (req,res,next)=>{
-    console.log("IN get of User");
+    // console.log("IN get of User");
     try{
         const tempPatient = await patient.findById(req.params.id);
         res.json({status:200,tempPatient});

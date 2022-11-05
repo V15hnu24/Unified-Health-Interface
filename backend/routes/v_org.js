@@ -1,12 +1,14 @@
 const express = require('express');
-const {updateProfessional,deleteProfessional,getProfessional,getAllVerifiedProfessionals,getAllRejectedProfessionals,getAllPendingforApproval_Professionals,getAllProfessionals} = require('../controllers/organisation');
+const {updateOrganisation,deleteOrganisation,getOrganisation,getAllVerifiedOrganisation,getAllRejectedOrganisation,getAllPendingforApproval_Organisation,getAllOrganisation,getAlldocuments,getDocument,updateDocumentAccess} = require('../controllers/organisation');
 const router =  express.Router();
-const {verifyToken, verifyUser, verifyAdmin}  = require('../utils/verifyToken');
-router.put("/:id",verifyUser, updateProfessional);
-router.delete("/:id",verifyUser, deleteProfessional);
-router.get("/:id",verifyUser, getProfessional);
-router.get("/rejected_professionals", verifyAdmin, getAllRejectedProfessionals);
-router.get("/verified_professionals", verifyAdmin, getAllProfessionals);
-router.get("/verifyPending_professionals", verifyAdmin, getAllPendingforApproval_Professionals);
-
+const {verifyToken, verifyUser, verifyAdmin, verifyDocumentAccess}  = require('../utils/verifyToken');
+router.put("/:id",verifyUser, updateOrganisation);
+router.delete("/:id",verifyUser, deleteOrganisation);
+router.get("/:id",verifyUser, getOrganisation);
+router.get("/rejected_professionals", verifyAdmin, getAllRejectedOrganisation);
+router.get("/verified_professionals", verifyAdmin, getAllOrganisation);
+router.get("/verifyPending_professionals", verifyAdmin, getAllPendingforApproval_Organisation);
+router.get("/professional_documents/:id", verifyUser, getAlldocuments);
+router.post("/documents/:id", verifyUser, updateDocumentAccess);
+router.get("/professional_document/:id", verifyDocumentAccess, getDocument);
 module.export = router;

@@ -21,7 +21,7 @@ const Cart = ({ cart, setCart, handleChange }) => {
   const checkoutHandler =async(amount)=>{
         
 
-    const res2=await fetch('/getkey', {
+    const res2=await fetch('/razorpay/getkey', {
         method:"GET",
         headers:{
             "Content-Type" : "application/json"
@@ -32,7 +32,7 @@ const Cart = ({ cart, setCart, handleChange }) => {
     
     let key = data2["key"];
     console.log(key);
-    const res=await fetch('/checkout', {
+    const res=await fetch('/razorpay/checkout', {
         method:"POST",
         headers:{
             "Content-Type" : "application/json"
@@ -67,7 +67,7 @@ const Cart = ({ cart, setCart, handleChange }) => {
         description: "Test Transaction",
         image: "https://example.com/your_logo",
         order_id: id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-        callback_url: "http://localhost:5000/paymentVerification",
+        callback_url: "http://localhost:5000/razorpay/paymentVerification",
         prefill: {
             name: "Gaurav Kumar",
             email: "gaurav.kumar@example.com",

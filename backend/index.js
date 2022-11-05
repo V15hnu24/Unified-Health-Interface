@@ -1,13 +1,13 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const dotenv = require('dotenv').config();
+const dotenv = require('dotenv').config({path:'./config.env'});
 const app = express();
 app.use(express.json());
 const cookieParser = require('cookie-parser');
 const authRoute = require('./routes/auth');
 const mutler = require('multer');
 app.use('/uploads', express.static('uploads'));
-const DB_Connection_URL = process.env.Mongo;
+const DB_Connection_URL = process.env.DATABASE;
 const cors = require('cors');
 const patientRoute = require('./routes/patient');
 const adminRoute = require('./routes/admin');
@@ -43,8 +43,8 @@ app.use('/auth', authRoute);
 app.use('/patient', patientRoute);
 // app.use('/admin', adminRoute);
 app.use('/adminpanel', adminpanelrouter);
-app.use('/organisation', organisationRoute);
-app.use('/professional', proffesionalRoute);
+// app.use('/organisation', organisationRoute);
+// app.use('/professional', proffesionalRoute);
 app.use('/razorpay', razorpayRoute);
 
 app.use((err, req, res, next)=>{
