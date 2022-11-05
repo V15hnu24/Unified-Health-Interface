@@ -9,7 +9,7 @@ const mutler = require('multer');
 app.use('/uploads', express.static('uploads'));
 const DB_Connection_URL = process.env.Mongo;
 const cors = require('cors');
-const patientRoute = require('./models/patient');
+const patientRoute = require('./routes/patient');
 const adminRoute = require('./routes/admin');
 const adminpanelrouter = require('./routes/adminpanel');
 const organisationRoute = require("./routes/v_org");

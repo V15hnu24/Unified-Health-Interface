@@ -12,8 +12,8 @@ const PatientEditdetails =() =>{
 
     console.log("Hello");
     try{
-      const res = await fetch('/about',{
-        method: "GET",
+      const res = await fetch('/patient/{}',{
+        method: "PUT",
         headers:{
           Accept:"application/json",
           "Content-Type":"application/json"

@@ -55,6 +55,8 @@ router.post("/paymentVerification",async (req,res)=>{
        success:true,
    })
 });
-router.get("/getKey",(req,res)=>{
+router.get("/getKey", async (req,res)=>{
        res.status(200).json({key:process.env.RAZORPAY_API_KEY});
 })
+
+module.export = router;
