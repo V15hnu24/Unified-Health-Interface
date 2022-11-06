@@ -5,7 +5,7 @@ import {useNavigate} from 'react-router-dom'
 const HealthCareProfessionalRegister =() =>{
     let navigate =useNavigate();
     const[user,setUser ] = useState({                          // Do this same in Patient Register
-        name:"", email:"", phone:"",work:"",gender:"",dob:"",location:"",pincode:"", password:"", cpassword: "",
+        name:"", email:"", phone:"",qualification:"",gender:"",dob:"",location:"",pincode:"", password:"", cpassword: "",
     });
     let name,value;
     const handleInputs =(e)=>{
@@ -18,7 +18,7 @@ const HealthCareProfessionalRegister =() =>{
 
     const PostData =async(e)=>{
         e.preventDefault();
-        const{name,email,phone,work,gender,dob,location,pincode,password,cpassword} =user;
+        const{name,email,phone,qualification,gender,dob,location,pincode,password,cpassword} =user;
         console.log("Hello")
         const res =await fetch('/HealthCareProfessionalRegister', {
         method:"POST",
@@ -26,7 +26,7 @@ const HealthCareProfessionalRegister =() =>{
             "Content-Type" : "application/json"
          },
         body:JSON.stringify({
-            name,email,phone,work,gender,dob,location,pincode,password,cpassword
+            name,email,phone,qualification,gender,dob,location,pincode,password,cpassword
          })
         });
        
@@ -74,9 +74,9 @@ const HealthCareProfessionalRegister =() =>{
                             />
                             <br/><br/>
                             <input type ="text"  name="work" id="work" autoComplete="off"
-                               value={user.work}
+                               value={user.qualification}
                                onChange={handleInputs}
-                             placeholder="Your Working Hospital Name" 
+                             placeholder="Your Qualification" 
                             />
                             <br></br>
                             <input type ="text"  name="gender" id="gender" autoComplete="off"

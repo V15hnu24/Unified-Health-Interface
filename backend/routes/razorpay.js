@@ -4,9 +4,11 @@ const express = require('express');
 const bcrypt =require('bcryptjs');
 const Payment = require("../models/PaymentSchema");
 const router = express.Router();
+const dotenv = require('dotenv').config({path:'./.env'});
+
 
 const instance = new Razorpay({
-    key_id: process.env.RAZORPAY_API_KEY,
+    key_id:process.env.RAZORPAY_API_KEY,
     key_secret:process.env.RAZORPAY_API_SECRET 
 })
 
@@ -62,6 +64,7 @@ router.post("/paymentVerification",async (req,res)=>{
        success:true,
    })
 });
+
 router.get("/getKey",(req,res)=>{
        res.status(200).json({key:process.env.RAZORPAY_API_KEY});
 })

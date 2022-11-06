@@ -2,7 +2,7 @@ const patient = require("../models/patient");
 const rejected_patients = require("../models/rejected_patients");
 
 const updatePatient = async (req,res,next)=>{
-//    console.log("IN put of User");
+   console.log("IN put of User");
     try{
         const updatePatient = await patient.findByIdAndUpdate(req.params.id,{$set:req.body},{new:true});
         res.json({status:200,updateUser});

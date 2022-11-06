@@ -9,7 +9,7 @@ import Button from 'react-bootstrap/Button'
 const OrganizationRegister =() =>{
     let navigate =useNavigate();
     const[user,setUser ] = useState({                          // Do this same in Patient Register
-        name:"", email:"", phone:"",work:"",location:"",pincode:"", password:"", cpassword: "",doc1:"",doc2:"",
+        name:"", email:"", phone:"",type:"",description:"",location:"", password:"", cpassword: "",doc1:"",doc2:"",
     });
     let name,value;
     const handleInputs =(e)=>{
@@ -22,7 +22,7 @@ const OrganizationRegister =() =>{
 
     const PostData =async(e)=>{
         e.preventDefault();
-        const{name,email,phone,work,location,pincode,password,cpassword,doc1,doc2} =user;
+        const{name,email,phone,type,description,location,password,cpassword,doc1,doc2} =user;
         const documents =[doc1,doc2];
         console.log("Hello")
         const res =await fetch('/registerOrganization', {
@@ -31,7 +31,7 @@ const OrganizationRegister =() =>{
             "Content-Type" : "application/json"
          },
         body:JSON.stringify({
-            name,email,phone,location,work,pincode,password,cpassword,documents,
+            name,email,phone,type,description,location,password,cpassword,documents,
          })
         });
        
@@ -171,16 +171,26 @@ return (
 
                     <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
                         <Form.Label column lg={2}>
-                        Profession
+                        Organization Working type (Pharmacy,Insurance Firm,Hospital Name)
                         </Form.Label>
                         <Col sm={10}>
                         <Form.Control type ="text"  name="work" id="work" autoComplete="off"
-                               value={user.work}
+                               value={user.type}
                                onChange={handleInputs}
-                             placeholder="Your Profession"  />
+                             placeholder="Your Working Type.."  />
                         </Col>
                     </Form.Group>
-
+                    <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
+                        <Form.Label column lg={2}>
+                        Description
+                        </Form.Label>
+                        <Col sm={10}>
+                        <Form.Control type ="text"  name="work" id="work" autoComplete="off"
+                               value={user.description}
+                               onChange={handleInputs}
+                             placeholder="Your Description"  />
+                        </Col>
+                    </Form.Group>
                     <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
                         <Form.Label column lg={2}>
                         Location
@@ -192,20 +202,6 @@ return (
                              placeholder="Your Location" />
                         </Col>
                     </Form.Group>
-                    
-                    <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
-                        <Form.Label column lg={2}>
-                        Pincode
-                        </Form.Label>
-                        <Col sm={10}>
-                        <Form.Control type ="Number" name="pincode" id="pincode" autoComplete="off"
-                            //  placeholder="Your Pincode" required="true"
-                             value={user.pincode}
-                             onChange={handleInputs}
-                             placeholder="Your Pincode"  />
-                        </Col>
-                    </Form.Group>
-
                     <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
                         <Form.Label column lg={2}>
                         Password
@@ -231,7 +227,7 @@ return (
                     </Form.Group>
                     <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
                         <Form.Label column lg={2}>
-                        Confirm Password
+                        Enter Image 1
                         </Form.Label>
                         <Col sm={10}>
                         <Form.Control type ="doc1"  name="doc1" id="doc1" autoComplete="off"
@@ -242,7 +238,7 @@ return (
                     </Form.Group>
                     <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
                         <Form.Label column lg={2}>
-                        Confirm Password
+                       Enter Image 2
                         </Form.Label>
                         <Col sm={10}>
                         <Form.Control type ="doc1"  name="doc2" id="doc2" autoComplete="off"

@@ -7,6 +7,7 @@ const upload = require('../middleware/upload');
 const user = require("../models/user");
 const document = require('../models/document');
 
+
 const patient_register = async (req,res,next) =>{
     try {
         const salt = bcrypt.genSaltSync(10);
@@ -91,6 +92,7 @@ const admin_register = async (req,res,next) =>{
 
 const patient_login = async (req,res,next) =>{
     console.log(req.body);
+
     try {
         const tempUser = await patient.findOne({email:req.body.email});
         if(!tempUser) return next(createError(404, "User not Found"));

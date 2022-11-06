@@ -39,6 +39,7 @@ export const userContext = createContext();
 const Routing =() =>{
   return(
         <Routes>
+        <Route path="/" element={ <MainHomePage/> } />
         <Route path="/MainHomePage" element={ <MainHomePage/> } />
         <Route path="/PatientHome" element={ <PatientHome/> } />
         <Route path="/Patientabout" element={ <PatientAbout/> } />
