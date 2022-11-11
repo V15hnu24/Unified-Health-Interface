@@ -1,17 +1,22 @@
-import React from 'react'
-import AdminHomePage from './AdminHomePage'
+import React, { useEffect,useState } from 'react';
+import {useNavigate} from 'react-router-dom';
+import {useContext} from 'react'
+import { userContext } from "../App";
+import AdminNavbar from './AdminNavbar';
 
 const AdminHandlePatient = () => {
-   
-  return (
+
+    const {state,dispatch} = useContext(userContext);
+    let navigate = useNavigate();
+    const[userData, setUserData] = useState([]);
+    const[searchApiData, setSearchApiData] = useState([]);
+    const[filterVal,setFilterVal] =useState('');
     
-    <>
-        <AdminHomePage />
-        <h1>
-            Admin is on Patient
-        </h1>
-    </>
-  )
+    return (
+      <>
+      <AdminNavbar />
+      </>
+    )
 }
 
 export default AdminHandlePatient

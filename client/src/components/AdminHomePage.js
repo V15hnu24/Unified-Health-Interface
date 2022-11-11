@@ -2,6 +2,11 @@ import React, { useEffect,useState } from 'react';
 import {useNavigate} from 'react-router-dom';
 import {useContext} from 'react'
 import { userContext } from "../App";
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
+import AdminNavbar from './AdminNavbar';
 
 const AdminHomePage =() =>{
 
@@ -12,8 +17,6 @@ const AdminHomePage =() =>{
   const[filterVal,setFilterVal] =useState('');
   const callAboutPage = async (req,res)=>{
 
-    console.log("Hello");
-    // try{
     //   const res = await fetch('/',{
     //     method: "GET",
     //     headers:{
@@ -71,53 +74,17 @@ const AdminHomePage =() =>{
   // }
 
   // navigate =useNavigate();
-  
-
-  return(
-    <>
-    <div>
-    <h1>Hello Aditya Peer from Admin.js</h1>
-    <br/>
-
-{/* <div align="center">
-    <input type="text"  onChange={handleFilter}value={filterVal}  placeholder="Search Hospitals"/>
-  </div> */}
-  <div className='App'>
-<table class="table">
-  <br></br>
-<div align="center">
-  <h2>Admin</h2>
-  
-    <th>Blocked</th>
-    <th>Pending</th>
-    <th>Approved</th>
-    <th>Rejected</th>
-    {
-      userData.map(item =>{
-        return(
-          <tr>
-            <td>{item.name}</td>
-            <td>{item.email}</td>
-            <td>{item.phone}</td>
-            <td>{item.pincode}</td>
-          </tr>
-        )
-      })
-      
-    }
-  </div>
-
-</table>
-</div>
-<br/><br/>
-</div> 
-
-
-
-<br/><br/>
-</>
-
-)
+  return (
+    <Container>
+        <Row>
+            <Col></Col>
+            <Col xs={8}>
+                <AdminNavbar />
+            </Col>
+            <Col></Col>
+        </Row>
+    </Container>
+  )
 }
 
 export default AdminHomePage
