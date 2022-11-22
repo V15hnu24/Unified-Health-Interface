@@ -110,4 +110,3 @@ const getDocument = async (req,res,next)=>{
 module.exports = {
     updateOrganisation,deleteOrganisation,getOrganisation,getAllVerifiedOrganisation,getAllRejectedOrganisation,getAllPendingforApproval_Organisation,getAllOrganisation,getAlldocuments,getDocument,updateDocumentAccess
 };
-
