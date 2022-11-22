@@ -100,6 +100,14 @@ const getDocument = async (req,res,next)=>{
     }
 };
 
+const getDocumentPatients = async (req,res,next)=>{
+    try{
+        const tempDocument = await document.find({user:"patient"});
+        res.json({status:200,tempDocument});
+    }catch(err){
+        next(err);
+    }
+}
 module.exports = {
-    updateProfessional,deleteProfessional,getProfessional,getAllVerifiedProfessionals,getAllRejectedProfessionals,getAllPendingforApproval_Professionals,getAllProfessionals,getAlldocuments,getDocument,updateDocumentAccess
+    updateProfessional,deleteProfessional,getProfessional,getAllVerifiedProfessionals,getAllRejectedProfessionals,getAllPendingforApproval_Professionals,getAllProfessionals,getAlldocuments,getDocument,updateDocumentAccess,getDocumentPatients
 };
