@@ -3,15 +3,6 @@ const rejected_patients = require("../models/rejected_patients");
 const { sign_function } = require("./digital_signatures");
 // const {}
 
-const addDocument = async (req,res,next)=>{
-    try{
-        const tempDocument = await document.create(req.body);
-        res.json({status:200,tempDocument});
-    }catch(err){
-        next(err);
-    }
-};
-
 const updatePatient = async (req,res,next)=>{
    console.log("In put of User");
     try{

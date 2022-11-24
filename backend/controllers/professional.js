@@ -13,7 +13,6 @@ const updateProfessional= async (req,res,next)=>{
     }
 };
 
-
 const create_prescription = async (req,res,next)=>{
     try{
         const newPrescription = new prescription();
@@ -29,6 +28,7 @@ const create_prescription = async (req,res,next)=>{
         const professional = await professional.findById(req.body.doctor_id);
         const temp_user = await user.find({email:req.body.professional.email});
 
+        // To save document for doctor side
         const doc = new document();
         doc.user_id = req.body.doctor_id;
         doc.user_type = "professional";
@@ -37,6 +37,18 @@ const create_prescription = async (req,res,next)=>{
         doc.document = req.body.prescription_link;
         doc.access_to = [{user_type:"patient",user_email:req.body.patient_email}];
         await doc.save();
+
+        // To save document for patient
+        const t_patient = await patient.find({email:req.body.patient_email});
+        const doc_p = new document();
+        doc_p.user_id = t_patient._id;
+        doc_p.user_type = "patient";
+        doc_p.document_name = "prescription issued by patient doctor" + professional.email;
+        doc_p.document_type = "prescription";
+        doc_p.document = req.body.prescription_link;
+        doc_p.access_to = [{user_type:"professional",user_email:professional.email}];
+        await doc_p.save();
+
 
         newPrescription.signature = sign_function(req.body, temp_user.private_key);
         await newPrescription.save();
