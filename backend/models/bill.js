@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const billSchema = new mongoose.Schema({
-    patient_id:{
+    patient_email:{
         type:String,
         required:true
     },
