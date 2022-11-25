@@ -5,10 +5,10 @@ const {verifyToken, verifyUser, verifyAdmin, verifyDocumentAccess}  = require('.
 router.put("/:id",verifyUser, updateOrganisation);
 router.delete("/:id",verifyUser, deleteOrganisation);
 router.get("/:id",verifyUser, getOrganisation);
-router.get("/rejected_professionals", verifyAdmin, getAllRejectedOrganisation);
-router.get("/verified_professionals", verifyAdmin, getAllOrganisation);
-router.get("/verifyPending_professionals", verifyAdmin, getAllPendingforApproval_Organisation);
-router.get("/professional_documents/:id", verifyUser, getAlldocuments);
+router.get("/rejected_organisation", verifyAdmin, getAllRejectedOrganisation);
+router.get("/verified_organisation", verifyAdmin, getAllOrganisation);
+router.get("/verifyPending_organisation", verifyAdmin, getAllPendingforApproval_Organisation);
+router.get("/organisation_documents/:id", verifyUser, getAlldocuments);
 router.post("/documents/:id", verifyUser, updateDocumentAccess);
-router.get("/professional_document/:id", verifyDocumentAccess, getDocument);
+router.get("/organisation_document/:id", verifyDocumentAccess, getDocument);
 module.export = router;

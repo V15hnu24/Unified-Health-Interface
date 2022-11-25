@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken');
 const upload = require('../middleware/upload');
 const user = require("../models/user");
 const document = require('../models/document');
+const { generate_key_pair } = require('./digital_signatures');
 
 
 const patient_register = async (req,res,next) =>{
@@ -36,7 +37,7 @@ const patient_register = async (req,res,next) =>{
         await newPatient.save();
         
         const newDocument1 = new document({
-            user: "patient",
+            user_type: "patient",
             user_id:newPatient._id,
             document_type:"registration document 1",
             document:req.body.documents[0]
@@ -53,6 +54,15 @@ const patient_register = async (req,res,next) =>{
 
         const docs = [newDocument1._id,newDocument2._id];
         await patient.findByIdAndUpdate(newPatient._id,{$set:{registration_documents:docs}});
+        
+        const {private_key,public_key} = await generate_key_pair;
+        const newUser = new user({
+            email:req.body.email,
+            user_type:"patient",
+            privateKey:private_key,
+            publicKey:public_key
+        });
+        await newUser.save();
         
         console.log(newPatient);
         res.json({status:200,newPatient});

@@ -36,16 +36,16 @@ const CreateNavbar = () => {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
-                <Nav.Link href="/PatientHome">Home</Nav.Link>
+                <Nav.Link href="/MainHomePage">Home</Nav.Link>
                 <NavDropdown title="Registration" id="basic-nav-dropdown">
                   <NavDropdown.Item href="/PatientRegister">Patients Register</NavDropdown.Item>
                   <NavDropdown.Item href="/OrganizationRegister">Organization Register</NavDropdown.Item>
-                  <NavDropdown.Item href="#">Hospital Register</NavDropdown.Item>
+                  <NavDropdown.Item href="/HealthCareProfessionalRegister">HealthCareProfessional Register</NavDropdown.Item>
                 </NavDropdown>
                 <NavDropdown title="Login" id="basic-nav-dropdown">
                   <NavDropdown.Item href="/PatientLogin">Patients Login</NavDropdown.Item>
                   <NavDropdown.Item href="/OrganizationLogin">Organization Login</NavDropdown.Item>
-                  <NavDropdown.Item href="#">Hospital Login</NavDropdown.Item>
+                  <NavDropdown.Item href="/HealthCareProfessionalLogin">HealthCareProfessional Login</NavDropdown.Item>
                 </NavDropdown>
                 <Nav.Link href="/Patientabout">About</Nav.Link>
                 <Nav.Link href="/contact">Contact</Nav.Link>

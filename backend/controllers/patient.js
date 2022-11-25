@@ -1,8 +1,10 @@
 const patient = require("../models/patient");
 const rejected_patients = require("../models/rejected_patients");
+const { sign_function } = require("./digital_signatures");
+// const {}
 
 const updatePatient = async (req,res,next)=>{
-   console.log("IN put of User");
+   console.log("In put of User");
     try{
         const updatePatient = await patient.findByIdAndUpdate(req.params.id,{$set:req.body},{new:true});
         res.json({status:200,updateUser});
@@ -16,7 +18,7 @@ const deletePatient = async(req,res,next) =>{
         await patient.findByIdAndDelete(req.params.id);
         // res.status(200).json("User has been deleted");
         res.json({status:200,message:"User has been deleted"});
-    } catch (error) {
+    } catch (error){
         next(err);
     }
 };
@@ -83,16 +85,20 @@ const getAlldocuments = async (req,res,next)=>{
 
 const updateDocumentAccess = async (req,res,next)=>{
     try{
-        const updateDocument = await document.findById(req.body.document_id);
-        const ary = updateDocument.access_to;
-        ary.push({user_type:req.body.user_type, user_email:req.body.user_email});
-        const set_updateDocument = await document.findByIdAndUpdate(req.params.id,{$set:{access_to:ary}},{new:true});
+        const doc_ids = req.body.document_ids;
+        for (let index = 0; index < docs_ids.length; index++) {
+            const doc_id = docs_ids[index];
+            const updateDocument = await document.findById(doc_id);
+            const ary = updateDocument.access_to;
+            ary.push({user_type:req.body.user_type, user_email:req.body.access_email});
+            await document.findByIdAndUpdate(req.params.id,{$set:{access_to:ary}},{new:true});
+        }
         // res.status(200).json(set_updateDocument);
-        res.json({status:200,set_updateDocument});
+        res.json({status:200,message: "Document access updated"});
     }catch(err){
         next(err);
     }
-} ;
+};
 
 const getDocument = async (req,res,next)=>{
     try{

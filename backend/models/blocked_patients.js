@@ -14,3 +14,5 @@ const blocked_patinetSchema = new mongoose.Schema({
         required:true
     }
 });
+
+module.exports = mongoose.model("blocked_patient", blocked_patinetSchema);

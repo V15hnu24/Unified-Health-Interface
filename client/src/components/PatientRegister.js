@@ -4,9 +4,8 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button'
-
-
+import Button from 'react-bootstrap/Button';
+import bcrypt from 'bcryptjs';
 const PatientRegister =() =>{
     let navigate =useNavigate();
     const[user,setUser ] = useState({                          // Do this same in Patient Register
@@ -29,14 +28,15 @@ const PatientRegister =() =>{
         {
             window.alert("Password are not Matching.");
         }
-        // console.log("Hello")
+        const hashedpassword  = bcrypt.hashSync(password, 10);
+        //console.log(hashedpassword);
         const res =await fetch('/auth/patient_register', {
         method:"POST",
         headers:{
             "Content-Type" : "application/json"
          },
         body:JSON.stringify({
-            name,email,mobile,country,gender,state,city,dob,pincode,password,documents
+            name,email,mobile,country,gender,state,city,dob,pincode,hashedpassword,documents
          })
         });
        
@@ -224,7 +224,7 @@ const PatientRegister =() =>{
                          placeholder="Confirm Your password" />
                         </Col>
                     </Form.Group>
-                    <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
+                    {/* <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
                         <Form.Label column lg={2}>
                         Confirm Password
                         </Form.Label>
@@ -234,7 +234,7 @@ const PatientRegister =() =>{
                            onChange={handleInputs}
                          placeholder="Confirm Your password" />
                         </Col>
-                    </Form.Group>
+                    </Form.Group> */}
 
                 </Form>
             </div>

@@ -36,8 +36,6 @@ mongoose.connection.on('connected', ()=>{
     console.log("MongoDB Connected");
 });
 
-
-
 app.use(cookieParser());
 app.use('/auth', authRoute);
 app.use('/patient', patientRoute);

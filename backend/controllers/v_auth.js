@@ -4,6 +4,7 @@ const organisation = require("../models/organisationSchema");
 const createError = require('../utils/error');
 const jwt = require('jsonwebtoken');
 const document = require('../models/document');
+const { generate_key_pair } = require('./digital_signatures');
 
 
 const professional_register = async (req,res,next) =>{
@@ -26,7 +27,7 @@ const professional_register = async (req,res,next) =>{
         await newProfessional.save();
 
         const newDocument1 = new document({
-            user: "professional",
+            user_type: "professional",
             user_id:newProfessional._id,
             document_type:"registration document 1",
             document:req.body.documents[0]
@@ -34,7 +35,7 @@ const professional_register = async (req,res,next) =>{
         await newDocument1.save();
 
         const newDocument2 = new document({
-            user: "professional",
+            user_type: "professional",
             user_id:newProfessional._id,
             document_type:"registration document 2",
             document:req.body.documents[1]
@@ -43,6 +44,16 @@ const professional_register = async (req,res,next) =>{
         const docs = [newDocument1._id,newDocument2._id];
         await professional.findByIdAndUpdate(newProfessional._id,{$set:{registration_documents:docs}});
         console.log(newProfessional);
+
+        const {private_key,public_key} = await generate_key_pair;
+        const newUser = new user({
+            email:req.body.email,
+            user_type:"professional",
+            privateKey:private_key,
+            publicKey:public_key
+        });
+        await newUser.save();
+        
         //res.status(200).json(newProfessional);
         res.json({status:200,newProfessional});
     } catch (error) {
@@ -124,7 +135,7 @@ const organisation_resgister = async (req,res,next) =>{
         await newOrganisation.save();
 
         const newDocument1 = new document({
-            user: "organisation",
+            user_type: "organisation",
             user_id:newOrganisation._id,
             document_type:"registration document 1",
             document:req.body.documents[0]
@@ -132,7 +143,7 @@ const organisation_resgister = async (req,res,next) =>{
         await newDocument1.save();
 
         const newDocument2 = new document({
-            user: "organisation",
+            user_type: "organisation",
             user_id:newOrganisation._id,
             document_type:"registration document 2",
             document:req.body.documents[1]
@@ -142,6 +153,16 @@ const organisation_resgister = async (req,res,next) =>{
         const docs = [newDocument1._id,newDocument2._id];
         await organisation.findByIdAndUpdate(newOrganisation._id,{$set:{registration_documents:docs}});
         console.log(newOrganisation);
+
+        const {private_key,public_key} = await generate_key_pair;
+        const newUser = new user({
+            email:req.body.email,
+            user_type:"Organisation",
+            privateKey:private_key,
+            publicKey:public_key
+        });
+        await newUser.save();
+        
         //res.status(200).json(newProfessional);
         res.json({status:200,newOrganisation});
     } catch (error) {
@@ -153,4 +174,3 @@ const organisation_resgister = async (req,res,next) =>{
 module.exports = {
     professional_register,professional_login,organisation_resgister,organisation_login
 };
-

@@ -12,5 +12,14 @@ const user = new mongoose.Schema({
     },
     otp:{
         type:Number
+    },
+    privateKey:{
+        type:String
+    },
+    publicKey:{
+        type:String
     }
 });
+
+
+module.exports = mongoose.model("user", user);
