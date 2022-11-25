@@ -1,4 +1,5 @@
 const patient = require("../models/patient");
+const prescription = require("../models/prescription");
 const rejected_patients = require("../models/rejected_patients");
 const { sign_function } = require("./digital_signatures");
 // const {}
@@ -75,9 +76,13 @@ const getAllPatients = async (req,res,next)=>{
 
 const getAlldocuments = async (req,res,next)=>{
     try{
+        const getPatient = await patient.findById(req.params.id);
         const allDocuemts = await document.find({user_id:req.params.id});
         // res.status(200).json(allDocuemts);
-        res.json({status:200,allDocuemts});
+
+        const allprescriptions = await prescription.find({patient_email: getPatient.email});
+        const allbills = await bill.find({patient_email: getPatient.email});
+        res.json({status:200,documents: allDocuemts, prescriptions: allprescriptions,bills: allbills});
     }catch(err){
         next(err);
     }
