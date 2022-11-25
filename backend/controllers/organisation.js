@@ -98,6 +98,34 @@ const updateDocumentAccess = async (req,res,next)=>{
     }
 } ;
 
+
+const getPharmacy = async (req,res,next)=>{
+    try{
+        const t = await organisation.find({ organisationType: 'Pharmacy'});
+        res.json({status:200,t});
+    }catch(err){
+        next(err);
+    }
+};
+const getInsurance_firms = async (req,res,next)=>{
+    try{
+        const t = await organisation.find({ organisationType: 'Insurance_firms'});
+        res.json({status:200,t});
+    }catch(err){
+        next(err);
+    }
+};
+const getHospital = async (req,res,next)=>{
+    try{
+        const t = await organisation.find({ organisationType: 'Hospital'});
+        res.json({status:200,t});
+    }catch(err){
+        next(err);
+    }
+};
+
+
+
 const getDocument = async (req,res,next)=>{
     try{
         const tempDocument = await document.findById(req.params.id);
@@ -110,5 +138,5 @@ const getDocument = async (req,res,next)=>{
 
 
 module.exports = {
-    updateOrganisation,deleteOrganisation,getOrganisation,getAllVerifiedOrganisation,getAllRejectedOrganisation,getAllPendingforApproval_Organisation,getAllOrganisation,getAlldocuments,getDocument,updateDocumentAccess
+    updateOrganisation,deleteOrganisation,getOrganisation,getAllVerifiedOrganisation,getAllRejectedOrganisation,getAllPendingforApproval_Organisation,getAllOrganisation,getAlldocuments,getDocument,updateDocumentAccess, getPharmacy, getInsurance_firms, getHospital
 };
