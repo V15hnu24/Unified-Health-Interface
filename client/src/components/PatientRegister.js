@@ -41,7 +41,7 @@ const PatientRegister =() =>{
         });
        
     //const data = await res.json();
-       if(res.status==200)
+       if(res.status===200)
        {
             window.alert("Registartion Successful");
             console.log("Successful Registration");

@@ -11,8 +11,8 @@ const { generate_key_pair } = require('./digital_signatures');
 
 const patient_register = async (req,res,next) =>{
     try {
-        const salt = bcrypt.genSaltSync(10);
-        const hash = bcrypt.hashSync(req.body.password, salt);
+        // const salt = bcrypt.genSaltSync(10);
+        // const hash = bcrypt.hashSync(req.body.password, salt);
         
         const check_user = await patient.findOne({email:req.body.email});
         if(check_user) return next(createError(400, "User already exists as "));
@@ -22,7 +22,7 @@ const patient_register = async (req,res,next) =>{
 
         const newPatient = new patient({
             name:req.body.name,
-            password:hash,
+            password:req.body.hashedpassword,
             email:req.body.email,
             mobile:req.body.mobile,
             status:1,
