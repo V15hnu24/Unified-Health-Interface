@@ -12,4 +12,6 @@ router.get("/organisation_documents/:id", verifyUser, getAlldocuments);
 router.post("/documents/:id", verifyUser, updateDocumentAccess);
 router.get("/organisation_document/:id", verifyDocumentAccess, getDocument);
 
+//Get all buy requests for pharmacy
+
 module.exports = router;
