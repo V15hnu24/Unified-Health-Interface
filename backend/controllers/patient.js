@@ -1,5 +1,6 @@
 const bill = require("../models/bill");
 const patient = require("../models/patient");
+const payment_request = require("../models/payment_request");
 const prescription = require("../models/prescription");
 const rejected_patients = require("../models/rejected_patients");
 const { sign_function } = require("./digital_signatures");
@@ -13,6 +14,18 @@ const updatePatient = async (req,res,next)=>{
     }catch(err){
         next(err);
     }
+};
+
+const getAllPaymentreqs = async (req,res,next)=>{
+    try {
+        const new_paitent = await patient.findById(req.params.id);
+        const payment_req = await payment_request.find({receiver_email:new_patient.email, status:"pending"});
+        res.json({status:200,payment_reqs: payment_req});
+
+    } catch (error) {
+        next(error);
+    }
+
 };
 
 const deletePatient = async(req,res,next) =>{
