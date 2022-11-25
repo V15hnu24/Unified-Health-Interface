@@ -2,6 +2,7 @@ const professional = require("../models/professionalSchema");
 const rejected_professional = require("../models/rejectedProfessional");
 const user = require("../models/user");
 const document = require("../models/document");
+const patient = require("../models/patient");
 
 const updateProfessional= async (req,res,next)=>{
     try{
@@ -13,50 +14,7 @@ const updateProfessional= async (req,res,next)=>{
     }
 };
 
-const create_prescription = async (req,res,next)=>{
-    try{
-        const newPrescription = new prescription();
 
-        newPrescription.patient_email = req.body.patient_email;
-        newPrescription.doctor_id = req.body.doctor_id;
-        newPrescription.prescription_date = Date.now();
-        newPrescription.prescription_description = req.body.prescription_description;
-        newPrescription.prescription_link = req.body.prescription_link;
-        // newPrescription.prescription_status = req.body.prescription_status;
-
-        
-        const professional = await professional.findById(req.body.doctor_id);
-        const temp_user = await user.find({email:req.body.professional.email});
-
-        // To save document for doctor side
-        // const doc = new document();
-        // doc.user_id = req.body.doctor_id;
-        // doc.user_type = "professional";
-        // doc.document_name = "prescription issued to patient " + req.body.patient_email;
-        // doc.document_type = "prescription";
-        // doc.document = req.body.prescription_link;
-        // doc.access_to = [{user_type:"patient",user_email:req.body.patient_email}];
-        // await doc.save();
-
-        // To save document for patient
-        // const t_patient = await patient.find({email:req.body.patient_email});
-        // const doc_p = new document();
-        // doc_p.user_id = t_patient._id;
-        // doc_p.user_type = "patient";
-        // doc_p.document_name = "prescription issued by patient doctor" + professional.email;
-        // doc_p.document_type = "prescription";
-        // doc_p.document = req.body.prescription_link;
-        // doc_p.access_to = [{user_type:"professional",user_email:professional.email}];
-        // await doc_p.save();
-
-
-        newPrescription.signature = sign_function(req.body, temp_user.private_key);
-        await newPrescription.save();
-        res.json({status:200,message:"Prescription added"});
-    }catch(err){
-        next(err);
-    }
-};
 
 const deleteProfessional = async(req,res,next) =>{
     try {
@@ -155,5 +113,5 @@ const getDocumentPatients = async (req,res,next)=>{
     }
 }
 module.exports = {
-    create_prescription, updateProfessional,deleteProfessional,getProfessional,getAllVerifiedProfessionals,getAllRejectedProfessionals,getAllPendingforApproval_Professionals,getAllProfessionals,getAlldocuments,getDocument,updateDocumentAccess,getDocumentPatients
+    updateProfessional,deleteProfessional,getProfessional,getAllVerifiedProfessionals,getAllRejectedProfessionals,getAllPendingforApproval_Professionals,getAllProfessionals,getAlldocuments,getDocument,updateDocumentAccess,getDocumentPatients
 };

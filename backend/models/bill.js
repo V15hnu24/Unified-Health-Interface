@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const billSchema = new mongoose.Schema({
+    bill_name:{
+        type:String,
+        required:true
+    },
     patient_email:{
         type:String,
         required:true
@@ -28,6 +32,6 @@ const billSchema = new mongoose.Schema({
     signature:{
         type:String,
     }
-});
+},{timestamps:true});
 
 module.exports = mongoose.model("bill", billSchema);

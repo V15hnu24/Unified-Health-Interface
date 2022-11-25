@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const prescriptionSchema = new mongoose.Schema({
+    prescription_name:{
+        type:String,
+        required:true
+    },
     patient_email:{
         type:String,
         required:true
@@ -9,14 +13,14 @@ const prescriptionSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    link:{
+    prescription_link:{
         type:String,
         required:true
     },
-    prescription_date:{
-        type:Date,
-        required:true
-    },
+    // prescription_date:{
+    //     type:Date,
+    //     required:true
+    // },
     prescription_link:{
         type:String,
         required:true

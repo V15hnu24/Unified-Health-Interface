@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 
 const documentSchema = new mongoose.Schema({
+    owner_name:{
+        type:String
+    },
     document_name:{
         type:String,
         required:true

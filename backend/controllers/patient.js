@@ -1,3 +1,4 @@
+const bill = require("../models/bill");
 const patient = require("../models/patient");
 const prescription = require("../models/prescription");
 const rejected_patients = require("../models/rejected_patients");
@@ -114,6 +115,43 @@ const getDocument = async (req,res,next)=>{
     }
 };
 
+
+const getAllPrescriptions = async (req,res,next)=>{
+    try{
+        const tempPrescriptions = await prescription.find({patient_email:req.body.patient_email});
+        res.json({status:200,prescriptions: tempPrescriptions});
+    }catch(err){
+        next(err);
+    }
+};
+
+const getPrescription = async (req,res,next)=>{
+    try{
+        const tempPrescription = await prescription.findById(req.body.prescription_id);
+        res.json({status:200,prescription: tempPrescription});
+    }catch(err){
+        next(err);
+    }
+};
+
+const getAllBills = async (req,res,next)=>{
+    try{
+        const tempBills = await bill.find({patient_email:req.body.patient_email});
+        res.json({status:200,Bills: tempBills});
+    }catch(err){
+        next(err);
+    }
+};
+
+const getBill = async (req,res,next)=>{
+    try{
+        const tempBill = await bill.findById(req.body.bill_id);
+        res.json({status:200,Bill: tempBill});
+    }catch(err){
+        next(err);
+    }
+};
+
 module.exports = {
-    updatePatient,deletePatient,getPatient,getAllVerifiedPatients,getAllRejectedPatients,getAllPendingforApproval_patients,getAllPatients, getAlldocuments, updateDocumentAccess, getDocument
+    updatePatient,deletePatient,getPatient,getAllVerifiedPatients,getAllRejectedPatients,getAllPendingforApproval_patients,getAllPatients, getAlldocuments, updateDocumentAccess, getDocument, getPrescription, getAllPrescriptions, getBill, getAllBills
 };
