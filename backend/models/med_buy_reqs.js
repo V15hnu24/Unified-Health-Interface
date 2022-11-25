@@ -14,7 +14,8 @@ const buy_reqs = new mongoose.Schema({
         required:true
     },
     status: {
-        type:String
+        type:String,
+        default: "pending"
     }
 }, {timestamps:true});
 

@@ -5,7 +5,7 @@ import {useNavigate} from 'react-router-dom'
 const HealthCareProfessionalRegister =() =>{
     let navigate =useNavigate();
     const[user,setUser ] = useState({                          // Do this same in Patient Register
-        name:"", email:"", phone:"",qualification:"",gender:"",dob:"",location:"",pincode:"", password:"", cpassword: "",
+        name:"", email:"", phone:"",qualification:"",gender:"",dob:"",location:"",pincode:"", password:"", cpassword: "",doc1:"",doc2:"",
     });
     let name,value;
     const handleInputs =(e)=>{
@@ -18,15 +18,16 @@ const HealthCareProfessionalRegister =() =>{
 
     const PostData =async(e)=>{
         e.preventDefault();
-        const{name,email,phone,qualification,gender,dob,location,pincode,password,cpassword} =user;
-        console.log("Hello")
-        const res =await fetch('/HealthCareProfessionalRegister', {
+
+        const{name,email,phone,qualification,gender,dob,location,pincode,password,doc1,doc2} =user;
+        const documents =[doc1,doc2];
+        const res =await fetch('/auth/professional_register', {
         method:"POST",
         headers:{
             "Content-Type" : "application/json"
          },
         body:JSON.stringify({
-            name,email,phone,qualification,gender,dob,location,pincode,password,cpassword
+            name,email,phone,qualification,gender,dob,location,pincode,password,documents
          })
         });
        
@@ -73,7 +74,7 @@ const HealthCareProfessionalRegister =() =>{
                              placeholder="Phone Number" 
                             />
                             <br/><br/>
-                            <input type ="text"  name="work" id="work" autoComplete="off"
+                            <input type ="text"  name="qualification" id="qualification" autoComplete="off"
                                value={user.qualification}
                                onChange={handleInputs}
                              placeholder="Your Qualification" 
@@ -91,7 +92,7 @@ const HealthCareProfessionalRegister =() =>{
                              placeholder="Your DOB" 
                             />
                             <br></br>
-                             <input type ="text"  name="location" id="work" autoComplete="off"
+                             <input type ="text"  name="location" id="location" autoComplete="off"
                                value={user.location}
                                onChange={handleInputs}
                              placeholder="Your Location" 
@@ -116,7 +117,22 @@ const HealthCareProfessionalRegister =() =>{
                              placeholder="Confirm Your password" 
                              
                             />
+                              <br/><br/>
+                            <input type ="doc1"  name="doc1" id="doc1" autoComplete="off"
+                               value={user.doc1}
+                               onChange={handleInputs}
+                             placeholder="Enter Doc1" 
+                             
+                            />
+                            <br/><br/>
+                            <input type ="doc2"  name="doc2" id="doc2" autoComplete="off"
+                               value={user.doc2}
+                               onChange={handleInputs}
+                             placeholder="Enter Doc2" 
+                             
+                            />
                         </div>
+                        
                         <br/><br/>
                         <div  align="center">
                             <input type="submit" name="signup" id="signup"

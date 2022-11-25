@@ -15,7 +15,7 @@ const HealthCareProfessionalLogin=() =>{
     const loginUser =async (e) =>{
         e.preventDefault();
 
-        const res =await fetch('/HealthCareProfessionalLogin', 
+        const res =await fetch('/auth/professional_register', 
         {
             method:"POST",
             headers:{
@@ -28,6 +28,8 @@ const HealthCareProfessionalLogin=() =>{
         });
 
         const data =res.json();
+        window.localStorage.setItem('id', data._id);
+        console.log()
 
         if(res.status==400 || !data){
             window.alert("Invalid Credentials");

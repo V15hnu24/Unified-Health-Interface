@@ -50,5 +50,4 @@ const verify_bill = async (req, res, next) => {
 
 
 
-
 module.exports = { create_bill, verify_bill };

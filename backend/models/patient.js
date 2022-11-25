@@ -19,9 +19,6 @@ const patientSchema = new mongoose.Schema({
         required:true,
         unique:true
     },
-    password:{
-        type: String
-    },
     country:{
         type:String
     },

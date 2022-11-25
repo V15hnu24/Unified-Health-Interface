@@ -1,65 +1,87 @@
 import React, { useEffect,useState,useContext } from 'react';
 import {useNavigate} from 'react-router-dom';
 import {userContext} from "../App";
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button'
+import Card from 'react-bootstrap/Card';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import jwt_decode from "jwt-decode";
 const HealthCareProfessionalHome=() =>{
 
     const {state,dispatch} = useContext(userContext);
     const [show,setShow]  =useState(false);
     let navigate = useNavigate();
     const[userData, setUserData] = useState([]);
+
     const userHomePage = async (req,res)=>{
   
-      console.log("Hello");
-      try{
-        const res = await fetch('/getHealthCareProfessional',{
-          method: "GET",
-          headers:{
-            Accept:"application/json",
-            "Content-Type":"application/json"
-          },
-        });
-  
-        const data  =await res.json();
-        console.log(data);
-      //   setUserData(data);
-      setUserData({...userData, name: data.name, email:data.email, phone:data.phone, gender:data.gender, dob:data.dob, pincode:data.pincode,location:data.location, work:data.work});
-      setShow(true);
-        if(!res.status ==200)
-        {
-            const error = new Error(res.error);
-            throw error;
+      const id = window.localStorage.getItem('id');
+      var fetch_url = "/professional/" + id
+      fetch(fetch_url, {
+        method: "GET",
+        headers:{
+          // Accept:"application/json",
+          "Content-Type":"application/json"
+        },
+      })
+      .then(res => {
+
+        if (res.status === 200) {
+          res.json()
+          .then( (data) => {
+            console.log("Here")
+            setUserData( {...userData, name: data.t.name});
+            setShow(true);
+            dispatch({type:"USER", payload:true});
+          })
+        } else if (res.status === 404) {
+          console.log("Can't fetch")
+        } 
+        else {
+          const error = new Error(res.error);
+          throw error;
         }
-        else{
-          dispatch({type:"USER", payload:true});
-        }
-      }catch(err)
-      {
-          console.log(err);
-          navigate('/login');
-      }
+
+      })
+
     }
       
       // navigate("/Editdetails");
-      const PatientApointmentStatus=()=>{
+      const PrescribeDocuments=()=>{
         //try and fetch patient  Appointment records.
+        navigate("/HealthCareProfessionalPrescribeDocuments");
       }
     
     useEffect(()=>{
-      userHomePage();
+      // userHomePage();
     },[]);  
   return(
-    <div>
-      <div className="home-div">
-    {/* <p className="pt-5">Welcome</p> */}
-    <h1 align="center">Welcome to<span> Health Care</span> Professional Page</h1>
-    <h2 align="center">Welcome Dr. {userData.name}</h2>
-    <br></br>
-    <div align="center">
-      <input type="submit"  value="Patients Appointment Status" onClick={PatientApointmentStatus} />
-    </div>
-    <h7 align="center">{show  ? 'Welcome you are logged in' : 'Mern'}</h7>
-    </div>
-    </div>
+    <Container>
+        <Row>
+          <Col></Col>
+          <Col xs={6}>
+            <h1 style={{'paddingTop':40, 'textAlign':'center', 'fontFamily':'Serif', 'fontSize':40}}>Welcome to MedChain Dr, {userData.name}!</h1>
+            <div>
+              <Card bg="dark" key="dark" text="white" style={{ width: "100%" }} className="mb-2">
+              <Card.Body style={{"paddingTop":40, "paddingBottom":40, "paddingLeft":100}}>
+                <Card.Title>What would you like to do?</Card.Title>
+                <Card.Text>
+                  <ButtonGroup size="lg" className="mb-2" vertical style={{paddingTop:20}}>
+                      <Button variant="light" onClick={PrescribeDocuments}>Prescribe Documents to Patients</Button>
+                      {/* <Button variant="light" onClick={SearchHealthCareProfessional}>Search HealthCare Professionals</Button>
+                      <Button variant="light" onClick={PatientUploadDocuments}>Upload Patient Documents</Button>
+                      <Button variant="light" onClick={PatientSendDocuments}>Send Patient Documents</Button> */}
+                  </ButtonGroup>
+                </Card.Text>
+              </Card.Body>
+              </Card>
+            </div>
+          </Col>
+          <Col></Col>
+        </Row>
+      </Container>
   )
 }
 
