@@ -37,17 +37,19 @@ const patient_register = async (req,res,next) =>{
         await newPatient.save();
         
         const newDocument1 = new document({
+            owner_name: req.body.name,
+            document_name: "regustration document 1", 
             user_type: "patient",
             user_id:newPatient._id,
-            document_type:"registration document 1",
             document:req.body.documents[0]
         });
         await newDocument1.save();
 
         const newDocument2 = new document({
-            user: "patient",
+            owner_name: req.body.name,
+            document_name: "regustration document 1", 
+            user_type: "patient",
             user_id:newPatient._id,
-            document_type:"registration document 2",
             document:req.body.documents[1]
         });
         await newDocument2.save();

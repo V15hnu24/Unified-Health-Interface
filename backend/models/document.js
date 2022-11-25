@@ -14,9 +14,6 @@ const documentSchema = new mongoose.Schema({
     user_id:{
         type:String
     },
-    document_type:{
-        type:String
-    },
     document:{
         type:String,
         required:true
