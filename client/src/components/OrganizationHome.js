@@ -10,7 +10,7 @@ const OrganizationHome =() =>{
     const userHomePage = async (req,res)=>{
       
       const id = window.localStorage.getItem('id');
-      var fetch_url = "/v_org/" + id
+      var fetch_url = "/organisation/" + id
 
       fetch(fetch_url, {
         method: "GET",

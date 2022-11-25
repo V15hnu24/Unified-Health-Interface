@@ -5,8 +5,10 @@ import { userContext } from "../App";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button'
+import Form from 'react-bootstrap/Form';
+import InputGroup from 'react-bootstrap/InputGroup';
+
 
 const PatientSendDocuments =() =>{
 
@@ -14,11 +16,13 @@ const PatientSendDocuments =() =>{
     let navigate =useNavigate();
     const [email1, setEmail1] =useState('');
     const [email2, setEmail2] =useState('');
+    const docs = [{"id" : "92salfjla1","descrption": "Document1","url":"drive link" },{"id" : "92salfjla1214","descrption": "Document2","url":"drive link 2" }]
+    const sendDocsArray = new Set()
 
     const showPatientDocuments = async(e) => {
 
         const id = window.localStorage.getItem('id');
-        var fetch_url = "/patient/patient_docuemts" + id
+        var fetch_url = "/patient/patient_documents/" + id
         console.log(fetch_url)
 
         fetch(fetch_url, {
@@ -96,9 +100,22 @@ const PatientSendDocuments =() =>{
         }
     }   
 
-    useEffect(()=>{
-        showPatientDocuments();
-      },[]);  
+    // useEffect(()=>{
+    //     showPatientDocuments();
+    //   },[]);  
+
+        const handleChange = (e) => {
+            let isChecked = e.target.checked;
+            
+            if (isChecked) {
+                sendDocsArray.add(e.target.value)
+                console.log(sendDocsArray)
+            } else {
+                sendDocsArray.delete(e.target.value)
+                console.log(sendDocsArray)
+            }
+
+        }
 
         return (
 
@@ -107,34 +124,36 @@ const PatientSendDocuments =() =>{
                 <Col></Col>
                 <Col xs={4}>
                     <h1 style={{'paddingTop':40, 'textAlign':'center', 'fontFamily':'Serif', 'fontSize':50}}>Send Documents</h1>
-                    <div style={{'paddingTop':20}}>
-                        <Form>
-                            <Form.Group className="mb-3" controlId="formBasicEmail">
-                                <Form.Label>Send Documents to Email address of Doctor</Form.Label>
-                                <Form.Control type="email" placeholder="Enter email of Doctor" value={email1} onChange={(e)=>setEmail1(e.target.value)} required={true} />
-                            </Form.Group>
-                        </Form>
-                    </div>
-                    <div className="d-grid gap-2">
-                        <Button variant="dark" size="lg" type="submit" name="signin" id="signin" className="form-submit" value="Login" onClick={DocumentSendDoctor}>
-                            Send Documents to Doctor
-                        </Button>
-                    </div>
-                    <br></br><br></br>
-                    <div style={{'paddingTop':20}}>
-                        <Form>
-                            <Form.Group className="mb-3" controlId="formBasicEmail">
-                                <Form.Label>Send Documents to Email address of Organization</Form.Label>
-                                <Form.Control type="email" placeholder="Enter email of Organization" value={email2} onChange={(e)=>setEmail2(e.target.value)} required={true} />
-                            </Form.Group>
-                        </Form>
-                    </div>
-                    <div className="d-grid gap-2">
-                        <Button variant="dark" size="lg" type="submit" name="signin" id="signin" className="form-submit" value="Login" onClick={DocumentSendOrganization}>
-                            Send Documents to Organization
-                        </Button>
-                    </div>
+                        {
+                            docs.map(item => {
+                                return(
+                                    <InputGroup className="mb-3">
+                                        <InputGroup.Checkbox value={item.id} onChange={handleChange} />
+                                        <Form.Control placeholder={item.descrption} disabled/>
+                                    </InputGroup>
+                                )
+                            })
+                        }
+                    <Form>
+                        <Form.Group>
+                            <Form.Label>Send to Respective Organisation</Form.Label>
+                            <Form.Select aria-label="Default select example">
+                                    <option value="organisation">Organisation</option>
+                                    <option value="pharmacy">Pharmacy</option>
+                                    <option value="insurance">Insurance Firm</option>
+                                    <option value="doctor">Doctor</option>
+                            </Form.Select>
+                        </Form.Group>
 
+                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Control type="email" placeholder="Enter email" />
+                        </Form.Group>
+                    </Form>
+                    <div className="d-grid gap-2">
+                        <Button variant="dark" size="lg" type="submit" name="signin" id="signin" className="form-submit" value="Login">
+                            Send Documents
+                        </Button>
+                    </div>
                 </Col>
                 <Col></Col>
                 </Row>

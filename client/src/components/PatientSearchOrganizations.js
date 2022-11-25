@@ -13,8 +13,10 @@ const PatientSearchOrganizations =() =>{
   const callAboutPage = async (req,res)=>{
 
     console.log("Hello");
+    const id = window.localStorage.getItem("id")
+
     try{
-      const res = await fetch('/getdataOrganization',{
+      const res = await fetch('/v_auth/verified_organisation/',{
         method: "GET",
         headers:{
           Accept:"application/json",
