@@ -41,7 +41,7 @@ app.use('/auth', authRoute);
 app.use('/patient', patientRoute);
 // app.use('/admin', adminRoute);
 app.use('/adminpanel', adminpanelrouter);
-// app.use('/organisation', organisationRoute);
+app.use('/organisation', organisationRoute);
 // app.use('/professional', proffesionalRoute);
 app.use('/razorpay', razorpayRoute);
 

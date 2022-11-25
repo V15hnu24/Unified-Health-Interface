@@ -20,7 +20,7 @@ const OrganizationLogin =() =>{
     const loginUser =async (e) =>{
         e.preventDefault();
 
-        const res =await fetch('/signinOrganization', 
+        const res =await fetch('/auth/organisation_login', 
         {
             method:"POST",
             headers:{
@@ -32,7 +32,8 @@ const OrganizationLogin =() =>{
        
         });
 
-        const data =res.json();
+        const data =await res.json();
+        window.localStorage.setItem('id', data._id);
 
         if(res.status==400 || !data){
             window.alert("Invalid Credentials");

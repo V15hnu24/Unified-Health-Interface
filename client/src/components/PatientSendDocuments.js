@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 import {useContext} from 'react'
 import { userContext } from "../App";
@@ -14,6 +14,34 @@ const PatientSendDocuments =() =>{
     let navigate =useNavigate();
     const [email1, setEmail1] =useState('');
     const [email2, setEmail2] =useState('');
+
+    const showPatientDocuments = async(e) => {
+
+        const id = window.localStorage.getItem('id');
+        var fetch_url = "/patient/patient_docuemts" + id
+        console.log(fetch_url)
+
+        fetch(fetch_url, {
+            method: "GET",
+            headers:{
+              // Accept:"application/json",
+              "Content-Type":"application/json"
+            },
+        })
+        .then(res => {
+
+            if (res.status === 200) {
+              res.json()
+              .then( (data) => {
+                console.log(data)
+              })
+            } else {
+              const error = new Error(res.error);
+              throw error;
+            }
+    
+        })
+    }
 
     const DocumentSendDoctor =async (e) =>{
         e.preventDefault();
@@ -66,42 +94,12 @@ const PatientSendDocuments =() =>{
             window.alert("Login Sucessful");
             navigate("/PatientHome");
         }
-    }
+    }   
 
-//   return(   
-//     <>
-//        <section className='="signup'>
-//        <div align="center"></div><div align="center">
-//                     <h2 className="form-title" align="center"> Patient Login Portal</h2>
-//                     <form method="POST">
-//                         <div className="form-group" align="center">
-                        
-//                             <input type ="text" name="email" id="name" autoComplete="off"
-//                             value ={email}
-//                             onChange ={(e)=> setEmail(e.target.value)}
-//                             placeholder="Your Email" required={true}
-//                             />
-//                             <br/><br/>
-//                             <input type ="password" name="password" id="password" autoComplete="off"
-//                              value ={password}
-//                              onChange ={(e)=> setPassword(e.target.value)}
-//                              placeholder="Your password" required={true}
-//                             />
-//                         </div>
-//                         <br/><br/>
-//                         <div className="form-group form-button" align="center">
-//                             <input type="submit" name="signin" id="signin" className="form-submit"
-//                              value="Login"
-//                              onClick={loginUser}
-//                             />
-//                             <br/><br/>
-//                             <a className="nav-link" href="/PatientRegister"><strong>Create an Account</strong></a>
-//                         </div>
-//                     </form>
-//                     </div>
-//     </section>
-//     </>
-//   )
+    useEffect(()=>{
+        showPatientDocuments();
+      },[]);  
+
         return (
 
             <Container>

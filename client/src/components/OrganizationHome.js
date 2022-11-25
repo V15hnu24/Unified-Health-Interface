@@ -6,38 +6,42 @@ const OrganizationHome =() =>{
     const {state,dispatch} = useContext(userContext);
     const [show,setShow]  =useState(false);
     let navigate = useNavigate();
-    const[userName, setUserName] = useState('');
+    const[userData, setUserData] = useState('');
     const userHomePage = async (req,res)=>{
       
-      console.log("Hello");
-      try{
-        const res = await fetch('/getdataOrganization',{
-          method: "GET",
-          headers:{
-            Accept:"application/json",
-            "Content-Type":"application/json"
-          },
-        });
-  
-        const data  =await res.json();
-        console.log(data);
-      //   setUserData(data);
-      setUserName(data.name);
-      setShow(true);
-        if(!res.status ==200)
-        {
-            const error = new Error(res.error);
-            throw error;
+      const id = window.localStorage.getItem('id');
+      var fetch_url = "/v_org/" + id
+
+      fetch(fetch_url, {
+        method: "GET",
+        headers:{
+          // Accept:"application/json",
+          "Content-Type":"application/json"
+        },
+      })
+      .then(res => {
+
+        if (res.status === 200) {
+          res.json()
+          .then( (data) => {
+            console.log("Here")
+            setUserData( {...userData, name: data.t.name});
+            setShow(true);
+            dispatch({type:"USER", payload:true});
+          })
+        } else if (res.status === 404) {
+          console.log("Can't fetch")
+        } 
+        else {
+          const error = new Error(res.error);
+          throw error;
         }
-        else{
-          dispatch({type:"USER", payload:true});
-        }
-      }catch(err)
-      {
-          console.log(err);
-          navigate('/login');
-      }
+
+      })
+
     }
+  
+      //   setUserData(data);
       
       // navigate("/Editdetails");
     
@@ -48,8 +52,8 @@ const OrganizationHome =() =>{
     <div>
       <div className="home-div">
     {/* <p className="pt-5">Welcome</p> */}
-    <h1 align="center">Welcome to<span> Patient</span>  HealthCare System</h1>
-    <h2 align="center">Welcome {userName}</h2>
+    <h1 align="center">Welcome to<span> Organization</span>  HealthCare System</h1>
+    <h2 align="center">Welcome {userData.name}</h2>
     <h7 align="center">{show  ? 'Welcome you are logged in' : 'Mern'}</h7>
     </div>
     </div>

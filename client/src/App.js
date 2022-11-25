@@ -32,6 +32,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import "./HomePage.css"
 import ErrorPage from "./components/Errorpage"
 import { useState, useEffect } from "react";
+import AdminHandlePatient from './components/AdminHandlePatient'
 
 // Context API
 export const userContext = createContext();
@@ -66,6 +67,8 @@ const Routing =() =>{
         <Route path= "/logout" element ={<Logout/>}/>  
         <Route path= "/AdminLogin" element ={<AdminLogin/>}/> 
         <Route path= "/PatientSendDocuments" element={<PatientSendDocuments/>}/>
+        <Route path= "/AdminHandlePatient" element={<AdminHandlePatient/>}/>
+        
       </Routes>
   )
 }

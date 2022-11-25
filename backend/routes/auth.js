@@ -4,7 +4,6 @@ const { email_otp, verify_otp } = require('../controllers/otp');
 const upload = require('../middleware/upload');
 const router = express.Router();
 
-
 const {professional_register, professional_login,organisation_resgister,organisation_login} = require('../controllers/v_auth');
 // const router = express.Router();
 // new

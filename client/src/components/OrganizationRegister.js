@@ -25,7 +25,7 @@ const OrganizationRegister =() =>{
         const{name,email,phone,type,description,location,password,cpassword,doc1,doc2} =user;
         const documents =[doc1,doc2];
         console.log("Hello")
-        const res =await fetch('/registerOrganization', {
+        const res =await fetch('/auth/organisation_register', {
         method:"POST",
         headers:{
             "Content-Type" : "application/json"
@@ -174,7 +174,7 @@ return (
                         Organization Working type (Pharmacy,Insurance Firm,Hospital Name)
                         </Form.Label>
                         <Col sm={10}>
-                        <Form.Control type ="text"  name="work" id="work" autoComplete="off"
+                        <Form.Control type ="text"  name="type" id="type" autoComplete="off"
                                value={user.type}
                                onChange={handleInputs}
                              placeholder="Your Working Type.."  />
@@ -185,7 +185,7 @@ return (
                         Description
                         </Form.Label>
                         <Col sm={10}>
-                        <Form.Control type ="text"  name="work" id="work" autoComplete="off"
+                        <Form.Control type ="text"  name="description" id="description" autoComplete="off"
                                value={user.description}
                                onChange={handleInputs}
                              placeholder="Your Description"  />

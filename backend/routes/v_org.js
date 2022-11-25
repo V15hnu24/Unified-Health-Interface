@@ -11,4 +11,5 @@ router.get("/verifyPending_organisation", verifyAdmin, getAllPendingforApproval_
 router.get("/organisation_documents/:id", verifyUser, getAlldocuments);
 router.post("/documents/:id", verifyUser, updateDocumentAccess);
 router.get("/organisation_document/:id", verifyDocumentAccess, getDocument);
-module.export = router;
+
+module.exports = router;
