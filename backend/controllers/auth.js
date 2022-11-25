@@ -11,8 +11,8 @@ const { generate_key_pair } = require('./digital_signatures');
 
 const patient_register = async (req,res,next) =>{
     try {
-        // const salt = bcrypt.genSaltSync(10);
-        // const hash = bcrypt.hashSync(req.body.password, salt);
+        const salt = bcrypt.genSaltSync(10);
+        const hash = bcrypt.hashSync(req.body.password, salt);
         
         const check_user = await patient.findOne({email:req.body.email});
         if(check_user) return next(createError(400, "User already exists as "));
@@ -22,7 +22,7 @@ const patient_register = async (req,res,next) =>{
 
         const newPatient = new patient({
             name:req.body.name,
-            password:req.body.hashedpassword,
+            password:req.body.hash,
             email:req.body.email,
             mobile:req.body.mobile,
             status:1,
@@ -109,10 +109,14 @@ const patient_login = async (req,res,next) =>{
         const tempUser = await patient.findOne({email:req.body.email});
         if(!tempUser) return next(createError(404, "User not Found"));
 
+        console.log(req.body.password)
+        console.log(tempUser.password)
+
         const isPasswordCorrect = await bcrypt.compare(
             req.body.password,  
             tempUser.password
             );
+
         if(!isPasswordCorrect) return next(createError(400, "Wrong password or Username!"));
         const userToken = jwt.sign(
             {id: tempUser._id},

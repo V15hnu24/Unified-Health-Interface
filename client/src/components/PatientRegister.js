@@ -28,7 +28,10 @@ const PatientRegister =() =>{
         {
             window.alert("Password are not Matching.");
         }
-        const hashedpassword  = bcrypt.hashSync(password, 10);
+        
+        const salt = bcrypt.genSaltSync(10);
+        const hash = bcrypt.hashSync(password, salt);
+        
         //console.log(hashedpassword);
         const res =await fetch('/auth/patient_register', {
         method:"POST",
@@ -36,7 +39,7 @@ const PatientRegister =() =>{
             "Content-Type" : "application/json"
          },
         body:JSON.stringify({
-            name,email,mobile,country,gender,state,city,dob,pincode,hashedpassword,documents
+            name,email,mobile,country,gender,state,city,dob,pincode,hash,documents
          })
         });
        
@@ -54,10 +57,7 @@ const PatientRegister =() =>{
         }
        
     }
-    function foo() {
-        alert("Submit button clicked!");
-        return true;
-     }
+
   return (
 
     <Container>

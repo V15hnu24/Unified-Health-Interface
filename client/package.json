@@ -16,6 +16,7 @@
     "bcryptjs": "^2.4.3",
     "bootstrap": "^5.2.2",
     "bson-objectid": "^2.0.3",
+    "crypto-browserify": "^3.12.0",
     "font-awesome": "^4.7.0",
     "framer-motion": "^7.6.2",
     "install": "^0.13.0",

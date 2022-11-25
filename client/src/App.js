@@ -16,6 +16,7 @@ import OrganizationLogin from "./components/OrganizationLogin"
 import OrganizationHome from "./components/OrganizationHome"
 import HealthCareProfessionalHome from './components/HealthCareProfessionalHome';
 import HealthCareProfessionalRegister from './components/HealthCareProfessionalRegister';
+import PharmacyHome from './components/PharmacyHome';
 import HealthCareProfessionalLogin from './components/HealthCareProfessionalLogin';
 import MainHomePage from "./components/MainHomePage"
 import AdminHomePage from './components/AdminHomePage';
@@ -68,7 +69,8 @@ const Routing =() =>{
         <Route path= "/AdminLogin" element ={<AdminLogin/>}/> 
         <Route path= "/PatientSendDocuments" element={<PatientSendDocuments/>}/>
         <Route path= "/AdminHandlePatient" element={<AdminHandlePatient/>}/>
-        
+        <Route path= "/PharmacyHome" element={<PharmacyHome/>}/>
+
       </Routes>
   )
 }
