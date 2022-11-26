@@ -2,7 +2,7 @@ import React, { useEffect,useState } from 'react';
 import {useNavigate} from 'react-router-dom';
 import {useContext} from 'react'
 import { userContext } from "../App";
-
+import Table from 'react-bootstrap/Table';
 const PatientSearchOrganizations =() =>{
 
   const {state,dispatch} = useContext(userContext);
@@ -10,13 +10,19 @@ const PatientSearchOrganizations =() =>{
   const[userData, setUserData] = useState([]);
   const[searchApiData, setSearchApiData] = useState([]);
   const[filterVal,setFilterVal] =useState('');
+  const[filterVal2,setFilterVal2] =useState('');
+  const[filterVal3,setFilterVal3] =useState('');
+
+
   const callAboutPage = async (req,res)=>{
 
     console.log("Hello");
     const id = window.localStorage.getItem("id")
+    
+
 
     try{
-      const res = await fetch('/v_auth/verified_organisation/',{
+      const res = await fetch('/organisationRoute/verified_organisation/' + id,{
         method: "GET",
         headers:{
           Accept:"application/json",
@@ -25,11 +31,11 @@ const PatientSearchOrganizations =() =>{
         credentials:"include"
       });
 
-      const data  =await res.json();
-      // console.log(data);
-    setUserData(data);
-    setSearchApiData(data);
-    console.log(data.name);
+    const data  =await res.json();
+    console.log(data);
+    setUserData(data.allP);
+    setSearchApiData(data.allP);
+    console.log(data.allP[0].name);
     for(let i = 0; i < data.length; i++) {
       let obj = data[i];
      
@@ -61,6 +67,24 @@ const PatientSearchOrganizations =() =>{
       }
       setFilterVal(e.target.value);
   }
+  const handleFilter2=(e)=>{
+    if(e.target.value==''){
+      setUserData(searchApiData);
+    }else{
+     const filterResult = searchApiData.filter(userData=> userData.email.toLowerCase().includes(e.target.value.toLowerCase()));
+      setUserData(filterResult);
+    }
+    setFilterVal2(e.target.value);
+}
+const handleFilter3=(e)=>{
+  if(e.target.value==''){
+    setUserData(searchApiData);
+  }else{
+   const filterResult = searchApiData.filter(userData=> userData.location.toLowerCase().includes(e.target.value.toLowerCase()));
+    setUserData(filterResult);
+  }
+  setFilterVal3(e.target.value);
+}
   // const handleInputs =(e) =>{
   //   const name = e.target.name;
   //   const value = e.target.value;
@@ -78,23 +102,37 @@ const PatientSearchOrganizations =() =>{
   return(
     <>
     <div>
-    <h1>Hello Aditya Peer from About.js</h1>
     <br/>
 
-<div align="center">
+{/* <div align="center">
     <input type="text"  onChange={handleFilter}value={filterVal}  placeholder="Search Hospitals"/>
+  </div> */}
+  <div align="center">
+  <h1>Search Hopitals</h1>
   </div>
-<table class="table">
+  <Table striped bordered hover variant="dark">
   <br></br>
 <div align="center">
   <h2>Orgnaization Details</h2>
+    <thead>
+      <div>
+    <th>HOSPITAL NAME 
+
+    <input type="text"  onChange={handleFilter}value={filterVal}  placeholder="Search Names"/>
+    </th>
+  </div>
   
-    <th>HOSPITAL NAME</th>
-    <th>Email</th>
-    <th>Phone</th>
-    <th>Pincode</th>
-    <th>Location</th>
+    <th>Email
+    <input type="text"  onChange={handleFilter2}value={filterVal2}  placeholder="Search Email ID"/>
+    </th>
+    
+    <th>Phone
+    </th>
+    <th>Location
+    <input type="text"  onChange={handleFilter3}value={filterVal3}  placeholder="Search through location"/>
+    </th>
     <th>Description</th>
+    </thead>
     {
       userData.map(item =>{
         return(
@@ -102,17 +140,15 @@ const PatientSearchOrganizations =() =>{
             <td>{item.name}</td>
             <td>{item.email}</td>
             <td>{item.phone}</td>
-            <td>{item.pincode}</td>
             <td>{item.location}</td>
-            <td>{item.work}</td>
+            <td>{item.description}</td>
           </tr>
         )
       })
       
     }
   </div>
-
-</table>
+  </Table> 
 <br/><br/>
 </div> 
 
