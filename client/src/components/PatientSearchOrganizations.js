@@ -22,7 +22,7 @@ const PatientSearchOrganizations =() =>{
 
 
     try{
-      const res = await fetch('/organisationRoute/verified_organisation/' + id,{
+      const res = await fetch('/organisation/verified_organisation/' + id,{
         method: "GET",
         headers:{
           Accept:"application/json",
