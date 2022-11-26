@@ -4,6 +4,7 @@ const organisation = require("../models/organisationSchema");
 const createError = require('../utils/error');
 const jwt = require('jsonwebtoken');
 const document = require('../models/document');
+const user = require("../models/user");
 const { generate_key_pair } = require('./digital_signatures');
 
 
@@ -11,10 +12,11 @@ const professional_register = async (req,res,next) =>{
     try {
         const salt = bcrypt.genSaltSync(10);
         const hash = bcrypt.hashSync(req.body.password, salt);
+        console.log(req.body.pincode);
+        console.log(req.body.location);
         const newProfessional = new professional({
             name:req.body.name,
             email:req.body.email,
-            password:hash,
             phone:req.body.phone,
             qualification:req.body.qualification,
             gender:req.body.gender,
@@ -22,22 +24,25 @@ const professional_register = async (req,res,next) =>{
             location:req.body.location,
             pincode:req.body.pincode,
             status:1,
+            password:hash,
             //registration_documents: req.body.registration_documents
         });
         await newProfessional.save();
 
         const newDocument1 = new document({
+            document_name:"registration document 1",
             user_type: "professional",
             user_id:newProfessional._id,
-            document_type:"registration document 1",
+            // document_type:"registration document 1",
             document:req.body.documents[0]
         });
         await newDocument1.save();
 
         const newDocument2 = new document({
+            document_name:"registration document 2",
             user_type: "professional",
             user_id:newProfessional._id,
-            document_type:"registration document 2",
+            // document_type:"registration document 2",
             document:req.body.documents[1]
         });
         await newDocument2.save();
@@ -137,7 +142,7 @@ const organisation_resgister = async (req,res,next) =>{
         const newDocument1 = new document({
             user_type: "organisation",
             user_id:newOrganisation._id,
-            document_type:"registration document 1",
+            document_name:"registration document 1",
             document:req.body.documents[0]
         });
         await newDocument1.save();
@@ -145,7 +150,7 @@ const organisation_resgister = async (req,res,next) =>{
         const newDocument2 = new document({
             user_type: "organisation",
             user_id:newOrganisation._id,
-            document_type:"registration document 2",
+            document_name:"registration document 2",
             document:req.body.documents[1]
         });
         await newDocument2.save();
