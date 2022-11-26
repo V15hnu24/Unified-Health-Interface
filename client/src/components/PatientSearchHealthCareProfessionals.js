@@ -2,19 +2,27 @@ import React, { useEffect,useState } from 'react';
 import {useNavigate} from 'react-router-dom';
 import {useContext} from 'react'
 import { userContext } from "../App";
-
-const PatientSearchHealthCareProfessionals=() =>{
+import Table from 'react-bootstrap/Table';
+const PatientSearchHealthCareProfessionals =() =>{
 
   const {state,dispatch} = useContext(userContext);
   let navigate = useNavigate();
   const[userData, setUserData] = useState([]);
   const[searchApiData, setSearchApiData] = useState([]);
   const[filterVal,setFilterVal] =useState('');
+  const[filterVal2,setFilterVal2] =useState('');
+  const[filterVal3,setFilterVal3] =useState('');
+
+
   const callAboutPage = async (req,res)=>{
 
     console.log("Hello");
+    const id = window.localStorage.getItem("id")
+    
+
+
     try{
-      const res = await fetch('/getSearchHealthCareProfessional',{
+      const res = await fetch('/professional/professionals/' + id,{
         method: "GET",
         headers:{
           Accept:"application/json",
@@ -23,12 +31,11 @@ const PatientSearchHealthCareProfessionals=() =>{
         credentials:"include"
       });
 
-      const data  =await res.json();
-      // console.log(data);
-    //   setUserData(data);
-    setUserData(data);
-    setSearchApiData(data);
-    console.log(data.name);
+    const data  =await res.json();
+    console.log(data);
+    setUserData(data.allP);
+    setSearchApiData(data.allP);
+    console.log(data.allP[0].name);
     for(let i = 0; i < data.length; i++) {
       let obj = data[i];
      
@@ -48,39 +55,6 @@ const PatientSearchHealthCareProfessionals=() =>{
         navigate('/login');
     }
   }
-  
-//   const Edit2= async(e)=>{
- 
-//     e.preventDefault();
-//     const {name, email, phone ,gender, dob, pincode, work} = userData;
-//     console.log(name);
-//     console.log(email);
-//     const res = await fetch('/Editdetails',{
-//       method:"POST",
-//       headers:{
-//         "Content-Type":"application/json"
-//       },
-//       body:JSON.stringify({
-//         name, email, phone ,gender, dob, pincode, work
-//       })
-//     });
-//     console.log("Hello");
-//     const data = await res.json();
-//     console.log(data);
-//     if(!data)
-//     {
-//         console.log("not Updated");
-//         alert("Details Not Updated");
-//     }
-//     else{
-//       alert("Details Updated");
-//       setUserData({... userData, name:"",});
-//       navigate("/about");
-//     }
-    
-//     // navigate("/Editdetails");
-  
-//   }
   useEffect(()=>{
     callAboutPage();
   },[]);
@@ -93,6 +67,24 @@ const PatientSearchHealthCareProfessionals=() =>{
       }
       setFilterVal(e.target.value);
   }
+  const handleFilter2=(e)=>{
+    if(e.target.value==''){
+      setUserData(searchApiData);
+    }else{
+     const filterResult = searchApiData.filter(userData=> userData.email.toLowerCase().includes(e.target.value.toLowerCase()));
+      setUserData(filterResult);
+    }
+    setFilterVal2(e.target.value);
+}
+const handleFilter3=(e)=>{
+  if(e.target.value==''){
+    setUserData(searchApiData);
+  }else{
+   const filterResult = searchApiData.filter(userData=> userData.location.toLowerCase().includes(e.target.value.toLowerCase()));
+    setUserData(filterResult);
+  }
+  setFilterVal3(e.target.value);
+}
   // const handleInputs =(e) =>{
   //   const name = e.target.name;
   //   const value = e.target.value;
@@ -110,37 +102,37 @@ const PatientSearchHealthCareProfessionals=() =>{
   return(
     <>
     <div>
-    <h1>Welcome To Health Care Professionals</h1>
     <br/>
-    {/* <div class="container">
-      <h2>Patient Details</h2>
-  <div class="row">
-    <div class="col">
-      Name
-    </div>
-    <div class="col">
-      2 of 3
-    </div>
-    <div class="col">
-      3 of 3
-    </div>
-  </div>
-</div>8/*/}
 
-<div align="center">
-    <input type="text"  onChange={handleFilter}value={filterVal}  placeholder="Search HealthCare Professionals"/>
+{/* <div align="center">
+    <input type="text"  onChange={handleFilter}value={filterVal}  placeholder="Search Hospitals"/>
+  </div> */}
+  <div align="center">
+  <h1>Search Hopitals</h1>
   </div>
-<table class="table">
+  <Table striped bordered hover variant="dark">
   <br></br>
 <div align="center">
-  <h2>HealthCare Professional Details</h2>
+  <h2>Orgnaization Details</h2>
+    <thead>
+      <div>
+    <th>HOSPITAL NAME 
+
+    <input type="text"  onChange={handleFilter}value={filterVal}  placeholder="Search Names"/>
+    </th>
+  </div>
   
-    <th>NAME</th>
-    <th>Email</th>
-    <th>Phone</th>
-    <th>Pincode</th>
-    <th>Location</th>
-    <th>Description</th>
+    <th>Email
+    <input type="text"  onChange={handleFilter2}value={filterVal2}  placeholder="Search Email ID"/>
+    </th>
+    
+    <th>Phone
+    </th>
+    <th>Location
+    <input type="text"  onChange={handleFilter3}value={filterVal3}  placeholder="Search through location"/>
+    </th>
+    <th>Qualification</th>
+    </thead>
     {
       userData.map(item =>{
         return(
@@ -148,17 +140,15 @@ const PatientSearchHealthCareProfessionals=() =>{
             <td>{item.name}</td>
             <td>{item.email}</td>
             <td>{item.phone}</td>
-            <td>{item.pincode}</td>
             <td>{item.location}</td>
-            <td>{item.work}</td>
+            <td>{item.qualification}</td>
           </tr>
         )
       })
       
     }
   </div>
-
-</table>
+  </Table> 
 <br/><br/>
 </div> 
 
