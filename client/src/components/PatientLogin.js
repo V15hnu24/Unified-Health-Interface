@@ -8,6 +8,7 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import bcrypt from 'bcryptjs';
+import Collapse from 'react-bootstrap/Collapse';
 
 const PatientLogin =() =>{
 
@@ -15,6 +16,8 @@ const PatientLogin =() =>{
     let navigate =useNavigate();
     const [email, setEmail] =useState('');
     const [password, setPassword] = useState('');
+    const [verified, setVerified] = useState(false)
+    const [otp, setOtp] = useState('')
     // const loginUser = func();
     const loginUser =async (e) =>{
         e.preventDefault();
@@ -33,16 +36,16 @@ const PatientLogin =() =>{
 
         console.log(res.body);
         const data = await res.json();
-        console.log(data);
+        // console.log(data);
 
         window.localStorage.setItem('id',data._id); 
         console.log(data._id);
         
-        if(res.status==200){
-                       
-            dispatch({type:"USER", payload:true});
-            window.alert("Login Sucessful");
-            navigate("/PatientHome");
+        if(res.status===200){
+            sendOtp()
+            // dispatch({type:"USER", payload:true});
+            // window.alert("Login Sucessful");
+            // navigate("/PatientHome");
         }
         else{
             window.alert(res.message + " ");
@@ -51,6 +54,47 @@ const PatientLogin =() =>{
     }
 
 
+    const sendOtp =async (e) =>{
+        
+        fetch('/auth/send_otp', 
+        {
+            method:"POST",
+            headers:{
+            "Content-Type" : "application/json"
+            },
+            body:JSON.stringify({
+            email
+            })
+        });
+
+        setVerified(true)
+    }
+
+    const verifyAndLogin = async(e) => {
+        
+        const res = await fetch('/auth/verify_otp', {
+            method:"POST",
+            headers:{
+            "Content-Type" : "application/json"
+            },
+            body:JSON.stringify({
+            email,otp
+            })
+        });
+
+        const data = await res.json();
+
+        if (data.message === "OTP verified") {
+            dispatch({type:"USER", payload:true});
+            window.alert("Login Sucessful");
+            navigate("/PatientHome");
+            
+        } else {
+            window.alert(data.message);
+        }
+    }
+
+    
     return (
         <Container>
             <Row>
@@ -78,6 +122,22 @@ const PatientLogin =() =>{
                     <a href="/PatientRegister">Don't have an account? Click here to sign up!</a>
                 </div>
 
+                <Collapse in={verified}>
+                    <div style={{'paddingTop':20}}>
+                        <Form>
+                            <Form.Group className="mb-3" controlId="formBasicEmail">
+                                <Form.Label><strong>Enter OTP sent at your registered email</strong></Form.Label>
+                                <Form.Control type="number" placeholder="Enter OTP" value={otp} onChange={(e)=>setOtp(e.target.value)} required={true} />
+                            </Form.Group>
+                        </Form>
+                        <div className="d-grid gap-2">
+                            <Button variant="dark" size="lg" type="submit" name="verifyOtp" className="form-submit" value="verifyOtp" onClick={verifyAndLogin}>
+                                Verify and Login
+                            </Button>
+                        </div>
+                    </div>
+                </Collapse>
+                
             </Col>
             <Col></Col>
             </Row>

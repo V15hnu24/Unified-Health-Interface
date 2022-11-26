@@ -1,15 +1,16 @@
 const mongoose = require('mongoose');
 const nodemailer = require("nodemailer");
 const process = require('process');
+const user = require("../models/user");
 
 const email_otp = async (req,res,next) =>{
     try {
         const otp = Math.floor(100000 + Math.random() * 900000);
         const email = req.body.email;
-        const user = await user.findOne({email:email});
-        if(user){
-            user.otp = otp;
-            await user.save();
+        const tempUser = await user.findOne({email:email});
+        if(tempUser){
+            tempUser.otp = otp;
+            await tempUser.save();
         }
         else{
             const newUser = new user({
@@ -33,9 +34,10 @@ const verify_otp = async (req,res,next) =>{
     try {
         const otp = req.body.otp;
         const email = req.body.email;
-        const user = await user.findOne({email:email});
-        if(user){
-            if(user.otp == otp){
+        const tempUser = await user.findOne({email:email});
+        
+        if(tempUser){
+            if(tempUser.otp == otp){
                 res.status(200).json({message:"OTP verified"});
             }
             else{
