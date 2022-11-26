@@ -41,4 +41,4 @@ router.get("/get_Bills", verifyUser, getAllBills);
 router.get("/get_Bill", verifyUser, getBill);
 
 
-module.export = router;
+module.exports = router;
