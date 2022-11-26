@@ -28,7 +28,7 @@ const deleteProfessional = async(req,res,next) =>{
 const getProfessional = async (req,res,next)=>{
     try{
         const tempProfessional = await professional.findById(req.params.id);
-        res.json({status:200,updateProfessional});
+        res.json({status:200,tempProfessional});
     }catch(err){
         next(err);
     }
