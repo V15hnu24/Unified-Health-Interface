@@ -22,7 +22,7 @@ const PatientSearchHealthCareProfessionals =() =>{
 
 
     try{
-      const res = await fetch('/professional/professionals/' + id,{
+      const res = await fetch('/professional/verified_professionals/' + id,{
         method: "GET",
         headers:{
           Accept:"application/json",
