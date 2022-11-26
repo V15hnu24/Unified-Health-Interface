@@ -19,7 +19,7 @@ const email_otp = async (req,res,next) =>{
             });
             await newUser.save();
         }
-
+        
         try {
             email_otp_sender(otp, email);
         } catch (error) {
@@ -35,7 +35,6 @@ const verify_otp = async (req,res,next) =>{
         const otp = req.body.otp;
         const email = req.body.email;
         const tempUser = await user.findOne({email:email});
-        
         if(tempUser){
             if(tempUser.otp == otp){
                 res.status(200).json({message:"OTP verified"});

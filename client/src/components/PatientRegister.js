@@ -6,25 +6,32 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import bcrypt from 'bcryptjs';
+import Collapse from 'react-bootstrap/Collapse';
+
 const PatientRegister =() =>{
     let navigate =useNavigate();
     const[user,setUser ] = useState({                          // Do this same in Patient Register
         name:"", email:"", mobile:"",country:"", gender:"",state:"",city:"",dob:"",pincode:"", password:"",cpassword:"",doc1:"", doc2:""
     });
     let name,value;
+
+    const [verified, setVerified] = useState(false)
+    const [otp, setOtp] = useState('')
+
     const handleInputs =(e)=>{
-        console.log(e);
         name = e.target.name;
         value =e.target.value;
 
         setUser({...user,[name]:value})
     }
 
-    const PostData =async(e)=>{
-        e.preventDefault();
-        const{name,email,mobile,country,gender,state,city,dob,pincode,password,cpassword,doc1, doc2} =user;
+    const registerPatient = async(e) => {
+        e.preventDefault()
+        
+        const{name,email,mobile,country,gender,state,city,dob,pincode,password,cpassword,doc1, doc2} = user;
         const documents = [doc1, doc2];
-        if(password!=cpassword)
+
+        if(password!==cpassword)
         {
             window.alert("Password are not Matching.");
         }
@@ -32,8 +39,9 @@ const PatientRegister =() =>{
         const salt = bcrypt.genSaltSync(10);
         const hash = bcrypt.hashSync(password, salt);
         
-        //console.log(hashedpassword);
-        const res =await fetch('/auth/patient_register', {
+        console.log(user)
+
+        const res = await fetch('/auth/patient_register', {
         method:"POST",
         headers:{
             "Content-Type" : "application/json"
@@ -46,17 +54,61 @@ const PatientRegister =() =>{
     //const data = await res.json();
        if(res.status===200)
        {
-            window.alert("Registartion Successful");
-            console.log("Successful Registration");
-        // alert("Hello");
-            navigate("/PatientLogin");
+            sendOtp()
+            // window.alert("Registartion Successful");
+            // console.log("Successful Registration");
+            // navigate("/PatientLogin");
        }
        else{
         window.alert(res.status + " " + res.message);
         console.log("Invalid Registration");
         }
-       
+
     }
+
+    const sendOtp =async (e) =>{
+
+        console.log("Sending OTP")
+        const email = user.email
+
+        fetch('/auth/send_otp', 
+        {
+            method:"POST",
+            headers:{
+            "Content-Type" : "application/json"
+            },
+            body:JSON.stringify({
+                email
+            })
+        });
+
+        setVerified(true)
+    }
+
+    const verifyAndLogin = async(e) => {
+        
+        const email = user.email
+        const res = await fetch('/auth/verify_otp', {
+            method:"POST",
+            headers:{
+            "Content-Type" : "application/json"
+            },
+            body:JSON.stringify({
+            email,otp
+            })
+        });
+
+        const data = await res.json();
+
+        if (data.message === "OTP verified") {
+            window.alert("Registartion Successful");
+            console.log("Successful Registration");
+            navigate("/PatientLogin");
+        } else {
+            window.alert(data.message);
+        }
+    }
+
 
   return (
 
@@ -240,13 +292,29 @@ const PatientRegister =() =>{
             </div>
             <div className="d-grid gap-2">
                 <Button variant="dark" size="lg" type="submit" name="signup" id="signup"
-                         value="register" onClick={PostData}>
+                         value="register" onClick={registerPatient}>
                     Register
                 </Button>
             </div>
             <div style={{'textAlign':'center', 'paddingTop':20}}>
                 <a href="/PatientLogin">Already have an account? Click here to login!</a>
             </div>
+            
+            <Collapse in={verified}>
+                    <div style={{'paddingTop':20}}>
+                        <Form>
+                            <Form.Group className="mb-3" controlId="formBasicEmail">
+                                <Form.Label><strong>Enter OTP sent at your registered email</strong></Form.Label>
+                                <Form.Control type="number" placeholder="Enter OTP" value={otp} onChange={(e)=>setOtp(e.target.value)} required={true} />
+                            </Form.Group>
+                        </Form>
+                        <div className="d-grid gap-2">
+                            <Button variant="dark" size="lg" type="submit" name="verifyOtp" className="form-submit" value="verifyOtp" onClick={verifyAndLogin}>
+                                Verify and Register
+                            </Button>
+                        </div>
+                    </div>
+            </Collapse>
 
         </Col>
         <Col></Col>
@@ -258,4 +326,3 @@ const PatientRegister =() =>{
 }
 
 export default PatientRegister
-

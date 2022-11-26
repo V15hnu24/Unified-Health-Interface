@@ -1,3 +1,5 @@
+// 
+
 const bcrypt = require('bcrypt');
 const patient = require("../models/patient");
 const admin = require("../models/admin");
