@@ -16,7 +16,7 @@ router.put("/:id",verifyUser, updateOrganisation);
 router.delete("/:id",verifyUser, deleteOrganisation);
 router.get("/:id",verifyUser, getOrganisation);
 router.get("/rejected_organisation", verifyUser, getAllRejectedOrganisation);
-router.get("/verified_organisation", verifyUser, getAllOrganisation);
+router.get("/verified_organisation/:id", verifyUser, getAllOrganisation);
 router.get("/verifyPending_organisation", verifyUser, getAllPendingforApproval_Organisation);
 router.get("/organisation_documents/:id", verifyUser, getAlldocuments);
 router.post("/documents/:id", verifyUser, updateDocumentAccess);
