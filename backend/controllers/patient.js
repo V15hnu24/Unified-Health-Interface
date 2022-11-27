@@ -9,6 +9,7 @@ const professional = require("../models/professional");
 const med_buy_reqs = require("../models/med_buy_reqs");
 const med_buy_reqs = require("../models/med_buy_reqs");
 const Insurance_claim = require("../models/Insurance_claim");
+const health_report = require("../models/health_report");
 
 const bill_claim_request = async (req,res,next)=>{
     try {
@@ -135,10 +136,10 @@ const getAlldocuments = async (req,res,next)=>{
         const getPatient = await patient.findById(req.params.id);
         const allDocuemts = await document.find({user_id:req.params.id});
         // res.status(200).json(allDocuemts);
-
+        const health_reports = await health_report({patient_email: getPatient.email});
         const allprescriptions = await prescription.find({patient_email: getPatient.email});
         const allbills = await bill.find({patient_email: getPatient.email});
-        res.json({status:200,documents: allDocuemts, prescriptions: allprescriptions,bills: allbills});
+        res.json({status:200,documents: allDocuemts, prescriptions: allprescriptions,bills: allbills, reports: health_reports});
     }catch(err){
         next(err);
     }
