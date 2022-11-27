@@ -7,7 +7,6 @@ const rejected_patients = require("../models/rejected_patients");
 const { sign_function } = require("./digital_signatures");
 const professional = require("../models/professional");
 const med_buy_reqs = require("../models/med_buy_reqs");
-const med_buy_reqs = require("../models/med_buy_reqs");
 const Insurance_claim = require("../models/Insurance_claim");
 const health_report = require("../models/health_report");
 
