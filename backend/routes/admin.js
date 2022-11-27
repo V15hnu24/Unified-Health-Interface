@@ -13,7 +13,6 @@ router.post('/professional_update', verifyAdmin, professional_status_update);
 router.post('/organisation_update', verifyAdmin, organisation_status_update);
 
 // router.get("/get_prescriptions", verifyAdmin, getAllPrescriptions);
-
 // router.get("/get_prescription", verifyAdmin, getPrescription);
 
 router.get("/get_All_bills", verifyAdmin, getAllBills);
@@ -35,8 +34,6 @@ router.get("/get_All_insurance_claims", verifyAdmin, getAllInsuranceClaims);
 router.get("/get_all_med_buy_requests", verifyAdmin, getAllMedBuyRequests);
 
 router.get("/get_all_health_reports", verifyAdmin, getAllHealthReports);
-
-
 
 
 module.exports = router;

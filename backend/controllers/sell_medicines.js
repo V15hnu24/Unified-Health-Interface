@@ -56,7 +56,6 @@ const verify_prescription = async (req, res, next) => {
         }else{
             res.json({status:200,verified:false, message:"Bill not verified"});
         }
-
     } catch (error) {
         next(error);
     }
@@ -78,7 +77,6 @@ const payment_request = async (req, res, next) => {
     } catch (error) {
         next(error);
     }
-}
-
+};
 
 module.exports = { getAllbuyRequests, getbuyRequest, verify_prescription, payment_request };

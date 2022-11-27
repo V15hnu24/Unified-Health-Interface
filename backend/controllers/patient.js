@@ -20,7 +20,7 @@ const bill_claim_request = async (req,res,next)=>{
             organisation_id: firm._id
         });
         await insuramceClaim.save();
-        
+
         res.json({status:200,message:"Insurance claim request sent to organisation"});
     }catch (error) {
         next(error);
@@ -29,7 +29,6 @@ const bill_claim_request = async (req,res,next)=>{
 
 const buy_medicine = async (req,res,next)=>{
     try {
-        
         // const patient = await patient.findById(req.body.patient_id);
         const prescription = await prescription.findById(req.body.prescription_id);
         const pharmacy = await organisation.find({email: req.body.pharmacy_email});

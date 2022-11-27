@@ -2,6 +2,7 @@ const express = require('express');
 const {updateOrganisation,deleteOrganisation,getOrganisation, getAllVerifiedOrganisation,getAllRejectedOrganisation,getAllPendingforApproval_Organisation,getAllOrganisation,getAlldocuments,getDocument,updateDocumentAccess} = require('../controllers/organisation');
 
 const {getPharmacy, getInsurance_firms, getHospital} = require('../controllers/organisation');
+const {create_prescription} = require('../controllers/doctor_billsAndPrescriptions');
 
 const router =  express.Router();
 const { getAllbuyRequests, getbuyRequest, verify_prescription, payment_request } = require('../controllers/sell_medicines');
@@ -25,6 +26,8 @@ router.get("/getHospital",verifyUser, getHospital);
 router.get("/getInsurance_firms",verifyUser, getInsurance_firms);
 
 //Get all buy requests for pharmacy
+
+router.post("/create_prescription", verifyUser, create_prescription);
 
 router.get("/getBuyRequests", verifyUser, getAllbuyRequests);
 router.get("/getbuyRequest", verifyUser, getbuyRequest);
