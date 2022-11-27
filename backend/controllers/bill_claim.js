@@ -10,7 +10,6 @@ const verifyBill = async (req,res,next)=>{
         // const organisation = await organisationSchema.find({email:req.body.issued_by_email});
 
         const data = {patient_email: patient.email, issued_user_type:req.body.issued_user_type, issued_user_id: req.body.issued_user_id, document_link: req.body.document_link, bill_amount: req.body.bill_amount, bill_name: req.body.bill_name};
-
         const signature= req.body.signature;
         
         const verify = false;
@@ -36,7 +35,6 @@ const verifyBill = async (req,res,next)=>{
 
 const getAllClaims = async (req,res,next)=>{
     try {
-        
         const claims = await Insurance_claim({organisation_id:req.body.organisation_id});
         res.json({status:200,claims:claims, message:"Claims fetched"});
 

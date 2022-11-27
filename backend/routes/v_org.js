@@ -10,8 +10,6 @@ const {create_bill} = require('../controllers/organisation_issue_bill');
 const {getAllClaims, verifyBill} = require('../controllers/bill_claim');
 const { issue_report } = require('../controllers/hostpital_issue_reports');
 
-
-
 router.put("/:id",verifyUser, updateOrganisation);
 router.delete("/:id",verifyUser, deleteOrganisation);
 router.get("/:id",verifyUser, getOrganisation);

@@ -13,7 +13,6 @@ const health_report = require("../models/health_report");
 
 const bill_claim_request = async (req,res,next)=>{
     try {
-        
         const firm = await organisation.find({email: req.body.organisation_email});
         const insuramceClaim = new Insurance_claim({
             patient_id: req.body.patient_id,
@@ -21,7 +20,7 @@ const bill_claim_request = async (req,res,next)=>{
             organisation_id: firm._id
         });
         await insuramceClaim.save();
-
+        
         res.json({status:200,message:"Insurance claim request sent to organisation"});
     }catch (error) {
         next(error);
