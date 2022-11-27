@@ -25,7 +25,7 @@ const getbuyRequest = async (req, res, next) => {
     catch (error) {
         next(error);
     }
-}
+};
 
 // const acceptBuyRequest = async (req, res, next) => {
 //     try {
@@ -39,7 +39,6 @@ const getbuyRequest = async (req, res, next) => {
 
 const verify_prescription = async (req, res, next) => {
     try {
-        
         const pharmacy = await organisationSchema.findById(req.body.id);
         const patient = await patient.findById(req.body.patient_id);
         const prescription = await prescription.findById(req.body.prescription_id);

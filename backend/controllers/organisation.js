@@ -1,7 +1,6 @@
 const organisation = require("../models/organisationSchema");
 const rejected_organisation = require("../models/rejectedOrganisation");
 
-
 const updateOrganisation= async (req,res,next)=>{
     try{
         const updateOrganisation = await organisation.findByIdAndUpdate(req.params.id,{$set:req.body},{new:true});

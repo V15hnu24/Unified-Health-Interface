@@ -30,7 +30,7 @@ const billSchema = new mongoose.Schema({
     //     required:true
     // },
     signature:{
-        type:String,
+        type:String
     }
 },{timestamps:true});
 

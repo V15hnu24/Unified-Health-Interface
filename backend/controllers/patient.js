@@ -1,11 +1,53 @@
 const bill = require("../models/bill");
+const organisationSchema = require("../models/organisationSchema");
 const patient = require("../models/patient");
 const payment_request = require("../models/payment_request");
 const prescription = require("../models/prescription");
 const rejected_patients = require("../models/rejected_patients");
 const { sign_function } = require("./digital_signatures");
-// const {}
+const professional = require("../models/professional");
+const med_buy_reqs = require("../models/med_buy_reqs");
+const med_buy_reqs = require("../models/med_buy_reqs");
+const Insurance_claim = require("../models/Insurance_claim");
 
+const bill_claim_request = async (req,res,next)=>{
+    try {
+        
+        const firm = await organisation.find({email: req.body.organisation_email});
+        const insuramceClaim = new Insurance_claim({
+            patient_id: req.body.patient_id,
+            bill_id: req.body.bill_id,
+            organisation_id: firm._id
+        });
+        await insuramceClaim.save();
+
+        res.json({status:200,message:"Insurance claim request sent to organisation"});
+    }catch (error) {
+        next(error);
+    }
+};
+
+const buy_medicine = async (req,res,next)=>{
+    try {
+        
+        // const patient = await patient.findById(req.body.patient_id);
+        const prescription = await prescription.findById(req.body.prescription_id);
+        const pharmacy = await organisation.find({email: req.body.pharmacy_email});
+        // const doctor = await professional.findById({email: req.body.doctor_email});
+        const med_buy_reqs = new med_buy_reqs({
+            patient_id: req.body.patient_id,
+            prescription_id: req.body.prescription_id,
+            organisation_id: pharmacy._id,
+        });
+
+        await med_buy_reqs.save();
+        res.json({status:200,message:"Medicine buy request sent to pharmacy"});
+
+    } catch (error) {
+        next(error);
+    }
+};
+ 
 const updatePatient = async (req,res,next)=>{
    console.log("In put of User");
     try{
@@ -166,5 +208,5 @@ const getBill = async (req,res,next)=>{
 };
 
 module.exports = {
-    updatePatient,deletePatient,getPatient,getAllVerifiedPatients,getAllRejectedPatients,getAllPendingforApproval_patients,getAllPatients, getAlldocuments, updateDocumentAccess, getDocument, getPrescription, getAllPrescriptions, getBill, getAllBills
+    updatePatient,deletePatient,getPatient,getAllVerifiedPatients,getAllRejectedPatients,getAllPendingforApproval_patients,getAllPatients, getAlldocuments, updateDocumentAccess, getDocument, getPrescription, getAllPrescriptions, getBill, getAllBills, buy_medicine, bill_claim_request, getAllPaymentreqs
 };

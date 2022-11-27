@@ -21,10 +21,10 @@ const prescriptionSchema = new mongoose.Schema({
     //     type:Date,
     //     required:true
     // },
-    prescription_link:{
-        type:String,
-        required:true
-    },
+    // prescription_link:{
+    //     type:String,
+    //     required:true
+    // },
     // prescription_description:{
     //     type:String,
     //     required:true

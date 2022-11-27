@@ -8,7 +8,7 @@ const professional = require("../models/professionalSchema");
 
 const create_bill = async (req, res, next) => {
     try {
-        const data = {patient_email: req.body.patient_email, issued_user_type:"organization", issued_user_id: req.body.organisation_id, document_link: req.body.document_link, bill_amount: req.body.bill_amount};
+        const data = {patient_email: req.body.patient_email, issued_user_type:"organization", issued_user_id: req.body.organisation_id, document_link: req.body.document_link, bill_amount: req.body.bill_amount, bill_name: req.body.bill_name};
 
         const organisation = await organisation.findById(req.body.organisation_id);
 
