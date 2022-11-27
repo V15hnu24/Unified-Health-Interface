@@ -18,7 +18,7 @@ router.get("/:id",verifyUser, getProfessional);
 router.get("/rejected_professionals", verifyAdmin, getAllRejectedProfessionals);
 
 //GetAll Verified patients
-router.get("/verified_professionals", verifyAdmin, getAllProfessionals);
+router.get("/verified_professionals/:id", verifyAdmin, getAllProfessionals);
 
 //GetAll pending for verfication patients
 router.get("/verifyPending_professionals", verifyAdmin, getAllPendingforApproval_Professionals);
