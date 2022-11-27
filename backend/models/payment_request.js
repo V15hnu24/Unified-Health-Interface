@@ -21,6 +21,6 @@ const payment_request = new mongoose.Schema({
         type:String,
         default:"pending"
     }
-});
+},{timestamps:true});
 
 module.exports = mongoose.model("payment_request", payment_request);

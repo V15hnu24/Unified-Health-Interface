@@ -15,7 +15,7 @@ const PaymentSchema = new mongoose.Schema({
         type:String,
         reuired:true
     },
-})
+},{timestamps:true});
 
 
 

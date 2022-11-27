@@ -13,6 +13,6 @@ const blocked_patinetSchema = new mongoose.Schema({
         type:String,
         required:true
     }
-});
+},{timestamps:true});
 
 module.exports = mongoose.model("blocked_patient", blocked_patinetSchema);

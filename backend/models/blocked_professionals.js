@@ -13,6 +13,6 @@ const blocked_professionals = new mongoose.Schema({
         type:String,
         required:true
     }
-});
+},{timestamps:true});
 
 module.exports = mongoose.model("blocked_professional", blocked_professionals);
