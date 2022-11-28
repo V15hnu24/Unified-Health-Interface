@@ -13,6 +13,14 @@ const AdminNavbar = () => {
         navigate("/AdminHandlePatient")
     }
 
+    const onOrganisationClick = () => {
+        navigate("/AdminHandleOrganization")
+    }
+
+    const onProfessionalClick = () => {
+        navigate("/AdminHandleProfessionals")
+    }
+
   return (
     <>
     <Container>
@@ -26,14 +34,14 @@ const AdminNavbar = () => {
             </Col>
             <Col>
                 <div className="d-grid gap-2">
-                    <Button variant="dark" size="lg">
+                    <Button variant="dark" size="lg" onClick={onOrganisationClick}>
                         Organizations
                     </Button>
                 </div>
             </Col>
             <Col>
                 <div className="d-grid gap-2">
-                    <Button variant="dark" size="lg">
+                    <Button variant="dark" size="lg" onClick={onProfessionalClick}>
                         Professionals
                     </Button>
                 </div>

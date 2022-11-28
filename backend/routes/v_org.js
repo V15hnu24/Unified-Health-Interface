@@ -2,7 +2,7 @@ const express = require('express');
 const {updateOrganisation,deleteOrganisation,getOrganisation, getAllVerifiedOrganisation,getAllRejectedOrganisation,getAllPendingforApproval_Organisation,getAllOrganisation,getAlldocuments,getDocument,updateDocumentAccess} = require('../controllers/organisation');
 
 const {getPharmacy, getInsurance_firms, getHospital} = require('../controllers/organisation');
-const {create_prescription} = require('../controllers/doctor_billsAndPrescriptions');
+const {create_prescription} = require('../controllers/doctor_billsAnd_Prescriptions');
 
 const router =  express.Router();
 const { getAllbuyRequests, getbuyRequest, verify_prescription, payment_request } = require('../controllers/sell_medicines');

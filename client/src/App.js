@@ -34,6 +34,8 @@ import "./HomePage.css"
 import ErrorPage from "./components/Errorpage"
 import { useState, useEffect } from "react";
 import AdminHandlePatient from './components/AdminHandlePatient'
+import AdminHandleOrganization from './components/AdminHandleOrganization'
+import AdminHandleProfessionals from './components/AdminHandleProfessionals'
 
 // Context API
 export const userContext = createContext();
@@ -63,13 +65,15 @@ const Routing =() =>{
         {/* <Route path="/CartNavbar" element={<CartNavbar/>}/> */}
         {/* <Route path= "/Amazon" element={<Amazon/>} /> */}
         <Route path= "/CartRoute" element={<CartRoute/>} />
-        <Route path= "/RazorPay" element={<RazorPay/>} />
+        {/* <Route path= "/RazorPay" element={<RazorPay/>} /> */}
         <Route path= "/PaymentSuccess" element={<PaymentSuccess/>} />
         <Route path= "/logout" element ={<Logout/>}/>  
         <Route path= "/AdminLogin" element ={<AdminLogin/>}/> 
         <Route path= "/PatientSendDocuments" element={<PatientSendDocuments/>}/>
         <Route path= "/AdminHandlePatient" element={<AdminHandlePatient/>}/>
         <Route path= "/PharmacyHome" element={<PharmacyHome/>}/>
+        <Route path= "/AdminHandleOrganization" element={<AdminHandleOrganization/>}/>
+        <Route path= "/AdminHandleProfessionals" element={<AdminHandleProfessionals/>}/>
 
       </Routes>
   )

@@ -13,7 +13,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Form from 'react-bootstrap/Form';
 
 
-const AdminHandlePatient = () => {
+const AdminHandleOrganization = () => {
 
     const {state,dispatch} = useContext(userContext);
     let navigate = useNavigate();
@@ -25,7 +25,7 @@ const AdminHandlePatient = () => {
 
     
     const getPendingPatients = async(e) => {
-        fetch("/patient/getAllPendingforApproval_patients", {
+        fetch("/organisation/getAllPendingforApproval_Organisation", {
           method: "GET",
           headers:{
             // Accept:"application/json",
@@ -49,7 +49,7 @@ const AdminHandlePatient = () => {
     }
 
       const getAllVerifiedPatients = async(e) => {
-        fetch("/patient/getAllVerifiedPatients", {
+        fetch("/organisation/getAllVerifiedOrganisation", {
           method: "GET",
           headers:{
             // Accept:"application/json",
@@ -73,7 +73,7 @@ const AdminHandlePatient = () => {
     }
 
     const getAllRejectedPatients = async(e) => {
-      fetch("/patient/getAllRejectedPatients", {
+      fetch("/organisation/getAllRejectedOrganisation", {
         method: "GET",
         headers:{
           // Accept:"application/json",
@@ -135,12 +135,12 @@ const AdminHandlePatient = () => {
                   <Nav.Item>
                     <Nav.Link href="#rejected" onClick={() => setActive("rejected")}>Rejected</Nav.Link>
                   </Nav.Item>
-                  </Nav>
+                </Nav>
               </Card.Header>
               <Card.Body>
                 {active === "pending" && (
                   <>
-                    <Card.Title>Pending Patients</Card.Title>
+                    <Card.Title>Pending Organisations</Card.Title>
                     {
                       pendingPatients.map(item => {
                         return (
@@ -156,7 +156,7 @@ const AdminHandlePatient = () => {
 
                 {active === "approved" && (
                   <>
-                  <Card.Title>Verified Patients</Card.Title>
+                  <Card.Title>Verified Organisations</Card.Title>
                   {
                       verifiedPatients.map(item => {
                         return (
@@ -172,7 +172,7 @@ const AdminHandlePatient = () => {
 
                 {active === "rejected" && (
                   <>
-                  <Card.Title>Rejected Patients</Card.Title>
+                  <Card.Title>Rejected Organisations</Card.Title>
                   {
                       rejectedPatients.map(item => {
                         return (
@@ -195,4 +195,4 @@ const AdminHandlePatient = () => {
     )
 }
 
-export default AdminHandlePatient
+export default AdminHandleOrganization
