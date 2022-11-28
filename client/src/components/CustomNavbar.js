@@ -46,6 +46,8 @@ const CreateNavbar = () => {
                   <NavDropdown.Item href="/PatientLogin">Patients Login</NavDropdown.Item>
                   <NavDropdown.Item href="/OrganizationLogin">Organization Login</NavDropdown.Item>
                   <NavDropdown.Item href="/HealthCareProfessionalLogin">HealthCareProfessional Login</NavDropdown.Item>
+                  <NavDropdown.Item href="/PharmacyLogin">Pharmacy Login</NavDropdown.Item>
+                  <NavDropdown.Item href="/InsuranceLogin">Insurance Login</NavDropdown.Item>
                 </NavDropdown>
                 <Nav.Link href="/Patientabout">About</Nav.Link>
                 <Nav.Link href="/contact">Contact</Nav.Link>

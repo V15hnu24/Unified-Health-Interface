@@ -12,6 +12,9 @@ const organisationSchema = new mongoose.Schema({
         type: Number,
         required:true
     },
+    user_type: {
+        type: String
+    },
     description: {
          type: String,
         required:true

@@ -45,7 +45,11 @@ const patientSchema = new mongoose.Schema({
     },
     otp:{
         type:Number
-    }
+    },
+    user_type: {
+        type: String
+    },
+    access_to: { organisation: [String], professional: [String]}
     // status : 1 = pending approval
     // status : 2 = approved
     // status : 3 = rejected

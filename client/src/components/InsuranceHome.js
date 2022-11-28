@@ -57,7 +57,7 @@ const PharmacyHome =() =>{
 
       const SeeRequests =()=>{
     
-        navigate("/PharmacySeeRequests");
+        navigate("/InsuranceSeeRequests");
       
       }
     
@@ -80,7 +80,7 @@ const PharmacyHome =() =>{
                 <Card.Title>What would you like to do?</Card.Title>
                 <Card.Text>
                   <ButtonGroup size="lg" className="mb-2" vertical style={{paddingTop:20}}>
-                      <Button variant="light" onClick={SeeRequests}>See Requests</Button>
+                      <Button variant="light" onClick={SeeRequests}>Claim Requests</Button>
                   </ButtonGroup>
                 </Card.Text>
               </Card.Body>

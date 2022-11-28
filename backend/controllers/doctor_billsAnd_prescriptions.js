@@ -5,6 +5,7 @@ const professional = require("../models/professionalSchema");
 const bill = require('../models/bill');
 const { sign_function } = require('./digital_signatures');
 const prescription = require('../models/prescription');
+const patient = require('../models/patient');
 
 const create_bill = async (req, res, next) => {
     try {
@@ -15,8 +16,10 @@ const create_bill = async (req, res, next) => {
         const temp_user = await user.find({email:professional.email});
         data.bill_name = "bill issued to patient " + req.body.patient_email + " by professional " + professional.email;
 
+        const patient = await patient.find({email: req.body.patient_email});
         const signature = sign_function(JSON.stringify(data), temp_user.private_key);
 
+        data.access_to = {patient: [patient._id], organisation: [], professional: [req.body.professional_id]};
         data.signature = signature;
 
         const newBill = new bill(data);
@@ -33,10 +36,13 @@ const create_prescription = async (req,res,next)=>{
         const tempprofessional = await professional.findById(req.body.doctor_id);
         const temp_user = await user.find({email:tempprofessional.email});
         const data = {patient_email: req.body.patient_email, doctor_id: req.body.doctor_id, prescription_link: req.body.prescription_link, prescription_name: "prescription issued to patient " + req.body.patient_email + " by doctor " + tempprofessional.email};
-
+        
+        const patient = await patient.find({email: req.body.patient_email});
         data.signature = sign_function(JSON.stringify(data), temp_user.privateKey);
+
+        data.access_to = {patient: [patient._id], organisation: [], professional: [req.body.doctor_id]};
         const newPrescription = new prescription(data);
-        await newPrescription.save();
+        await newPrescription.save();  
         res.json({status:200,message:"Prescription added"});
     }catch(err){
         next(err);
@@ -55,7 +61,13 @@ const getAllPrescriptions = async (req,res,next)=>{
 const getPrescription = async (req,res,next)=>{
     try{
         const tempPrescription = await prescription.findById(req.body.prescription_id);
-        res.json({status:200,prescription: tempPrescription});
+        if(tempPrescription.access_to.professional.includes(req.body.professional_id)){
+            res.json({status:200,prescription: tempPrescription});
+        }else{
+            const tempProfessional = await professional.findById(req.body.professional_id);
+            tempProfessional.status = 4;
+            res.json({status:201,message:"You are not authorised to view this prescription, Hence blocked by admin permanently"});
+        }
     }catch(err){
         next(err);
     }
@@ -73,11 +85,17 @@ const getAllBills = async (req,res,next)=>{
 const getBill = async (req,res,next)=>{
     try{
         const tempBill = await bill.findById(req.body.bill_id);
-        res.json({status:200,Bill: tempBill});
+        if(tempBill.access_to.professional.includes(req.body.professional_id)){
+            res.json({status:200,Bill: tempBill});
+        }else{
+            const tempProfessional = await professional.findById(req.body.professional_id);
+            tempProfessional.status = 4;
+            res.json({status:201,message:"You are not authorised to view this bill, Hence blocked by admin permantenly"});
+        }
     }catch(err){
         next(err);
     }
 };
 
 
-module.exports = { create_bill, create_prescription, getAllPrescriptions, getPrescription, getAllBills, getBill,  };
+module.exports = { create_bill, create_prescription, getAllPrescriptions, getPrescription, getAllBills, getBill  };

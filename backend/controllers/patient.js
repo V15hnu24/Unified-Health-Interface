@@ -37,7 +37,11 @@ const buy_medicine = async (req,res,next)=>{
             prescription_id: req.body.prescription_id,
             organisation_id: pharmacy._id,
         });
-
+        temp = prescription.access_to;
+        temp.organisation.push(pharmacy._id);
+        prescription.access_to = temp;
+        await prescription.save();
+        med_buy_reqs.access_to = {patient: [req.body.patient_id], organisation: [pharmacy._id], professional: []};
         await med_buy_reqs.save();
         res.json({status:200,message:"Medicine buy request sent to pharmacy"});
 

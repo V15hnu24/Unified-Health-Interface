@@ -16,7 +16,8 @@ const buy_reqs = new mongoose.Schema({
     status: {
         type:String,
         default: "pending"
-    }
+    },
+    access_to:{patient: [String], organisation: [String], professional: [String]}
 }, {timestamps:true});
 
 module.exports = mongoose.model("med_buy_reqs", buy_reqs);

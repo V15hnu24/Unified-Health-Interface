@@ -30,7 +30,8 @@ const patient_register = async (req,res,next) =>{
             state:req.body.state,
             pincode:req.body.pincode,
             dob:req.body.dob,
-            gender:req.body.gender
+            gender:req.body.gender,
+            user_type:"patient"
             // registration_documents: req.body.documents
         });
         await newPatient.save();
@@ -81,7 +82,7 @@ const admin_register = async (req,res,next) =>{
 
         const newUser = new user({
             email:req.body.email,
-            user_type:"patient"
+            user_type:"admin"
         });
         await newUser.save();
 
@@ -119,6 +120,8 @@ const patient_login = async (req,res,next) =>{
         );
 
         const { password, ...otherDetails } = tempUser._doc;
+        console.log(otherDetails);
+        console.log(userToken);
         res
             .cookie("access_token", userToken, {
                 httpOnly:true
