@@ -4,6 +4,7 @@ import RazorPay_ from "./RazorPay";
 
 const Cart = ({ cart, setCart, handleChange }) => {
   const [price, setPrice] = useState(0);
+  const[userData, setUserData] = useState('');
 
   const handleRemove = (id) => {
     const arr = cart.filter((item) => item.id !== id);
@@ -16,7 +17,34 @@ const Cart = ({ cart, setCart, handleChange }) => {
     cart.map((item) => (ans += item.amount * item.price));
     setPrice(ans);
   };
+const getPatientDetail= () =>{
+    const id = window.localStorage.getItem('id');
 
+    var fetch_url = "/patient/" + id
+    console.log(fetch_url)
+    fetch(fetch_url, {
+      method: "GET",
+      headers:{
+        // Accept:"application/json",
+        "Content-Type":"application/json"
+      },
+    })
+    .then(res => {
+
+      if (res.status === 200) {
+        res.json()
+        .then( (data) => {
+          setUserData( {...userData, name: data.tempPatient.name, email:data.tempPatient.email});
+          //setShow(true);
+          dispatch({type:"USER", payload:true});
+        })
+      } else {
+        const error = new Error(res.error);
+        throw error;
+      }
+
+    })
+  }
 
   const checkoutHandler =async(amount)=>{
         
@@ -63,7 +91,7 @@ const Cart = ({ cart, setCart, handleChange }) => {
         key:key, // Enter the Key ID generated from the Dashboard
         amount:amount2, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
         currency: "INR",
-        name: "Aditya Peer",
+        name: userData.name,
         description: "Test Transaction",
         image: "https://example.com/your_logo",
         order_id: id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
@@ -86,6 +114,7 @@ const Cart = ({ cart, setCart, handleChange }) => {
 
   useEffect(() => {
     handlePrice();
+    getPatientDetail();
   });
 
   return (
