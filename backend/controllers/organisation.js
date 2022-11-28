@@ -21,11 +21,9 @@ const deleteOrganisation = async(req,res,next) =>{
 };
 
 const getOrganisation = async (req,res,next)=>{
-    console.log("Getting org")
     try{
         const t = await organisation.findById(req.params.id);
         //res.status(200).json(t);
-        console.log("Finding org")
         res.json({status:200,t});
     }catch(err){
         next(err);

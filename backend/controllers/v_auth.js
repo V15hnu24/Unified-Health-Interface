@@ -12,8 +12,7 @@ const professional_register = async (req,res,next) =>{
     try {
         const salt = bcrypt.genSaltSync(10);
         const hash = bcrypt.hashSync(req.body.password, salt);
-        console.log(req.body.pincode);
-        console.log(req.body.location);
+
         const newProfessional = new professional({
             name:req.body.name,
             email:req.body.email,
@@ -48,7 +47,6 @@ const professional_register = async (req,res,next) =>{
         await newDocument2.save();
         const docs = [newDocument1._id,newDocument2._id];
         await professional.findByIdAndUpdate(newProfessional._id,{$set:{registration_documents:docs}});
-        console.log(newProfessional);
 
         const {private_key,public_key} = await generate_key_pair;
         const newUser = new user({
@@ -62,7 +60,6 @@ const professional_register = async (req,res,next) =>{
         //res.status(200).json(newProfessional);
         res.json({status:200,newProfessional});
     } catch (error) {
-        console.log(error);
         next(error);
     }
 };
@@ -83,7 +80,6 @@ const professional_login = async (req,res,next) =>{
         );
 
         const { password, ...otherDetails } = t._doc;
-        console.log(userToken);
         res
             .cookie("access_token", userToken, {
                 httpOnly:true
@@ -157,7 +153,6 @@ const organisation_resgister = async (req,res,next) =>{
 
         const docs = [newDocument1._id,newDocument2._id];
         await organisation.findByIdAndUpdate(newOrganisation._id,{$set:{registration_documents:docs}});
-        console.log(newOrganisation);
 
         const {private_key,public_key} = await generate_key_pair;
         const newUser = new user({
@@ -171,7 +166,6 @@ const organisation_resgister = async (req,res,next) =>{
         //res.status(200).json(newProfessional);
         res.json({status:200,newOrganisation});
     } catch (error) {
-        console.log(error);
         next(error);
     }
 };

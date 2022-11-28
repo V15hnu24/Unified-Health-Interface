@@ -18,7 +18,7 @@ const PatientUploadDocuments =() =>{
 
     let name,value;
     const handleInputs =(e)=>{
-        console.log(e);
+        // console.log(e);
         name = e.target.name;
         value =e.target.value;
 
@@ -28,7 +28,7 @@ const PatientUploadDocuments =() =>{
       const PatientUploadDocuments =async(e)=>{
         e.preventDefault();
         const{Link1,Link2} =userData;
-        console.log("Hello")
+        // console.log("Hello")
         const res =await fetch('/PatientDocuments', {
         method:"POST",
         headers:{
@@ -43,11 +43,11 @@ const PatientUploadDocuments =() =>{
        if(res.status==422 || !data)
        {
             window.alert("Invalid Registration");
-            console.log("Invalid Registration");
+            // console.log("Invalid Registration");
        }
        else{
         window.alert("Link Uploaded");
-        console.log("Successful Registration");
+        // console.log("Successful Registration");
        // alert("Hello");
         navigate("/PatientLogin");
         }

@@ -66,7 +66,7 @@ const PatientIntermediateLogin =() =>{
     const fileType =['application/pdf'];
     const handlePdfFileChange1=(e)=>{
         let selectedFile = e.target.files[0];
-        console.log(selectedFile);
+        // console.log(selectedFile);
         if(selectedFile){
           if(selectedFile  && fileType.includes(selectedFile.type)){
             
@@ -85,7 +85,7 @@ const PatientIntermediateLogin =() =>{
         }
         else{
           window.alert('Select Your File.');
-          console.log('Select Your File.');
+          // console.log('Select Your File.');
         }
     }
 
@@ -109,7 +109,7 @@ const PatientIntermediateLogin =() =>{
       }
       else{
         window.alert('Select Your File.');
-        console.log('Select Your File.');
+        // console.log('Select Your File.');
       }
   }
     //form Submit
@@ -141,7 +141,7 @@ const PatientIntermediateLogin =() =>{
     }
     const onSubmitFile1=async()=>{
       const formData = new FormData();
-      console.log(pdfFile);
+      // console.log(pdfFile);
       const base64PdfFile = dataURLtoFile(pdfFile);
       formData.append('application/pdf',base64PdfFile,base64PdfFile.name);
       // console.log(Object.fromEntries(formData.entries()))
@@ -157,7 +157,7 @@ const PatientIntermediateLogin =() =>{
                    })
         });
         const data = res.json();
-        console.log(data);
+        // console.log(data);
         if(res.status==400 || !data){
           window.alert("Invalid");
         }
@@ -174,7 +174,7 @@ const PatientIntermediateLogin =() =>{
       if(pdfFile!=null)
       {
         setViewPdf2(pdfFile);
-        console.log(pdfFile);
+        // console.log(pdfFile);
 
       }
       else{

@@ -47,7 +47,7 @@ const buy_medicine = async (req,res,next)=>{
 };
  
 const updatePatient = async (req,res,next)=>{
-   console.log("In put of User");
+
     try{
         const updatePatient = await patient.findByIdAndUpdate(req.params.id,{$set:req.body},{new:true});
         res.json({status:200,updateUser});
@@ -79,7 +79,6 @@ const deletePatient = async(req,res,next) =>{
 };
 
 const getPatient = async (req,res,next)=>{
-    // console.log("IN get of User");
     try{
         const tempPatient = await patient.findById(req.params.id);
         res.json({status:200,tempPatient});

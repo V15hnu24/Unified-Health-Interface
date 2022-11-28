@@ -23,7 +23,7 @@ const PatientSendDocuments =() =>{
 
         const id = window.localStorage.getItem('id');
         var fetch_url = "/patient/patient_documents/" + id
-        console.log(fetch_url)
+        // console.log(fetch_url)
 
         fetch(fetch_url, {
             method: "GET",
@@ -37,7 +37,7 @@ const PatientSendDocuments =() =>{
             if (res.status === 200) {
               res.json()
               .then( (data) => {
-                console.log(data)
+                // console.log(data)
               })
             } else {
               const error = new Error(res.error);
@@ -109,10 +109,10 @@ const PatientSendDocuments =() =>{
             
             if (isChecked) {
                 sendDocsArray.add(e.target.value)
-                console.log(sendDocsArray)
+                // console.log(sendDocsArray)
             } else {
                 sendDocsArray.delete(e.target.value)
-                console.log(sendDocsArray)
+                // console.log(sendDocsArray)
             }
 
         }

@@ -61,7 +61,7 @@ const PatientHome =() =>{
       const id = window.localStorage.getItem('id');
 
       var fetch_url = "/patient/" + id
-      console.log(fetch_url)
+      // console.log(fetch_url)
       fetch(fetch_url, {
         method: "GET",
         headers:{
@@ -109,6 +109,11 @@ const PatientHome =() =>{
       
       }
 
+      const PatientGetMedicines =()=>{
+    
+        navigate("/PatientGetMedicines");
+      
+      }
 
 
 //      }
@@ -125,6 +130,7 @@ const PatientHome =() =>{
           <Col></Col>
           <Col xs={6}>
             <h1 style={{'paddingTop':40, 'textAlign':'center', 'fontFamily':'Serif', 'fontSize':40}}>Welcome to MedChain, {userData.name}!</h1>
+            
             <div>
               <Card bg="dark" key="dark" text="white" style={{ width: "100%" }} className="mb-2">
               <Card.Body style={{"paddingTop":40, "paddingBottom":40, "paddingLeft":100}}>
@@ -135,6 +141,7 @@ const PatientHome =() =>{
                       <Button variant="light" onClick={SearchHealthCareProfessional}>Search HealthCare Professionals</Button>
                       <Button variant="light" onClick={PatientUploadDocuments}>Upload Patient Documents</Button>
                       <Button variant="light" onClick={PatientSendDocuments}>Send Patient Documents</Button>
+                      <Button variant="light" onClick={PatientGetMedicines}>Get Medicines</Button>
                   </ButtonGroup>
                 </Card.Text>
               </Card.Body>

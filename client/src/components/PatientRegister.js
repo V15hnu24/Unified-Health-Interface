@@ -39,7 +39,8 @@ const PatientRegister =() =>{
         const salt = bcrypt.genSaltSync(10);
         const hash = bcrypt.hashSync(password, salt);
         
-        console.log(user)
+        // console.log(user)
+
 
         const res = await fetch('/auth/patient_register', {
         method:"POST",
@@ -61,14 +62,14 @@ const PatientRegister =() =>{
        }
        else{
         window.alert(res.status + " " + res.message);
-        console.log("Invalid Registration");
+        // console.log("Invalid Registration");
         }
 
     }
 
     const sendOtp =async (e) =>{
 
-        console.log("Sending OTP")
+        // console.log("Sending OTP")
         const email = user.email
 
         fetch('/auth/send_otp', 
@@ -102,7 +103,7 @@ const PatientRegister =() =>{
 
         if (data.message === "OTP verified") {
             window.alert("Registartion Successful");
-            console.log("Successful Registration");
+            // console.log("Successful Registration");
             navigate("/PatientLogin");
         } else {
             window.alert(data.message);

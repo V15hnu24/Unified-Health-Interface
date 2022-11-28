@@ -34,12 +34,12 @@ const PatientLogin =() =>{
         });
 
 
-        console.log(res.body);
+        // console.log(res.body);
         const data = await res.json();
         // console.log(data);
 
         window.localStorage.setItem('id',data._id); 
-        console.log(data._id);
+        // console.log(data._id);
         
         if(res.status===200){
             sendOtp()
@@ -49,7 +49,7 @@ const PatientLogin =() =>{
         }
         else{
             window.alert(res.message + " ");
-            console.log(res);
+            // console.log(res);
         }
     }
 

@@ -18,7 +18,7 @@ const HealthCareProfessionalPrescribeDocuments =() =>{
     });
     let name,value;
     const handleInputs =(e)=>{
-        console.log(e);
+        // console.log(e);
         name = e.target.name;
         value =e.target.value;
 
@@ -39,7 +39,7 @@ const HealthCareProfessionalPrescribeDocuments =() =>{
             if(res.status==200)
             {
                  window.alert("Successfully Sent Documentrs to patient id");
-                 console.log("Successful documents sent.");
+                //  console.log("Successful documents sent.");
              // alert("Hello");
                  navigate("/PatientLogin");
             }

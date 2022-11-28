@@ -26,7 +26,7 @@ const PatientAbout =() =>{
       });
 
       const data  =await res.json();
-      console.log(data);
+      // console.log(data);
 
       setUserData(data.tempPatient);
       if(!res.status ==200)
@@ -39,7 +39,7 @@ const PatientAbout =() =>{
       }
     }catch(err)
     {
-        console.log(err);
+        // console.log(err);
         navigate('/login');
     }
   }

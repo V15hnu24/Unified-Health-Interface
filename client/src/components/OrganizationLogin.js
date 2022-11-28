@@ -11,7 +11,7 @@ import Button from 'react-bootstrap/Button'
 const OrganizationLogin =() =>{
 
     const {state,dispatch} = useContext(userContext);
-    console.log(state);
+    // console.log(state);
 
     let navigate =useNavigate();
     const [email, setEmail] =useState('');

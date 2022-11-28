@@ -74,8 +74,6 @@ async function email_otp_sender(otp, email) {
     text: "OTP is " + otp // plain text body
     // html: "<b>Hello world </b>", // html body
   });
-
-  console.log("Message sent: %s", info.messageId);
 };
 
 module.exports = {email_otp, verify_otp};

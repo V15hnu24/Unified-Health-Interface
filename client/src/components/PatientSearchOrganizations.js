@@ -16,7 +16,7 @@ const PatientSearchOrganizations =() =>{
 
   const callAboutPage = async (req,res)=>{
 
-    console.log("Hello");
+    // console.log("Hello");
     const id = window.localStorage.getItem("id")
     
 
@@ -32,14 +32,14 @@ const PatientSearchOrganizations =() =>{
       });
 
     const data  =await res.json();
-    console.log(data);
+    // console.log(data);
     setUserData(data.allP);
     setSearchApiData(data.allP);
-    console.log(data.allP[0].name);
+    // console.log(data.allP[0].name);
     for(let i = 0; i < data.length; i++) {
       let obj = data[i];
      
-      console.log(obj.phone);
+      // console.log(obj.phone);
      }
       if(!res.status ==200)
       {
@@ -51,7 +51,7 @@ const PatientSearchOrganizations =() =>{
       }
     }catch(err)
     {
-        console.log(err);
+        // console.log(err);
         navigate('/login');
     }
   }

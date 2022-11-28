@@ -42,7 +42,7 @@ const PatientEditdetails =() =>{
       }
     }catch(err)
     {
-        console.log(err);
+        // console.log(err);
         navigate('/PatientLogin');
     }
   }
@@ -50,8 +50,8 @@ const PatientEditdetails =() =>{
  
     e.preventDefault();
     const {name, email, mobile , country,gender,state,city, dob, pincode,} = userData;
-    console.log(name);
-    console.log(email);
+    // console.log(name);
+    // console.log(email);
     const res = await fetch(`/patient/${id}`,{
       method:"PUT",
       headers:{
@@ -61,12 +61,12 @@ const PatientEditdetails =() =>{
         name, email, mobile ,country,gender,state,city, dob, pincode, 
       })
     });
-    console.log("Hello");
+    // console.log("Hello");
     const data = await res.json();
-    console.log(data);
+    // console.log(data);
     if(!data)
     {
-        console.log("not Updated");
+        // console.log("not Updated");
         alert("Details Not Updated");
     }
     else{

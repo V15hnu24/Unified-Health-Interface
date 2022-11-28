@@ -34,7 +34,7 @@ const AdminLogin =() =>{
         else{
             dispatch({type:"USER", payload:true});
             window.alert("Login Sucessful");
-            navigate("/PatientHome");
+            navigate("/AdminHomePage");
         }
     }
 

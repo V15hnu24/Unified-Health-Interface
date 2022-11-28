@@ -33,7 +33,7 @@ router.post("/updateDocumentAccess", verifyUser, updateDocumentAccess);
 // and the user_type and user_email in req.body.user_type and req.body.user_email as we have kept email as unique identifier for every user for now
 router.get("/patient_document/:id", verifyDocumentAccess, getDocument);
 
-router.get("/get_prescriptions", verifyUser, getAllPrescriptions);
+router.get("/get_prescriptions/:id", verifyUser, getAllPrescriptions);
 
 router.get("/get_prescription", verifyUser, getPrescription);
 
@@ -41,7 +41,7 @@ router.get("/get_Bills", verifyUser, getAllBills);
 
 router.get("/get_Bill", verifyUser, getBill);
 
-router.post("/send_buy_request", verifyUser, buy_medicine );
+router.post("/send_buy_request/:id", verifyUser, buy_medicine );
 
 router.post("/send_bill_claim_request", verifyUser, bill_claim_request);
 

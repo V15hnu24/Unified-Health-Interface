@@ -31,7 +31,7 @@ const HealthCareProfessionalHome=() =>{
         if (res.status === 200) {
           res.json()
           .then( (data) => {
-            console.log("Here")
+            // console.log("Here")
             setUserData( {...userData, name: data.t.name});
             setShow(true);
             dispatch({type:"USER", payload:true});

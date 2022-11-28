@@ -36,7 +36,7 @@ import { useState, useEffect } from "react";
 import AdminHandlePatient from './components/AdminHandlePatient'
 import AdminHandleOrganization from './components/AdminHandleOrganization'
 import AdminHandleProfessionals from './components/AdminHandleProfessionals'
-
+import PatientGetMedicines from './components/PatientGetMedicines'
 // Context API
 export const userContext = createContext();
 
@@ -74,7 +74,7 @@ const Routing =() =>{
         <Route path= "/PharmacyHome" element={<PharmacyHome/>}/>
         <Route path= "/AdminHandleOrganization" element={<AdminHandleOrganization/>}/>
         <Route path= "/AdminHandleProfessionals" element={<AdminHandleProfessionals/>}/>
-
+        <Route path= "/PatientGetMedicines" element={<PatientGetMedicines/>}/>
       </Routes>
   )
 }

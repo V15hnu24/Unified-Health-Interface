@@ -17,9 +17,7 @@ const patient_register = async (req,res,next) =>{
         
         const check_user = await patient.findOne({email:req.body.email});
         if(check_user) return next(createError(400, "User already exists as "));
-        
-        console.log(req.body);
-
+    
 
         const newPatient = new patient({
             name:req.body.name,
@@ -67,10 +65,8 @@ const patient_register = async (req,res,next) =>{
         });
         await newUser.save();
         
-        console.log(newPatient);
         res.json({status:200,newPatient});
     } catch (error) {
-        console.log(error);
         next(error);
     }
 };
@@ -104,14 +100,12 @@ const admin_register = async (req,res,next) =>{
 };
 
 const patient_login = async (req,res,next) =>{
-    console.log(req.body);
 
     try {
         const tempUser = await patient.findOne({email:req.body.email});
         if(!tempUser) return next(createError(404, "User not Found"));
 
-        console.log(req.body.password)
-        console.log(tempUser.password)
+
 
         const isPasswordCorrect = await bcrypt.compare(
             req.body.password,  
@@ -125,8 +119,6 @@ const patient_login = async (req,res,next) =>{
         );
 
         const { password, ...otherDetails } = tempUser._doc;
-        console.log(otherDetails);
-        console.log(userToken);
         res
             .cookie("access_token", userToken, {
                 httpOnly:true

@@ -13,7 +13,7 @@ const HealthCareProfessionalRegister =() =>{
     });
     let name,value;
     const handleInputs =(e)=>{
-        console.log(e);
+        // console.log(e);
         name = e.target.name;
         value =e.target.value;
 
@@ -28,7 +28,7 @@ const HealthCareProfessionalRegister =() =>{
           window.alert("Password are not matching!");
         }
         const documents =[doc1,doc2];
-        console.log("Hello")
+        // console.log("Hello")
         const res =await fetch('/auth/professional_register', {
         method:"POST",
         headers:{
@@ -43,11 +43,11 @@ const HealthCareProfessionalRegister =() =>{
        if(res.status==422 || !data)
        {
             window.alert("Invalid Registration");
-            console.log("Invalid Registration");
+            // console.log("Invalid Registration");
        }
        else{
         window.alert("Registartion Successful");
-        console.log("Successful Registration");
+        // console.log("Successful Registration");
        // alert("Hello");
         navigate("/HealthCareProfessionalLogin");
         }

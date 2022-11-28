@@ -31,7 +31,7 @@ const Cart = ({ cart, setCart, handleChange }) => {
     const data2 = await res2.json();
     
     let key = data2["key"];
-    console.log(key);
+    // console.log(key);
     const res=await fetch('/razorpay/checkout', {
         method:"POST",
         headers:{
@@ -43,14 +43,14 @@ const Cart = ({ cart, setCart, handleChange }) => {
         });
        
        const data = await res.json();
-       console.log(data);
+      //  console.log(data);
        let id = data["order"]["id"];
        let amount2 = data["order"]["amount"];
     
        if(res.status==422 || !data)
        {
             window.alert("Invalid Registration");
-            console.log("Invalid Registration");
+            // console.log("Invalid Registration");
        }
     //    else{
     //     window.alert("Registartion Successful");

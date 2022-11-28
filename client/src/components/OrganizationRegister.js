@@ -13,7 +13,7 @@ const OrganizationRegister =() =>{
     });
     let name,value;
     const handleInputs =(e)=>{
-        console.log(e);
+        // console.log(e);
         name = e.target.name;
         value =e.target.value;
 
@@ -24,7 +24,7 @@ const OrganizationRegister =() =>{
         e.preventDefault();
         const{name,email,phone,type,description,location,password,cpassword,doc1,doc2} =user;
         const documents =[doc1,doc2];
-        console.log("Hello")
+        // console.log("Hello")
         const res =await fetch('/auth/organisation_register', {
         method:"POST",
         headers:{
@@ -39,11 +39,11 @@ const OrganizationRegister =() =>{
        if(res.status==422 || !data)
        {
             window.alert("Invalid Registration");
-            console.log("Invalid Registration");
+            // console.log("Invalid Registration");
        }
        else{
         window.alert("Registartion Successful");
-        console.log("Successful Registration");
+        // console.log("Successful Registration");
        // alert("Hello");
         navigate("/OrganizationLogin");
         }
