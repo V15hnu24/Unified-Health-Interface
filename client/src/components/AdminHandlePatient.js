@@ -15,7 +15,91 @@ const AdminHandlePatient = () => {
     const {state,dispatch} = useContext(userContext);
     let navigate = useNavigate();
     const [active, setActive] = useState("pending")
+    const [verifiedPatients, setVerifiedPatients] = useState('')
+    const [pendingPatients, setPendingPatients] = useState('')
+    const [rejectedPatients, setRejectedPatients] = useState('')
+
     
+    const getPendingPatients = async(e) => {
+        fetch("/patient/verifyPending_patients", {
+          method: "GET",
+          headers:{
+            // Accept:"application/json",
+            "Content-Type":"application/json"
+          },
+        })
+        .then(res => {
+
+          if (res.status === 200) {
+            res.json()
+            .then( (data) => {
+              setPendingPatients(data)
+            })
+          } else {
+            const error = new Error(res.error);
+            throw error;
+          }
+
+        })      
+
+    }
+
+      const getAllVerifiedPatients = async(e) => {
+        fetch("/patient/verified_patients", {
+          method: "GET",
+          headers:{
+            // Accept:"application/json",
+            "Content-Type":"application/json"
+          },
+        })
+        .then(res => {
+
+          if (res.status === 200) {
+            res.json()
+            .then( (data) => {
+              setVerifiedPatients(data)
+            })
+          } else {
+            const error = new Error(res.error);
+            throw error;
+          }
+
+        })      
+
+    }
+
+    const getAllRejectedPatients = async(e) => {
+      fetch("/patient/rejected_patients", {
+        method: "GET",
+        headers:{
+          // Accept:"application/json",
+          "Content-Type":"application/json"
+        },
+      })
+      .then(res => {
+
+        if (res.status === 200) {
+          res.json()
+          .then( (data) => {
+            setRejectedPatients(data)
+          })
+        } else {
+          const error = new Error(res.error);
+          throw error;
+        }
+
+      })      
+
+  }
+
+    useEffect(()=>{
+
+      getPendingPatients();
+      getAllRejectedPatients();
+      getAllVerifiedPatients();
+    
+    },[]);  
+
     return (
       <Container>
         <Row>
