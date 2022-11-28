@@ -36,6 +36,7 @@ const prescriptionSchema = new mongoose.Schema({
     signature:{
         type:String,
     }
+    // access_to:[patient:[], doctor:[], organisation:[]]
 }, {timestamps:true});
 
 module.exports = mongoose.model("prescription", prescriptionSchema);

@@ -1,5 +1,4 @@
 const express = require('express');
-const { create_bill, create_prescription } = require('../controllers/doctor_billsAnd_prescriptions');
 const { updateProfessional,deleteProfessional,getProfessional,getAllVerifiedProfessionals,getAllRejectedProfessionals,getAllPendingforApproval_Professionals,getAllProfessionals,updateDocumentAccess, getAlldocuments, getDocument, getDocumentPatients} = require('../controllers/professional');
 
 const {create_bill, create_prescription, getAllPrescriptions, getPrescription, getAllBills, getBill} = require('../controllers/doctor_billsAnd_prescriptions');

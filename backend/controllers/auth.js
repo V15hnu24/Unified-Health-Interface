@@ -85,7 +85,7 @@ const admin_register = async (req,res,next) =>{
 
         const newUser = new user({
             email:req.body.email,
-            user_type:"patient"
+            user_type:"admin"
         });
         await newUser.save();
 

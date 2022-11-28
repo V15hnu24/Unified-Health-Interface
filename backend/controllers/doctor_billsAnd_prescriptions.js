@@ -80,4 +80,4 @@ const getBill = async (req,res,next)=>{
 };
 
 
-module.exports = { create_bill, create_prescription, getAllPrescriptions, getPrescription, getAllBills, getBill,  };
+module.exports = { create_bill, create_prescription, getAllPrescriptions, getPrescription, getAllBills, getBill  };
