@@ -34,9 +34,13 @@ import "./HomePage.css"
 import ErrorPage from "./components/Errorpage"
 import { useState, useEffect } from "react";
 import AdminHandlePatient from './components/AdminHandlePatient'
-import AdminHandleOrganization from './components/AdminHandleOrganization'
-import AdminHandleProfessionals from './components/AdminHandleProfessionals'
-import PatientGetMedicines from './components/PatientGetMedicines'
+import PharmacySeeRequests from './components/PharmacySeeRequests'
+import PharmacyEachRequest from './components/PharmacyEachRequest'
+import PharmacyVerification from './components/PharmacyVerification'
+import PharmacyHome from './components/PharmacyHome';
+import InsuranceHome from './components/InsuranceHome';
+import InsuranceLogin from './components/InsuranceLoginPage'
+
 // Context API
 export const userContext = createContext();
 
@@ -71,10 +75,9 @@ const Routing =() =>{
         <Route path= "/AdminLogin" element ={<AdminLogin/>}/> 
         <Route path= "/PatientSendDocuments" element={<PatientSendDocuments/>}/>
         <Route path= "/AdminHandlePatient" element={<AdminHandlePatient/>}/>
+        <Route path= "/PharmacySeeRequests" element={<PharmacySeeRequests/>}/>
         <Route path= "/PharmacyHome" element={<PharmacyHome/>}/>
-        <Route path= "/AdminHandleOrganization" element={<AdminHandleOrganization/>}/>
-        <Route path= "/AdminHandleProfessionals" element={<AdminHandleProfessionals/>}/>
-        <Route path= "/PatientGetMedicines" element={<PatientGetMedicines/>}/>
+
       </Routes>
   )
 }
