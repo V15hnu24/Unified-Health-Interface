@@ -5,7 +5,7 @@ const patient = require('../models/patient');
 const prescription = require('../models/prescription');
 const user = require('../models/user');
 const { verify_function } = require('./digital_signatures');
-const payment_request = require('../models/payment_request');
+const payment = require('../models/payment_request');
 
 const getAllbuyRequests = async (req, res, next) => {
     try {
@@ -25,7 +25,7 @@ const getbuyRequest = async (req, res, next) => {
     catch (error) {
         next(error);
     }
-}
+};
 
 // const acceptBuyRequest = async (req, res, next) => {
 //     try {
@@ -39,7 +39,6 @@ const getbuyRequest = async (req, res, next) => {
 
 const verify_prescription = async (req, res, next) => {
     try {
-        
         const pharmacy = await organisationSchema.findById(req.body.id);
         const patient = await patient.findById(req.body.patient_id);
         const prescription = await prescription.findById(req.body.prescription_id);
@@ -57,7 +56,6 @@ const verify_prescription = async (req, res, next) => {
         }else{
             res.json({status:200,verified:false, message:"Bill not verified"});
         }
-
     } catch (error) {
         next(error);
     }
@@ -66,7 +64,7 @@ const verify_prescription = async (req, res, next) => {
 const payment_request = async (req, res, next) => {
     try {
         
-        const payment_req = new payment_request ({
+        const payment_req = new payment ({
             receiver_email: req.body.patient_email,
             amount: req.body.amount,
             sender_id: req.body.organisation_id,
@@ -79,7 +77,6 @@ const payment_request = async (req, res, next) => {
     } catch (error) {
         next(error);
     }
-}
-
+};
 
 module.exports = { getAllbuyRequests, getbuyRequest, verify_prescription, payment_request };

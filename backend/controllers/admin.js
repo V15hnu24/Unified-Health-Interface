@@ -115,8 +115,81 @@ const organisation_status_update = async (req,res,next) =>{
     }
 };
 
+const getAllPatients = async (req,res,next) =>{
+    try{
+        const patients = await patient.find();
+        res.json({status:200, patients:patients});
+    }catch(err){
+        next(err);
+    }
+};
+
+const getAllProfessionals = async (req,res,next) =>{
+    try{
+        const professionals = await professionalSchema.find();
+        res.json({status:200, professionals:professionals});
+    }catch(err){
+        next(err);
+    }
+};
+
+const getAllOrganisations = async (req,res,next) =>{
+    try{
+        const organisations = await organisationSchema.find();
+        res.json({status:200, organisations:organisations});
+    }catch(err){
+        next(err);
+    }
+};
+
+const getAllHealthReports = async (req,res,next) =>{
+    try{
+        const health_reports = await healthReport.find();
+        res.json({status:200, health_reports:health_reports});
+    }catch(err){
+        next(err);
+    }
+};
+
+const getAllBills = async (req,res,next) =>{
+    try{
+        const bills = await bill.find();
+        res.json({status:200, bills:bills});
+    }catch(err){
+        next(err);
+    }
+};
+
+const getAllMedBuyRequests = async (req,res,next) =>{
+    try{
+        const medBuyRequests = await medBuyRequest.find();
+        res.json({status:200, medBuyRequests:medBuyRequests});
+    }catch(err){
+        next(err);
+    }
+};
+
+const getAllPrescriptions = async (req,res,next) =>{
+    try{
+        const prescriptions = await prescription.find();
+        res.json({status:200, prescriptions:prescriptions});
+    }catch(err){
+        next(err);
+    }
+};
+
+const getAllInsuranceClaims = async (req,res,next) =>{
+    try{
+        const insuranceClaims = await insuranceClaim.find();
+        res.json({status:200, insuranceClaims:insuranceClaims});
+    }catch(err){
+        next(err);
+    }
+};
 
 
 module.exports = {
-    patient_update, professional_status_update, organisation_status_update
+    patient_update, professional_status_update, organisation_status_update,
+    getAllPatients, getAllProfessionals, getAllOrganisations, getAllHealthReports,
+    getAllBills, getAllMedBuyRequests, getAllInsuranceClaims, getAllPrescriptions
 };

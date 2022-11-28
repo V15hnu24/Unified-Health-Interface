@@ -4,6 +4,7 @@ const user = require('../models/user');
 const professional = require("../models/professionalSchema");
 const bill = require('../models/bill');
 const { sign_function } = require('./digital_signatures');
+const prescription = require('../models/prescription');
 
 const create_bill = async (req, res, next) => {
     try {
@@ -27,41 +28,13 @@ const create_bill = async (req, res, next) => {
     }
 };
 
-
 const create_prescription = async (req,res,next)=>{
     try{
+        const tempprofessional = await professional.findById(req.body.doctor_id);
+        const temp_user = await user.find({email:tempprofessional.email});
+        const data = {patient_email: req.body.patient_email, doctor_id: req.body.doctor_id, prescription_link: req.body.prescription_link, prescription_name: "prescription issued to patient " + req.body.patient_email + " by doctor " + tempprofessional.email};
 
-        
-        // newPrescription.prescription_status = req.body.prescription_status;
-
-        
-        const professional = await professional.findById(req.body.doctor_id);
-        const temp_user = await user.find({email:req.body.professional.email});
-
-        // To save document for doctor side
-        // const doc = new document();
-        // doc.user_id = req.body.doctor_id;
-        // doc.user_type = "professional";
-        // doc.document_name = "prescription issued to patient " + req.body.patient_email;
-        // doc.document_type = "prescription";
-        // doc.document = req.body.prescription_link;
-        // doc.access_to = [{user_type:"patient",user_email:req.body.patient_email}];
-        // await doc.save();
-
-        // To save document for patient
-        // const t_patient = await patient.find({email:req.body.patient_email});
-        // const doc_p = new document();
-        // doc_p.user_id = t_patient._id;
-        // doc_p.user_type = "patient";
-        // doc_p.document_name = "prescription issued by patient doctor" + professional.email;
-        // doc_p.document_type = "prescription";
-        // doc_p.document = req.body.prescription_link;
-        // doc_p.access_to = [{user_type:"professional",user_email:professional.email}];
-        // await doc_p.save();
-
-        const data = {patient_email: req.body.patient_email, doctor_id: req.body.doctor_id, prescription_link: req.body.prescription_link, prescription_name: "prescription issued to patient " + req.body.patient_email + " by doctor " + professional.email};
-
-        data.signature = sign_function(JSON.stringify(data), temp_user.private_key);
+        data.signature = sign_function(JSON.stringify(data), temp_user.privateKey);
         const newPrescription = new prescription(data);
         await newPrescription.save();
         res.json({status:200,message:"Prescription added"});
@@ -107,4 +80,4 @@ const getBill = async (req,res,next)=>{
 };
 
 
-module.exports = { create_bill, create_prescription, getAllPrescriptions, getPrescription, getAllBills, getBill };
+module.exports = { create_bill, create_prescription, getAllPrescriptions, getPrescription, getAllBills, getBill,  };

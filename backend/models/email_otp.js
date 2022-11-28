@@ -9,6 +9,6 @@ const otp_schema = new mongoose.Schema({
         type:String,
         required:true
     }
-});
+},{timestamps:true});
 
 module.expots = mongoose.model("otp", otp_schema);
