@@ -12,6 +12,9 @@ const professionalSchema = new mongoose.Schema({
         type: Number,
         required:true
     },
+    user_type: {
+        type: String
+    },
     qualification: {
          type: String,
         required:true
@@ -36,7 +39,6 @@ const professionalSchema = new mongoose.Schema({
          type: String,
         required:true
     },
-
     registration_documents:{
         type:[String]
     },

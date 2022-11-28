@@ -31,7 +31,8 @@ const billSchema = new mongoose.Schema({
     // },
     signature:{
         type:String
-    }
+    },
+    access_to:{patient: [String], organisation: [String], professional: [String]}
 },{timestamps:true});
 
 module.exports = mongoose.model("bill", billSchema);

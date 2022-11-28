@@ -25,6 +25,7 @@ const professional_register = async (req,res,next) =>{
             pincode:req.body.pincode,
             status:1,
             password:hash,
+            user_type:"professional"
             //registration_documents: req.body.registration_documents
         });
         await newProfessional.save();
@@ -134,6 +135,7 @@ const organisation_resgister = async (req,res,next) =>{
             description:req.body.description,
             location:req.body.location,
             organisationType:req.body.organisationType,
+            user_type:"organisation"
             //registration_documents: req.body.registration_documents
             
         });

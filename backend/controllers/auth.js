@@ -32,7 +32,8 @@ const patient_register = async (req,res,next) =>{
             state:req.body.state,
             pincode:req.body.pincode,
             dob:req.body.dob,
-            gender:req.body.gender
+            gender:req.body.gender,
+            user_type:"patient"
             // registration_documents: req.body.documents
         });
         await newPatient.save();
@@ -124,7 +125,7 @@ const patient_login = async (req,res,next) =>{
             process.env.JWT
         );
 
-        const { password, ...otherDetails } = tempUser._doc;
+        const { password, access_to,  ...otherDetails } = tempUser._doc;
         console.log(otherDetails);
         console.log(userToken);
         res

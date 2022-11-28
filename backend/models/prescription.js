@@ -35,7 +35,8 @@ const prescriptionSchema = new mongoose.Schema({
     // },
     signature:{
         type:String,
-    }
+    },
+    access_to:{patient: [String], organisation: [String], professional: [String]}
     // access_to:[patient:[], doctor:[], organisation:[]]
 }, {timestamps:true});
 

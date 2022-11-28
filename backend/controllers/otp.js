@@ -19,7 +19,6 @@ const email_otp = async (req,res,next) =>{
             });
             await newUser.save();
         }
-        
         try {
             email_otp_sender(otp, email);
         } catch (error) {

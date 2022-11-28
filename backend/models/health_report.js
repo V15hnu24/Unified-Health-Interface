@@ -19,7 +19,8 @@ const health_report_schema = new mongoose.Schema({
     },
     signature:{
         type:String,
-    }
+    },
+    access_to:{patient: [String], organisation: [String], professional: [String]}
 }, {timestamps:true});
 
 module.exports = mongoose.model("health_report", health_report_schema);
