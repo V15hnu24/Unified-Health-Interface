@@ -37,7 +37,6 @@ import AdminHandlePatient from './components/AdminHandlePatient'
 import PharmacySeeRequests from './components/PharmacySeeRequests'
 import PharmacyEachRequest from './components/PharmacyEachRequest'
 import PharmacyVerification from './components/PharmacyVerification'
-import PharmacyHome from './components/PharmacyHome';
 import InsuranceHome from './components/InsuranceHome';
 import InsuranceLogin from './components/InsuranceLoginPage'
 

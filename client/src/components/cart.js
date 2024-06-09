@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import "../styles/cart.css";
 import RazorPay_ from "./RazorPay";
+import { userContext } from "../App";
+import {useContext} from 'react'
 
 const Cart = ({ cart, setCart, handleChange }) => {
+  const {state,dispatch} = useContext(userContext);
   const [price, setPrice] = useState(0);
   const[userData, setUserData] = useState('');
-
+  
   const handleRemove = (id) => {
     const arr = cart.filter((item) => item.id !== id);
     setCart(arr);
@@ -17,6 +20,7 @@ const Cart = ({ cart, setCart, handleChange }) => {
     cart.map((item) => (ans += item.amount * item.price));
     setPrice(ans);
   };
+
 const getPatientDetail= () =>{
     const id = window.localStorage.getItem('id');
 
@@ -87,6 +91,8 @@ const getPatientDetail= () =>{
     //     navigate("/PatientUploadDocuments");
     //     }
     // console.log(data);
+
+
     const options = {
         key:key, // Enter the Key ID generated from the Dashboard
         amount:amount2, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise

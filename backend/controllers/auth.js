@@ -1,4 +1,4 @@
-// 
+
 const bcrypt = require('bcrypt');
 const patient = require("../models/patient");
 const admin = require("../models/admin");
@@ -141,7 +141,7 @@ const admin_login = async (req,res,next) =>{
         const isPasswordCorrect = await bcrypt.compare(
             req.body.password, 
             tempUser.password
-            );
+        );
 
             if(!isPasswordCorrect) return next(createError(400, "Wrong password or Username!"));
         const userToken = jwt.sign(
